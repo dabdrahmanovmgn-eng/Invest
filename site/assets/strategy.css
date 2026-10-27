@@ -1,0 +1,158 @@
+/* Стратегия — открытые приоритеты бизнеса, на отдельном фирменном фоне. */
+#strategy {
+  margin-top: 80px;
+  padding: 48px;
+  border-radius: 28px;
+  background: var(--mint);
+  color: var(--ink);
+}
+#strategy .block-head { margin-bottom: 18px; }
+#strategy .block-head h2 {
+  max-width: none;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(34px, 4.4vw, 56px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
+#strategy > .block-intro {
+  max-width: 58ch;
+  margin: 0 0 38px;
+  color: var(--ink-soft);
+  font-size: 18px;
+  line-height: 1.7;
+}
+#strategy .strategy-priorities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 44px;
+}
+#strategy .strategy-priority {
+  min-width: 0;
+  padding: 28px 0 32px;
+  border-top: 1px solid #c5dccd;
+  scroll-margin-top: calc(var(--header-height, 88px) + var(--subnav-height, 0px) + 24px);
+}
+#strategy .strategy-priority .pl-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0 0 16px;
+}
+#strategy .strategy-priority .pl-icon {
+  flex: 0 0 38px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: 0;
+  border: 1px solid #c5dccd;
+  border-radius: 10px;
+  background: #fff;
+}
+#strategy .strategy-priority .pl-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--green-deep);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#strategy .strategy-priority h3 {
+  min-width: 0;
+  margin: 3px 0 0;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.025em;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+#strategy .strategy-priority p {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-wrap: break-word;
+}
+#strategy .strategy-goal {
+  color: var(--green-deep);
+  font-weight: 650;
+}
+#strategy .pl-note {
+  display: block;
+  margin-top: 8px;
+  color: #825300;
+  font-size: 12px !important;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+/* Открытая отчётность и международный капитал — заметный финальный ряд. */
+#strategy #pl9,
+#strategy #pl0 {
+  margin-top: 20px;
+  padding: 26px;
+  border: 0;
+  border-radius: 18px;
+  background: #fff;
+}
+#strategy #pl9 h3,
+#strategy #pl0 h3 { color: var(--ink); }
+#strategy #pl9 p,
+#strategy #pl0 p { color: var(--ink-soft); }
+#strategy #pl9 .pl-icon,
+#strategy #pl0 .pl-icon { border-color: #c5dccd; background: #fff; }
+#strategy #pl9 .pl-icon svg,
+#strategy #pl0 .pl-icon svg { stroke: var(--green-deep); }
+#strategy .strategy-priority:focus-visible,
+#strategy h3:focus-visible { outline: 2px solid var(--green-deep); outline-offset: 6px; }
+#strategy #pl9:focus-visible,
+#strategy #pl0:focus-visible,
+#strategy #pl9 h3:focus-visible,
+#strategy #pl0 h3:focus-visible { outline-color: var(--green-deep); }
+@media (max-width: 1000px) {
+  #strategy { padding: 36px; }
+  #strategy .strategy-priorities { column-gap: 32px; }
+  #strategy .strategy-priority h3 { font-size: 21px; }
+  #strategy #pl9, #strategy #pl0 { padding: 24px; }
+}
+@media (max-width: 760px) {
+  #strategy { margin-top: 56px; padding: 28px; border-radius: 24px; }
+  #strategy .strategy-priorities { grid-template-columns: minmax(0, 1fr); }
+  #strategy > .block-intro { margin-bottom: 30px; }
+  #strategy .strategy-priority { padding-block: 24px 28px; }
+  #strategy #pl9, #strategy #pl0 { margin-top: 14px; }
+}
+@media (max-width: 600px) {
+  #strategy { padding: 26px 22px; }
+  #strategy .block-head h2 { font-size: 36px; }
+  #strategy > .block-intro { font-size: 16px; }
+  #strategy .strategy-priority .pl-head { gap: 12px; }
+  #strategy .strategy-priority .pl-icon { flex-basis: 32px; width: 32px; height: 32px; border-radius: 8px; }
+  #strategy .strategy-priority .pl-icon svg { width: 20px; height: 20px; }
+  #strategy .strategy-priority h3 { margin-top: 1px; font-size: 20px; }
+  #strategy .strategy-priority p { font-size: 16px; line-height: 1.7; }
+  #strategy #pl9, #strategy #pl0 { padding: 22px 18px; }
+}
+@media print {
+  #strategy { margin-block: 24px; padding: 20px 0; border: 0; border-radius: 0; background: none; color: var(--ink); }
+  #strategy .block-head h2 { color: var(--ink); font-size: 28pt; }
+  #strategy > .block-intro { color: var(--ink-soft); font-size: 11pt; }
+  #strategy .strategy-priorities { display: block; }
+  #strategy .strategy-priority,
+  #strategy #pl9,
+  #strategy #pl0 { margin: 0; padding: 16px 0; border: 0; border-top: 1px solid #cad8d0; border-radius: 0; background: none; break-inside: avoid; }
+  #strategy .strategy-priority .pl-icon { display: none; }
+  #strategy .strategy-priority h3 { color: var(--ink); font-size: 14pt; }
+  #strategy .strategy-priority p,
+  #strategy #pl9 p,
+  #strategy #pl0 p { color: var(--ink); font-size: 10pt; }
+  #strategy .strategy-goal { color: var(--ink); }
+  #strategy .pl-note { color: #775000; }
+}

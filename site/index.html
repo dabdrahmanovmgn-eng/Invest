@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dengi Market — Investors</title>
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/styles.css?v=no-hero-orbits-1">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" href="assets/fonts/manrope-variable.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/ux.css?v=funding-contact-1">
+<link rel="stylesheet" href="assets/motion.css?v=hero-lines-no-control-3">
+<link rel="stylesheet" href="assets/discovery.css?v=merged-facts-1">
+<link rel="stylesheet" href="assets/overview.css?v=mission-ornament-2">
+<link rel="stylesheet" href="assets/about.css?v=unified-about-type-1">
+<link rel="stylesheet" href="assets/team.css?v=team-static-1">
+<link rel="stylesheet" href="assets/contact.css?v=investor-contact-bold-1">
+<link rel="stylesheet" href="assets/history.css?v=timeline-1">
+<link rel="stylesheet" href="assets/investment.css?v=open-factors-1">
+<link rel="stylesheet" href="assets/strategy.css?v=standard-palette-1">
+<script src="assets/config.js?v=team-en-1" defer></script>
+<script src="assets/content.js?v=strategy-contact-1" defer></script>
+<script src="assets/vendor/gsap/gsap.min.js" defer></script>
+<script src="assets/vendor/gsap/ScrollTrigger.min.js" defer></script>
+<script src="assets/motion.js?v=strategy-contact-1" defer></script>
+<script src="assets/app.js?v=strategy-contact-1" defer></script>
+<script src="assets/history.js?v=timeline-1" defer></script>
+</head><body><a class="skip-link" id="skipContent" href="#content">Skip to content</a><svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <lineargradient id="sealGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6dfa0"></stop>
+      <stop offset=".5" stop-color="#d4af5f"></stop>
+      <stop offset="1" stop-color="#a97a2e"></stop>
+    </lineargradient>
+  </defs>
+  <symbol id="i-calendar" viewbox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"></rect><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"></line><line x1="8" y1="3" x2="8" y2="6.5"></line><line x1="16" y1="3" x2="16" y2="6.5"></line></symbol>
+  <symbol id="i-pin" viewbox="0 0 24 24"><path d="M12 21s7-7.1 7-12a7 7 0 1 0-14 0c0 4.9 7 12 7 12z"></path><circle cx="12" cy="9" r="2.4"></circle></symbol>
+  <symbol id="i-store" viewbox="0 0 24 24"><path d="M4 9.5V20h16V9.5"></path><path d="M3 4h18l1.5 5.5h-21z"></path><line x1="9.5" y1="20" x2="9.5" y2="13.5"></line><line x1="14.5" y1="20" x2="14.5" y2="13.5"></line><line x1="9.5" y1="13.5" x2="14.5" y2="13.5"></line></symbol>
+  <symbol id="i-users" viewbox="0 0 24 24"><circle cx="9" cy="9" r="3.2"></circle><path d="M3.5 20c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"></path><circle cx="17" cy="8.5" r="2.6"></circle><path d="M15.5 14.3c2.4.3 4.2 2.3 4.9 4.6"></path></symbol>
+  <symbol id="i-user" viewbox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6"></circle><path d="M4.5 20.5c0-4.2 3.3-7.2 7.5-7.2s7.5 3 7.5 7.2"></path></symbol>
+  <symbol id="i-wallet" viewbox="0 0 24 24"><rect x="3" y="6.5" width="18" height="13" rx="2.5"></rect><path d="M3 10h18"></path><circle cx="16.5" cy="14" r="1.4"></circle></symbol>
+  <symbol id="i-trend" viewbox="0 0 24 24"><path d="M4 17l5.5-6 4 3.5L20 6"></path><path d="M14.5 6H20v5.5"></path></symbol>
+  <symbol id="i-chart" viewbox="0 0 24 24"><line x1="5" y1="20" x2="19" y2="20"></line><rect x="6" y="13" width="3.2" height="7"></rect><rect x="10.4" y="9" width="3.2" height="11"></rect><rect x="14.8" y="4.5" width="3.2" height="15.5"></rect></symbol>
+  <symbol id="i-target" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"></circle></symbol>
+  <symbol id="i-eye" viewbox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"></path><circle cx="12" cy="12" r="3"></circle></symbol>
+  <symbol id="i-shield" viewbox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 5-3.2 8-7.5 9.5-4.3-1.5-7.5-4.5-7.5-9.5V6L12 3z"></path></symbol>
+  <symbol id="i-heart" viewbox="0 0 24 24"><path d="M12 20S3 14.5 3 8.5C3 5.5 5.3 3.5 8 3.5c1.8 0 3.3 1 4 2.5.7-1.5 2.2-2.5 4-2.5 2.7 0 5 2 5 5 0 6-9 11.5-9 11.5z"></path></symbol>
+  <symbol id="i-badge" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M8.5 12.3l2.3 2.3 4.7-5"></path></symbol>
+  <symbol id="i-globe" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><ellipse cx="12" cy="12" rx="4" ry="9"></ellipse><line x1="3" y1="12" x2="21" y2="12"></line><path d="M4.5 7h15M4.5 17h15"></path></symbol>
+  <symbol id="i-laptop" viewbox="0 0 24 24"><rect x="4" y="5" width="16" height="10" rx="1.5"></rect><path d="M2 19h20"></path><path d="M9 19l1-2h4l1 2"></path></symbol>
+  <symbol id="i-link" viewbox="0 0 24 24"><path d="M9 15l6-6"></path><path d="M8 13.5a4 4 0 0 1 0-5.7l2-2a4 4 0 0 1 5.7 5.7l-1 1"></path><path d="M16 10.5a4 4 0 0 1 0 5.7l-2 2a4 4 0 0 1-5.7-5.7l1-1"></path></symbol>
+  <symbol id="i-trophy" viewbox="0 0 24 24"><path d="M7 4h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V4z"></path><path d="M7 5H4.5a3 3 0 0 0 3 5"></path><path d="M17 5h2.5a3 3 0 0 1-3 5"></path><path d="M12 12v3.5"></path><path d="M9 20h6"></path><path d="M9.5 15.5h5l.5 4.5h-6z"></path></symbol>
+  <symbol id="i-search" viewbox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.3" y1="15.3" x2="20.5" y2="20.5"></line></symbol>
+  <symbol id="i-pins3" viewbox="0 0 24 24"><path d="M6 9c0-1.7 1.1-3 2.5-3s2.5 1.3 2.5 3c0 2-2.5 5-2.5 5s-2.5-3-2.5-5z"></path><path d="M13 5c0-1.4.9-2.5 2-2.5s2 1.1 2 2.5c0 1.7-2 4-2 4s-2-2.3-2-4z"></path><path d="M14 14.2c0-1.2.8-2.2 1.8-2.2s1.8 1 1.8 2.2c0 1.5-1.8 3.5-1.8 3.5s-1.8-2-1.8-3.5z"></path></symbol>
+  <symbol id="i-doc-check" viewbox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"></path><path d="M14 3v4h4"></path><path d="M9.5 14.5l1.8 1.8 3.2-3.6"></path></symbol>
+  <symbol id="i-mail" viewbox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M4.5 7l7.5 6 7.5-6"></path></symbol>
+  <symbol id="i-seal" viewbox="0 0 24 24">
+    <path fill="url(#sealGold)" stroke="none" d="M12 1.3l1.9 2.9 3.3-1.2.2 3.5 3.5.2-1.2 3.3 2.9 1.9-2.9 1.9 1.2 3.3-3.5.2-.2 3.5-3.3-1.2L12 22.7l-1.9-2.9-3.3 1.2-.2-3.5-3.5-.2 1.2-3.3-2.9-1.9 2.9-1.9-1.2-3.3 3.5-.2.2-3.5 3.3 1.2z"></path>
+    <path fill="#fff" stroke="none" d="M12 8.3l1.1 2.3 2.5.3-1.8 1.8.4 2.5-2.2-1.2-2.2 1.2.4-2.5-1.8-1.8 2.5-.3z"></path>
+  </symbol>
+</svg>
+
+<header class="ir-header">
+  <div class="ir-header-inner">
+    <a class="brand" href="#home" data-page="home" translate="no">
+      <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewbox="0 0 1.6 0.8" aria-hidden="true" focusable="false">
+ <defs>
+  
+ </defs>
+    <g id="Слой_x0020_1">
+        <path class="fil0" d="M0.31 0l0.24 0c0.06,0 0.12,0.03 0.18,0.09l0.2 0.2 0.2 -0.2c0.06,-0.06 0.09,-0.09 0.17,-0.09l0.17 0 0 0.14 -0.56 0.55 0 0c-0.2,-0.23 -0.4,-0.46 -0.6,-0.69z"></path>
+        <path class="fil1" d="M0.4 0.8l-0.31 0c-0.05,0 -0.09,-0.04 -0.09,-0.09l0 -0.31c0.21,0.02 0.38,0.19 0.4,0.4z"></path>
+        <path class="fil2" d="M0.07 0l0.33 0c0.22,0 0.4,0.18 0.4,0.4l0 0c0,0.19 -0.13,0.35 -0.31,0.39 -0.03,-0.26 -0.23,-0.46 -0.49,-0.48l0 -0.24c0,-0.04 0.03,-0.07 0.07,-0.07z"></path>
+        <path class="fil3" d="M1.47 0.27c0,0.15 0,0.3 0,0.45 0,0.05 -0.05,0.08 -0.09,0.08l-0.25 0 0 -0.2c0.11,-0.11 0.23,-0.22 0.34,-0.33z"></path>
+ </g>
+</svg>
+      <span class="brand-name" id="brandName">DM Pawnshop</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#home" data-page="home" class="site-nav-link" id="navHome">Home</a>
+      <a href="#about" data-page="about" class="site-nav-link" id="navAboutPage">About Us</a>
+      <a href="#investors" data-page="investors" class="site-nav-link" id="navInvestors">Investors</a>
+      <a href="#investors/documents" data-page="investors" data-section="documents" class="site-nav-link" data-copy="reportsNavigation">Reports</a>
+    </nav>
+    <div class="header-right">
+      <div class="locale" role="group" aria-label="Language">
+        <button type="button" id="loc-ru" data-language="ru" lang="ru" aria-pressed="false">RU</button>
+        <button type="button" id="loc-en" data-language="en" lang="en" aria-pressed="true" class="active">EN</button>
+      </div>
+    </div>
+  </div>
+<div class="reading-progress" aria-hidden="true"></div></header>
+
+<main id="content" tabindex="-1">
+<div class="page story-page" id="page-home" aria-labelledby="h1" data-page-section="home">
+<div class="hero">
+  <div class="hero-lines" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none" focusable="false">
+      <g class="hero-line"><path d="M240 1040C250 780 900 900 1180 630S1070 140 1690-110"/></g>
+      <g class="hero-line"><path d="M420 1060C380 770 1020 875 1270 625S1160 125 1810-90"/></g>
+      <g class="hero-line"><path d="M620 1060C490 775 1110 850 1370 615S1270 140 1940-70"/></g>
+      <g class="hero-line"><path d="M810 1070C650 780 1240 835 1475 615S1380 125 2060-50"/></g>
+      <g class="hero-line"><path d="M1000 1080C820 790 1360 835 1580 620S1510 145 2180-30"/></g>
+    </svg>
+  </div>
+  <div class="hero-inner wrap">
+    <div class="hero-copy">
+      <div class="hero-eyebrow"><span class="hero-intro-mark" aria-hidden="true"></span><span class="eyebrow" id="designEyebrow">Investors / Dengi Market</span></div><h1 id="h1" class="hero-title"><span class="hero-word-mask"><span class="hero-word">Dengi</span></span> <span class="hero-word-mask"><span class="hero-word accent">Market</span></span></h1>
+      <div class="hero-sub" id="heroSub"><p>A nationwide pawnshop network in Kazakhstan, providing individuals with fast access to secured credit.</p></div><div class="hero-actions"><a class="action primary" href="#investors/ir-contact" data-page="investors" data-anchor="ir-contact" id="designContact">Contact IR →</a><a class="action" href="#investors/financials" data-page="investors" data-anchor="financials" id="designFinancials">Financial results ↗</a></div>
+    </div>
+    </div>
+    <div class="hero-bottom wrap"><span class="hero-location" translate="no">Dengi Market / Kazakhstan</span></div></div>
+
+  <div class="results-stage-frame">
+  <div class="hero-bridge">
+    <a class="scroll-cue-link" href="#featured-results">
+      <span class="visually-hidden" data-copy="scrollExplore">Scroll to explore</span>
+      <svg class="bridge-contour" xmlns="http://www.w3.org/2000/svg" width="128" height="64" viewBox="0 0 128 64" aria-hidden="true" focusable="false"><path d="M0 32C20 32 30 26.889 36.287 16A32 32 0 0 1 91.713 16C98 26.889 108 32 128 32V64H0Z" fill="currentColor"/><circle cx="64" cy="32" r="30.5" fill="#fff"/></svg>
+      <span class="bridge-feedback" aria-hidden="true"><span class="bridge-shape"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 4V20M6 14L12 20L18 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+    </a>
+  </div>
+
+  <section class="results-stage" id="featured-results" aria-labelledby="featuredTitle">
+    <img class="scroll-ornament" src="assets/koshkar-muiz.svg?v=symmetric-2" alt="" aria-hidden="true" width="300" height="600">
+    <div class="wrap">
+      <div class="stage-heading" data-reveal><span class="section-index">01 /</span><h2 id="featuredTitle" data-copy="sec4h2">Financial Highlights</h2><span class="stage-period">2025 · USD</span></div>
+      <div class="featured-metrics">
+        <div class="featured-metric" data-reveal>
+          <span class="featured-label" data-copy="t4r1">Loan portfolio</span>
+          <span class="metric-value-mask"><strong>$<span data-count-value="73.7" data-count-decimals="1">73.7</span><span>M</span></strong></span>
+          <span class="metric-rule" aria-hidden="true"></span>
+        </div>
+        <div class="featured-metric" data-reveal>
+          <span class="featured-label" data-copy="t4r2">Total assets</span>
+          <span class="metric-value-mask"><strong>$<span data-count-value="79.1" data-count-decimals="1">79.1</span><span>M</span></strong></span>
+          <span class="metric-rule" aria-hidden="true"></span>
+        </div>
+        <div class="featured-metric" data-reveal>
+          <span class="featured-label" data-copy="t4r5">Net profit</span>
+          <span class="metric-value-mask"><strong>$<span data-count-value="19.2" data-count-decimals="1">19.2</span><span>M</span></strong></span>
+          <span class="metric-rule" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="stage-bottom"><a href="#investors/financials" data-copy="allFinancials">All financial indicators ↗</a><a href="documents/financial-statements-2025-en.pdf" target="_blank" rel="noopener" data-copy="report2025">Financial Statements 2025 · PDF ↗</a></div>
+    </div>
+  </section>
+  </div>
+  <section class="wrap advantages-section" id="advantages" aria-labelledby="whyTitle">
+    <h2 class="home-h2" id="whyTitle">What sets us apart</h2>
+    <div class="home-why advantage-grid">
+      <details class="feature-disclosure advantage-card advantage-card--history">
+        <summary>
+          <span class="advantage-visual"><span class="advantage-stat"><span class="advantage-number"><span data-count-value="10" data-count-decimals="0">10</span></span><span class="advantage-caption" data-copy="stat1">years on the market</span></span><svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><g class="icon-hover"><g class="icon-press"><circle class="visual-soft" cx="64" cy="64" r="49"/><path d="M64 15a49 49 0 1 1-49 49"/><path data-icon-part="hand" d="M64 32v32l24 16"/><circle class="visual-solid" cx="64" cy="15" r="4"/></g></g></svg></span>
+          <h3 id="why1Title">A decade-long track record</h3>
+          <span class="advantage-preview" id="why1Preview">Operating in Kazakhstan since 2015.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why1Text">A resilient business model, tested over time.</p></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--network">
+        <summary>
+          <span class="advantage-visual"><span class="advantage-stat"><span class="advantage-number"><span data-count-value="325" data-count-decimals="0">325</span></span><span class="advantage-caption" data-copy="kf2">Branches nationwide</span></span><svg viewBox="0 0 220 128" aria-hidden="true" focusable="false"><g class="icon-hover"><g class="icon-press"><path class="visual-line" d="M25 30l50 22 45-25 70 30-35 47-60-17-70-57m50 22 20 35 25-60 35 77 35-47M25 30l95-3M95 87l-48 20"/><g class="visual-solid"><circle data-icon-part="node" cx="25" cy="30" r="5"/><circle data-icon-part="node" cx="75" cy="52" r="7"/><circle data-icon-part="node" cx="120" cy="27" r="5"/><circle data-icon-part="node" cx="190" cy="57" r="6"/><circle data-icon-part="node" cx="155" cy="104" r="5"/><circle data-icon-part="node" cx="95" cy="87" r="7"/><circle data-icon-part="node" cx="47" cy="107" r="4"/></g><circle class="visual-soft" cx="75" cy="52" r="17"/><circle class="visual-soft" cx="95" cy="87" r="16"/></g></g></svg></span>
+          <h3 id="why2Title">Nationwide scale</h3>
+          <span class="advantage-preview" id="why2Preview">Across 17 regions of Kazakhstan, serving over 500,000 active clients.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why2Text">The country's largest pawnshop network.</p></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--branches">
+        <summary>
+          <span class="advantage-visual"><svg viewBox="0 0 220 128" aria-hidden="true" focusable="false"><g class="icon-hover"><g class="icon-press"><path class="visual-line" d="M10 112h200M26 112V58h49v54m70 0V58h49v54"/><path d="M74 112V35h72v77M70 35h80l-9-20H79zM90 112V76h40v36M80 54h60M25 58h50l-7-15H32zM145 58h50l-7-15h-36z"/><path class="visual-soft" data-icon-part="windows" d="M38 77h24v18H38zM158 77h24v18h-24z"/><path d="M110 35v19m-19-19v19m38-19v19"/></g></g></svg></span>
+          <h3 id="why3Title">A modern branch network</h3>
+          <span class="advantage-preview" id="why3Preview"><strong>TOP-4</strong> among Kazakhstan pawnshops by assets and loan portfolio.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why3Text">Branches are located in the best city locations and meet the regulator's requirements for the security and storage of pledged property.</p></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--risk">
+        <summary>
+          <span class="advantage-visual"><svg viewBox="0 0 220 128" aria-hidden="true" focusable="false"><g class="icon-hover"><g class="icon-press"><path d="M52 16h46l24 24v72H52zM98 16v24h24"/><path class="visual-line" d="M65 54h40M65 68h28M65 82h34"/><path d="M65 97h17"/><g data-icon-part="lens"><circle cx="150" cy="73" r="24"/><path d="m167 90 20 20"/><path class="visual-line" d="M140 73h20m-10-10v20"/></g></g></g></svg></span>
+          <h3 id="why4Title">Rigorous risk control</h3>
+          <span class="advantage-preview" id="why4Preview">A proprietary collateral-appraisal system.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why4Text">Trained appraisers and a dedicated internal audit team control portfolio quality.</p></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--technology">
+        <summary>
+          <span class="advantage-visual"><svg viewBox="0 0 220 128" aria-hidden="true" focusable="false"><g class="icon-hover"><g class="icon-press"><path class="visual-line" d="M75 64H41V25m104 39h35V25M75 64H41v39m104-39h35v39"/><rect x="75" y="36" width="70" height="56" rx="12"/><rect data-icon-part="terminal" x="23" y="10" width="36" height="28" rx="5"/><rect data-icon-part="terminal" x="162" y="10" width="36" height="28" rx="5"/><rect data-icon-part="terminal" x="23" y="91" width="36" height="28" rx="5"/><rect data-icon-part="terminal" x="162" y="91" width="36" height="28" rx="5"/><path data-icon-part="code" d="m98 54-10 10 10 10m24-20 10 10-10 10m-8-24-8 28"/></g></g></svg></span>
+          <h3 id="why5Title">In-house IT ecosystem</h3>
+          <span class="advantage-preview" id="why5Preview">Proprietary CRM and mobile app.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why5Text">An in-house development team — no outsourcing, scaling in step with the branch network.</p></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--collateral">
+        <summary><img class="scroll-ornament" src="assets/ornament-collateral.svg?v=symmetric-2" alt="" aria-hidden="true" width="220" height="360">
+          <span class="advantage-visual"><span class="advantage-number"><span data-count-value="100" data-count-decimals="0">100</span><small>%</small></span><svg viewBox="0 0 128 128" aria-hidden="true" focusable="false"><g class="icon-hover"><g class="icon-press"><g data-icon-part="phone"><rect x="80" y="12" width="38" height="80" rx="8"/><rect class="visual-line" x="85" y="26" width="28" height="50" rx="2"/><path d="M92 20h14m-10 64h6"/></g><g data-icon-part="bullion"><path d="M22 67h39l15 28H8zM8 95v16h68V95M22 67l7 28m32-28-7 28"/><path class="visual-soft" d="M37 80h10"/></g></g></g></svg></span>
+          <h3 id="why6Title">Fully secured lending model</h3>
+          <span class="advantage-preview" id="why6Preview">Loans secured by jewellery (gold) and electronics.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why6Text">Transparent collateral appraisal and LTV control.</p></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--growth">
+        <summary>
+          <span class="advantage-visual"><span class="advantage-stat"><span class="advantage-number"><small>+</small><span data-count-value="103" data-count-decimals="0">103</span><small>%</small></span><span class="advantage-caption" data-copy="kf5">YoY portfolio growth</span></span></span>
+          <h3 id="why7Title">Fast, sustained growth</h3>
+          <span class="advantage-preview" id="why7Preview">Portfolio CAGR of 118% over 2022–2025.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why7Text">An above-market growth rate. Annual portfolio figures are available in the financial highlights section.</p><a class="advantage-detail-link" href="#investors/financials" data-copy="allFinancials">All financial indicators ↗</a></div>
+      </details>
+      <details class="feature-disclosure advantage-card advantage-card--trust">
+        <summary>
+          <span class="advantage-visual"><span class="advantage-stat"><span class="advantage-number">B<small>+</small></span><span class="advantage-caption" data-copy="why8Rating">Kilde rating</span></span></span>
+          <h3 id="why8Title">High investor trust</h3>
+          <span class="advantage-preview" id="why8Preview">On the international capital market since 2023.</span>
+          <span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span>
+        </summary>
+        <div class="disclosure-content"><p id="why8Text">Long-term and transparent investor relationships on Kilde, with 12 consecutive quarters of zero missed payments.</p></div>
+      </details>
+    </div>
+  </section>
+
+</div>
+
+<div class="page story-page" id="page-about" aria-labelledby="aboutIntroTitle" data-page-section="about">
+  <div class="wrap body-grid">
+    <div>
+    <div class="about-intro" data-reveal="">
+      <div class="about-heading">
+        <div class="about-kicker" id="aboutKicker">Dengi Market today</div>
+        <span class="section-index">02 /</span><h2 id="aboutIntroTitle">Company Overview</h2>
+      </div>
+      <div class="about-copy-panel">
+        <div class="company-copy" id="companyCopy"><p>We lend against two types of collateral: jewellery (gold) and electronics (smartphones, laptops and other gadgets). Accepting electronics is a competitive advantage over most pawnshops in Kazakhstan, which work with jewellery (gold) only.</p></div>
+      </div>
+      <div class="about-visual">
+        <div class="hero-art about-composite" aria-hidden="true">
+          <img src="assets/hero.png" alt="" width="1241" height="912" loading="lazy" decoding="async">
+        </div>
+        <div class="about-visual-caption"><b>Dengi Market</b><span id="aboutVisualCaption">A modern financial network with digital infrastructure and nationwide presence.</span></div>
+      </div>
+      <div class="about-context" id="companyContext"><p>We help clients across the country get fast access to funds secured by their property, combining transparent terms, convenient service and modern digital solutions.</p><p>We are building a resilient, technology-driven business model that creates long-term value for clients, partners and investors.</p></div>
+    </div><section class="block" id="overview" data-reveal="">
+      <details class="section-disclosure"><summary><span data-copy="companyMore">Mission, values and company details</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content" id="company-details"><div class="mvv-card">
+        <div class="mvv-grid">
+          <div class="mvv-col mvv-col--mission">
+            <h3 class="mvv-heading" id="missionTitle">Mission</h3>
+            <p id="missionText">Give people fast, straightforward access to money against collateral - no unnecessary complexity, with respect and transparent terms.</p>
+          </div>
+          <div class="mvv-col mvv-col--vision">
+            <h3 class="mvv-heading" id="visionTitle">Vision</h3>
+            <p id="visionText">A pawnshop reimagined as a modern financial service - convenient online and offline, technology-driven, secure and easy to understand.</p>
+          </div>
+          <div class="mvv-col mvv-col--values">
+            <h3 class="mvv-heading" id="valuesTitle">Values</h3>
+            <div class="values-grid">
+              <div class="mini-value"><h4 id="val1Title">Trust</h4><span id="val1Text">Honest terms, transparency and accountability in every decision.</span></div>
+              <div class="mini-value"><h4 id="val2Title">Respect</h4><span id="val2Text">We value our clients' time and deliver comfortable, pressure-free service.</span></div>
+              <div class="mini-value"><h4 id="val3Title">Expertise</h4><span id="val3Text">Professional appraisal of collateral, with service quality we keep raising.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="goals-card" aria-labelledby="goalsH2">
+        <h3 class="goals-heading" id="goalsH2">Strategic <span class="accent">Goals</span></h3>
+        <div class="goals-grid">
+          <div class="goal-card"><h4 id="goal1Title">Market leadership</h4><p id="goal1Text">To become the leading modern pawnshop network in Kazakhstan - through outstanding service, technology and client trust.</p></div>
+          <div class="goal-card"><h4 id="goal2Title">Technology development</h4><p id="goal2Text">Grow our in-house IT ecosystem - CRM, mobile app and online collateral appraisal - for faster, more convenient service.</p></div>
+          <div class="goal-card"><h4 id="goal3Title">Network growth</h4><p id="goal3Text">Expand the network to 350+ branches and grow the loan portfolio, while keeping strict risk-control discipline.</p></div>
+          <div class="goal-card"><h4 id="goal4Title">Investment attractiveness</h4><p id="goal4Text">Strengthen the company's investment appeal - transparent reporting, a resilient track record and a reputation as a reliable borrower in the international capital market.</p></div>
+        </div>
+      </section>
+
+      <section class="company-facts" aria-labelledby="companyFactsTitle">
+      <h3 id="companyFactsTitle" data-copy="companyFigures">Company at a glance</h3>
+      <div class="fact-grid">
+        <div class="fact-card"><div class="n small" id="m2val">Coverage of all regions of Kazakhstan</div><div class="l" id="m2">Geographic coverage</div></div>
+        <div class="fact-card"><div class="n">2021</div><div class="l" id="m6">Licensed activity No. 10.21.0017.L dated 12.03.2021</div></div>
+        <div class="fact-card"><div class="n" id="m8val" data-count-value="15">15 min</div><div class="l" id="m8">Average disbursement time</div></div>
+        <div class="fact-card"><div class="n" id="m7val" data-count-value="45">45 days</div><div class="l" id="m7">Max loan term (gold)</div></div>
+        <div class="fact-card"><div class="n" data-count-value="800">800+</div><div class="l" id="m5">Employees</div></div>
+        <div class="fact-card"><div class="n" id="m3val" data-count-value="80">Up to 80%</div><div class="l" id="m3">Maximum LTV</div></div>
+        <div class="fact-card"><div class="n" data-count-value="47.3" data-count-decimals="1" data-localized-value="47.3%" data-ru-value="47,3%">47.3%</div><div class="l" id="m1">Return on equity (ROE), 2025</div></div>
+        <div class="fact-card"><div class="n" data-count-value="11">11%</div><div class="l" id="m4">Share of the Kazakhstan pawnshop market</div></div>
+      </div>
+      </section>
+
+    </div></details></section>
+    <section class="block" id="model" data-reveal="">
+      <div class="block-head"><h2 id="sec3h2">Business Model</h2></div>
+      <p class="block-intro" id="sec3Intro"><b>How the business works:</b> a client pledges jewellery (gold) or electronics (smartphones, laptops, gadgets) as collateral for a short-term secured loan. The loan is sized against an appraised collateral value, repaid with interest, and the collateral is released on repayment.</p>
+      <div class="flow">
+        <div class="flow-step card" id="fs1"><b>1. Appraisal</b>In-house scales, a gold purity test and online appraisal - unique on the market - disbursement averages 15 minutes.</div>
+        <div class="flow-step card" id="fs2"><b class="ink">2. Disbursement</b>Loan issued same-day at an LTV of up to 80% for jewellery and up to 60% for electronics.</div>
+        <div class="flow-step card" id="fs3"><b>3. Servicing</b>Average term - up to 45 days for gold and up to 25 days for electronics, with an average ticket of $440 and $180 respectively.</div>
+        <div class="flow-step card" id="fs4"><b class="ink">4. Resolution</b>Repayment with the collateral returned to the client, or disposal of unclaimed gold via auction sale or sale to a refinery.</div>
+      </div>
+      <div class="card table-card">
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="sec3h2"><table class="datatable">
+        <tr><th scope="col" id="t3h1">Portfolio by collateral type</th><th scope="col" id="t3h2">Share</th></tr>
+        <tr><td id="t3r1">Gold &amp; jewellery</td><td>87.5%</td></tr>
+        <tr><td id="t3r2">Electronics</td><td>12.5%</td></tr>
+      </table></div>
+      </div>
+    </section>
+
+    <section class="block" id="overview-history" data-reveal="">
+      <details class="section-disclosure"><summary><span data-copy="companyHistory">Company timeline</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content"><div class="card timeline-card">
+  <div class="timeline-head">
+    <h3 class="timeline-title" id="tlTitle"><span class="section-heading-inline">Company <span class="accent">timeline</span></span></h3>
+    <div class="timeline-nav" hidden>
+      <button type="button" class="tl-arrow" id="tlPrev" aria-label="Previous events">‹</button>
+      <button type="button" class="tl-arrow" id="tlNext" aria-label="Next events">›</button>
+    </div>
+  </div>
+  <ol class="timeline-h" id="timelineTrack" aria-labelledby="tlTitle">
+    <li class="th-item">
+      <h4 class="th-year th-year-plan">2026<span id="tlPlan">target</span></h4>
+      <ul class="th-facts" id="tl2026"><li>Target: 350 branches</li><li>Target: $95M portfolio</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2025</h4>
+      <ul class="th-facts" id="tl2025"><li>310 branches</li><li>Portfolio $70M</li><li>#5 by portfolio size among KZ pawnshops</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2024</h4>
+      <ul class="th-facts" id="tl2024"><li>255 branches</li><li>Portfolio $34M</li><li>#7 by portfolio size among KZ pawnshops</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2023</h4>
+      <ul class="th-facts" id="tl2023"><li>Partnership begins with the international Kilde platform</li><li>213 branches</li><li>Portfolio $26.8M</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2021</h4>
+      <ul class="th-facts" id="tl2021"><li>Licence obtained from the National Bank - activities become licensed and supervised by ARDFM</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2020</h4>
+      <ul class="th-facts" id="tl2020"><li>153 branches opened - full coverage of regions and most cities of Kazakhstan</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2018</h4>
+      <ul class="th-facts" id="tl2018"><li>50 branches opened in major cities of Kazakhstan</li></ul>
+    </li>
+    <li class="th-item">
+      <h4 class="th-year">2015</h4>
+      <ul class="th-facts" id="tl2015"><li>First branch opened</li></ul>
+    </li>
+  </ol>
+</div>
+
+      </div></details><section id="team-section" class="team-section" aria-labelledby="teamTitle">
+        <div class="block-head"><h2 class="team-title" id="teamTitle"><span class="section-heading-inline">Our <span class="accent">Team</span></span></h2></div>
+        <p class="team-caption" id="teamCaption">Dengi Market is a team of professionals making secured lending fast, transparent and reliable.</p>
+        <div class="team-grid" id="team-grid">
+          <article class="team-card card">
+            <div class="team-portrait"><img class="team-photo" src="assets/team/portrait-04.webp" alt="Maxim Kobzev" lang="en" width="320" height="400" loading="lazy"></div>
+            <h3 lang="en">Maxim Kobzev</h3><p class="team-role" lang="en">Director of Strategic Development</p><a class="team-email" href="mailto:m.kobzev@dengigroup.kz" data-team-email lang="en" dir="ltr">m.kobzev@dengigroup.kz</a>
+          </article>
+          <article class="team-card card">
+            <div class="team-portrait"><img class="team-photo" src="assets/team/portrait-02.webp" alt="Alyona Morozova" lang="en" width="320" height="400" loading="lazy"></div>
+            <h3 lang="en">Alyona Morozova</h3><p class="team-role" lang="en">Chief Accountant</p><a class="team-email" href="mailto:alyona.morozova@dengigroup.kz" data-team-email lang="en" dir="ltr">alyona.morozova@dengigroup.kz</a>
+          </article>
+          <article class="team-card card">
+            <div class="team-portrait"><img class="team-photo" src="assets/team/portrait-03.webp" alt="Margarita Isakova" lang="en" width="320" height="400" loading="lazy"></div>
+            <h3 lang="en">Margarita Isakova</h3><p class="team-role" lang="en">Director of the IT Department</p><a class="team-email" href="mailto:m.isakova@dengigroup.kz" data-team-email lang="en" dir="ltr">m.isakova@dengigroup.kz</a>
+          </article>
+          <article class="team-card card">
+            <div class="team-portrait"><img class="team-photo" src="assets/team/portrait-01.webp" alt="Marina Chabina" lang="en" width="320" height="400" loading="lazy"></div>
+            <h3 lang="en">Marina Chabina</h3><p class="team-role" lang="en">Director of Human Resources</p><a class="team-email" href="mailto:m.sinichkina@dengigroup.kz" data-team-email lang="en" dir="ltr">m.sinichkina@dengigroup.kz</a>
+          </article>
+        </div>
+      </section>
+    </section>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="page story-page" id="page-investors" aria-labelledby="investorsTitle" data-page-section="investors">
+<nav class="ir-subnav" aria-label="Investor sections">
+  <div class="mobile-section-nav wrap"><label for="investor-section" data-copy="investorNavigation">Investor sections</label><select id="investor-section" aria-label="Investor sections"><option value="#investors/highlights" data-copy="nav2">Investment Attractiveness</option><option value="#investors/financials" data-copy="nav4">Key Financial Highlights</option><option value="#investors/funding" data-copy="nav5">Funding Track Record</option><option value="#investors/risk" data-copy="nav6">Risk Management &amp; Regulation</option><option value="#investors/strategy" data-copy="nav8">Growth Strategy</option><option value="#investors/documents" data-copy="nav7">Disclosure</option></select></div><div class="ir-subnav-inner">
+    <a href="#investors/highlights" id="nav2">Investment Attractiveness</a>
+    <a href="#investors/financials" id="nav4">Key Financial Highlights</a>
+    <a href="#investors/funding" id="nav5">Funding Track Record</a>
+    <a href="#investors/risk" id="nav6">Risk Management &amp; Regulation</a>
+    <a href="#investors/strategy" id="nav8">Growth Strategy</a>
+    <a href="#investors/documents" id="nav7">Disclosure</a>
+  </div>
+</nav>
+  <div class="wrap body-grid">
+    <div>
+    <span class="section-index">03 /</span><h2 class="investors-title" id="investorsTitle">Investors</h2>
+    <section class="block" id="highlights" data-reveal="">
+      <div class="block-head"><h2 id="sec2h2">Key Investment Attractiveness Factors</h2></div>
+      <div class="investment-factors">
+        <article class="investment-factor" id="hl1"><h3>Established track record</h3><p><strong class="investment-key">Over 10 years</strong> of successful operating history in consumer lending. On the Kazakhstan market <strong class="investment-key">since 2015</strong>.</p></article>
+        <article class="investment-factor" id="hl2"><h3>National scale</h3><p><strong class="investment-key">Over 300 branches</strong> across every region of the country - the largest pawnshop network, ranked in the <strong class="investment-key">TOP-5</strong>.</p></article>
+        <article class="investment-factor" id="hl3"><h3>Collateral-backed lending</h3><p><strong class="investment-key">100% of loans are secured by collateral</strong> - jewellery (gold) and electronics. Pledged items are held in safekeeping at the pawnshop until the loan is fully repaid.</p></article>
+        <article class="investment-factor" id="hl4"><h3>Diversified loan book</h3><p>The portfolio is diversified both <strong class="investment-key">by collateral type</strong> - jewellery and electronics - and <strong class="investment-key">by loan size</strong>, reducing concentration risk and making the portfolio more resilient.</p></article>
+        <article class="investment-factor" id="hl5"><h3>Stable financial performance</h3><p><strong class="investment-key">ROA - 24.3%</strong>, <strong class="investment-key">ROE - 47.3%</strong> for fiscal year 2025 - steadily rising profitability over the last three years.</p></article>
+        <article class="investment-factor" id="hl8"><h3>Proprietary technology platform</h3><p><strong class="investment-key">An in-house development team</strong>, <strong class="investment-key">proprietary CRM</strong>, website and mobile app - built <strong class="investment-key">without outsourcing</strong>, scaling together with the branch network.</p></article>
+        <article class="investment-factor" id="hl9"><h3>Low leverage, ample liquidity headroom</h3><p><strong class="investment-key">Equity-to-Asset ratio of 48.2%</strong> (covenant ≥20%), <strong class="investment-key">Net Debt-to-Equity of 0.85x</strong> (covenant ≤3.00) - as of 1 July 2026, both with a substantial buffer.</p></article>
+        <article class="investment-factor" id="hl6"><h3>Proven international funding history</h3><p>An impeccable reputation on the international Kilde investment platform: <strong class="investment-key">a B+ rating</strong>, <strong class="investment-key">$12.0M</strong> raised since 2023, and <strong class="investment-key">zero missed payments</strong>.</p></article>
+      </div>
+      <div class="investment-links">
+        <a class="action" href="#investors/financials" data-copy="allFinancials">All financial indicators ↗</a>
+        <a class="action" href="#investors/funding"><span data-copy="nav5">Funding Track Record</span><span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="block" id="financials" data-reveal="">
+      <div class="block-head"><h2 id="sec4h2">Financial Highlights</h2></div>
+      <div class="fin-split">
+      <details class="section-disclosure financial-table-details"><summary><span data-copy="financialTableDetails">All indicators, 2023–2025</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content"><div class="card table-card">
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="sec4h2"><table class="datatable">
+        <tr><th scope="col" id="t4h0">Indicator</th><th scope="col" id="t4h1">2023</th><th scope="col" id="t4h2">2024</th><th scope="col" id="t4h3">2025</th></tr>
+        <tr><td id="t4r1">Loan portfolio</td><td>$25.7M</td><td>$35.8M</td><td>$73.7M</td></tr>
+        <tr><td id="t4r2">Total assets</td><td>$28.0M</td><td>$43.2M</td><td>$79.1M</td></tr>
+        <tr><td id="t4r3">Equity</td><td>$13.0M</td><td>$21.6M</td><td>$40.6M</td></tr>
+        <tr><td id="t4r4">Revenue</td><td>$14.3M</td><td>$21.1M</td><td>$36.9M</td></tr>
+        <tr><td id="t4r5">Net profit</td><td>$5.3M</td><td>$8.5M</td><td>$19.2M</td></tr>
+        <tr><td id="t4r6">ROA</td><td>18.8%</td><td>19.7%</td><td>24.3%</td></tr>
+        <tr><td id="t4r7">ROE</td><td>40.4%</td><td>39.5%</td><td>47.3%</td></tr>
+      </table></div>
+      </div>
+      </div></details><div class="card table-card">
+      <h3 class="table-mini-title" id="growthTitle">Growth dynamics, % YoY</h3>
+      <div class="growth-legend">
+        <span><i class="b1"></i><span id="growthCol1">2023→2024</span></span>
+        <span><i class="b2"></i><span id="growthCol2">2024→2025</span></span>
+      </div>
+      <div class="chart-scroll" tabindex="0" role="region" aria-labelledby="growthTitle"><div class="growth-chart">
+        <div class="growth-bars">
+          <div class="growth-bar-col b1"><div class="growth-bar-val">+39.3%</div><div class="growth-bar" style="height:44px"></div></div>
+          <div class="growth-bar-col b2"><div class="growth-bar-val">+105.9%</div><div class="growth-bar" style="height:118px"></div></div>
+        </div>
+        <div class="growth-bars">
+          <div class="growth-bar-col b1"><div class="growth-bar-val">+54.6%</div><div class="growth-bar" style="height:61px"></div></div>
+          <div class="growth-bar-col b2"><div class="growth-bar-val">+82.9%</div><div class="growth-bar" style="height:92px"></div></div>
+        </div>
+        <div class="growth-bars">
+          <div class="growth-bar-col b1"><div class="growth-bar-val">+65.2%</div><div class="growth-bar" style="height:73px"></div></div>
+          <div class="growth-bar-col b2"><div class="growth-bar-val">+88.5%</div><div class="growth-bar" style="height:98px"></div></div>
+        </div>
+        <div class="growth-bars">
+          <div class="growth-bar-col b1"><div class="growth-bar-val">+47.8%</div><div class="growth-bar" style="height:53px"></div></div>
+          <div class="growth-bar-col b2"><div class="growth-bar-val">+74.6%</div><div class="growth-bar" style="height:83px"></div></div>
+        </div>
+        <div class="growth-bars">
+          <div class="growth-bar-col b1"><div class="growth-bar-val">+61.5%</div><div class="growth-bar" style="height:68px"></div></div>
+          <div class="growth-bar-col b2"><div class="growth-bar-val">+125.9%</div><div class="growth-bar" style="height:140px"></div></div>
+        </div>
+        <div class="growth-glabel" id="g1">Loan portfolio</div>
+        <div class="growth-glabel" id="g2">Assets</div>
+        <div class="growth-glabel" id="g3">Equity</div>
+        <div class="growth-glabel" id="g4">Revenue</div>
+        <div class="growth-glabel" id="g5">Net profit</div>
+      </div></div>
+      </div>
+      <a class="financial-report" href="documents/financial-statements-2025-en.pdf" target="_blank" rel="noopener"><span class="report-kicker" data-copy="sec7h2">Disclosure</span><strong>2025</strong><span data-copy="d1">Financial Statements for 2025</span><span class="report-footer">PDF · EN <span aria-hidden="true">↗</span></span></a></div>
+    </section>
+
+    <section class="block" id="funding" data-reveal="">
+      <div class="block-head"><h2 id="sec5h2">International Funding Track Record</h2></div>
+      <p class="block-intro" id="sec5Intro">Investments raised through the Kilde investment platform, as at 1 July 2026:</p>
+      <div class="card table-card" style="margin-bottom:14px;">
+      <h3 class="table-mini-title" id="trackTitle">Investments by year</h3>
+      <div class="chart-scroll" tabindex="0" role="region" aria-labelledby="trackTitle"><div class="track-head"><span></span><span></span><span id="trackColCumul">Cumulative</span><span id="trackColYear">Raised that year</span></div>
+      <div class="track-row"><div class="yr">2023</div><div class="track-bar"><i style="width:21%"></i></div><div class="amt">$2.5M</div><div class="amt-yr">+$2.5M</div></div>
+      <div class="track-row"><div class="yr">2024</div><div class="track-bar"><i style="width:46%"></i></div><div class="amt">$5.5M</div><div class="amt-yr">+$3.0M</div></div>
+      <div class="track-row"><div class="yr">2025</div><div class="track-bar"><i style="width:46%"></i></div><div class="amt">$5.5M</div><div class="amt-yr">+$0</div></div>
+      <div class="track-row"><div class="yr">2026</div><div class="track-bar"><i style="width:100%"></i></div><div class="amt">$12.0M</div><div class="amt-yr">+$6.5M</div></div></div>
+      </div>
+      <details class="section-disclosure"><summary><span data-copy="fundingDetails">Funding details</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content"><div class="card table-card">
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="sec5h2"><table class="datatable">
+        <tr><td id="t5r2">Total raised to date</td><td>$12.0M</td></tr>
+        <tr><td id="t5r3">Total repaid to date</td><td>$0</td></tr>
+        <tr><td id="t5r4">Late payments</td><td>0</td></tr>
+        <tr><td id="t5r5">Current outstanding</td><td>$12.0M</td></tr>
+      </table></div>
+      </div>
+
+      </div></details><details class="section-disclosure"><summary><span id="covTitle" data-copy="covTitle">Covenants</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content"><div class="card table-card">
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="covTitle"><table class="datatable">
+        <tr><th scope="col" id="covH1">Metric</th><th scope="col" id="covH2">Covenant</th><th scope="col" id="covH3">Actual</th><th scope="col" id="covH4">Status</th></tr>
+        <tr><td id="cov1">Equity-to-Asset ratio</td><td>≥20%</td><td>48,2%</td><td class="cov-ok" id="covOk1">Compliant</td></tr>
+        <tr><td id="cov2">Net Debt-to-Equity ratio</td><td>≤3,00x</td><td>0,85x</td><td class="cov-ok" id="covOk2">Compliant</td></tr>
+        <tr><td id="cov3">Interest Coverage Ratio</td><td>&lt;80%</td><td>15,1%</td><td class="cov-ok" id="covOk3">Compliant</td></tr>
+      </table></div>
+      <p class="table-foot" id="covFoot">Metrics as of 1 July 2026, calculated per the terms of the Kilde loan agreements.</p>
+      </div>
+
+      </div></details><details class="section-disclosure"><summary><span id="repaySchedTitle" data-copy="repaySchedTitle">Principal repayment schedule</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content"><div class="card table-card">
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="repaySchedTitle"><table class="datatable">
+        <tr><th scope="col" id="rsH1">Maturity</th><th scope="col" id="rsH2">Amount due</th></tr>
+        <tr><td>Q4 2026</td><td>$2.5M</td></tr>
+        <tr><td>Q2 2027</td><td>$4.0M</td></tr>
+        <tr><td>Q2 2029</td><td>$4.5M</td></tr>
+        <tr><td>Q3 2029</td><td>$1.0M</td></tr>
+      </table></div>
+      </div>
+    </div></details>
+      <a class="action funding-contact" href="#investors/ir-contact" data-page="investors" data-anchor="ir-contact" data-copy="designContact">Contact IR →</a>
+    </section>
+
+    <section class="block" id="risk" data-reveal="">
+      <div class="block-head"><h2 id="sec6h2">Risk Management &amp; Regulation</h2></div>
+      <p class="block-intro" id="sec6Intro">The risk management system combines collateral-backed lending, collateral appraisal controls, portfolio diversification and internal review procedures within the applicable regulatory framework.</p>
+      <div class="card table-card risk-card">
+      <div class="reg-grid">
+        <div class="reg-item"><span class="k" id="r1k">Licence</span><span class="v" id="r1v">No. 10.21.0017.L, issued 12.03.2021 by the Agency for Regulation and Development of the Financial Market (ARDFM) of Kazakhstan</span></div>
+        <div class="reg-item"><span class="k" id="r2k">Regulator</span><span class="v" id="r2v">Agency for Regulation and Development of the Financial Market (ARDFM), Kazakhstan</span></div>
+        </div>
+      <details class="section-disclosure"><summary><span data-copy="riskDetails">Risk management procedures</span><span class="disclosure-action"><span class="disclosure-more" data-copy="readMore">Learn more</span><span class="disclosure-less" data-copy="readLess">Show less</span><i aria-hidden="true"></i></span></summary><div class="disclosure-content"><div class="reg-grid reg-more-grid"><div class="reg-item"><span class="k" id="r3k">Lending model</span><span class="v" id="r3v">100% secured / collateral-backed</span></div>
+        <div class="reg-item"><span class="k" id="r5k">Appraisal method</span><span class="v" id="r5v">Appraisal specialist (at collateral intake)</span></div>
+        <div class="reg-item"><span class="k" id="r6k">Portfolio concentration</span><span class="v" id="r6v">Diversified across regions - in major regions the company operates its own jewellery stores with display windows and large retail space for selling jewellery (gold) and electronics.</span></div>
+        <div class="reg-item"><span class="k" id="r9k">Appraisal review</span><span class="v" id="r9v">Auditor / revisor (after collateral intake)</span></div>
+        <div class="reg-item"><span class="k" id="r7k">Credit risk controls</span><span class="v" id="r7v">A proprietary Risk Management Methodology has been developed. The company has a dedicated Analytics and Risk department that applies scorecards to assess borrowers.</span></div>
+        <div class="reg-item"><span class="k" id="r8k">Other disclosures</span><span class="v" id="r8v">Online underwriting with additional checks, using modern collateral verification methods (when needed, at the point of collateral intake).</span></div>
+      </div></div></details></div>
+    </section>
+
+    <section class="block" id="strategy" data-reveal="">
+      <div class="block-head"><h2 id="sec8h2">Growth Strategy</h2></div>
+      <p class="block-intro" id="sec8Intro">The company’s development priorities for the coming years.</p>
+      <div class="strategy-priorities">
+        <article class="strategy-priority" id="pl1"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-pins3"/></svg></div><h3>Network scaling</h3></div><p>Expanding the branch network, including into new and fast-urbanising districts of Kazakhstan.</p></article>
+        <article class="strategy-priority" id="pl2"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-trophy"/></svg></div><h3>Sustaining leadership and efficiency</h3></div><p>Strengthening our leading position and improving the efficiency of the core business - <strong class="strategy-goal">reaching the TOP-3 largest pawnshops in Kazakhstan by assets and loan portfolio</strong>.</p></article>
+        <article class="strategy-priority" id="pl3"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-search"/></svg></div><h3>Appraisal technology development</h3></div><p>Refining our online collateral appraisal system and introducing new appraisal methods.</p></article>
+        <article class="strategy-priority" id="pl7"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-laptop"/></svg></div><h3>Technology platform development</h3></div><p>Growing our proprietary IT infrastructure and digital services - CRM, mobile app, and internal management systems.</p></article>
+        <article class="strategy-priority" id="pl4"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-users"/></svg></div><h3>Team development</h3></div><p>Investing in training and professional growth for employees at every level of the network.</p></article>
+        <article class="strategy-priority" id="pl5"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-shield"/></svg></div><h3>Risk management</h3></div><p>Continued improvement of the risk management system and portfolio quality controls.</p></article>
+        <article class="strategy-priority" id="pl6"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-store"/></svg></div><h3>Service and national reach</h3></div><p>Improving client service quality and sustaining the network's presence across all regions of the country.</p></article>
+        <article class="strategy-priority" id="pl8"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-link"/></svg></div><h3>Cross-selling<span class="pl-note">Pending internal approval</span></h3></div><p>Selective development of cross-selling between the jewellery and electronics segments, subject to pawnshop industry regulatory requirements.</p></article>
+        <article class="strategy-priority" id="pl9"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-doc-check"/></svg></div><h3>Transparency and corporate governance</h3></div><p>Continued development of corporate governance practices and transparent reporting for investors and partners.</p></article>
+        <article class="strategy-priority" id="pl0"><div class="pl-head"><div class="pl-icon"><svg aria-hidden="true" focusable="false"><use href="#i-globe"/></svg></div><h3>Growing international funding</h3></div><p>Expanding access to international capital as an additional growth driver for the business, while strengthening and preserving partnerships with existing and new investors.</p></article>
+      </div>
+    </section>
+
+    <section class="block" id="documents" data-reveal="">
+      <div class="block-head"><h2 id="sec7h2">Disclosure</h2></div>
+      <div class="doc-list">
+        <article class="doc-row">
+          <div class="name"><span class="icon" aria-hidden="true">PDF</span><h3 id="d1">Financial Statements for 2025</h3></div>
+          <div class="doc-actions"><a href="documents/financial-statements-2025-en.pdf" target="_blank" rel="noopener" data-document-action="open" aria-label="Open PDF — 2025"><span data-copy="openDocument">Open PDF</span><span aria-hidden="true"> ↗</span></a><a href="documents/financial-statements-2025-en.pdf" download aria-label="Download — 2025" data-document-action="download"><span data-copy="downloadDocument">Download</span><span aria-hidden="true"> ↓</span></a></div>
+        </article>
+        <article class="doc-row">
+          <div class="name"><span class="icon" aria-hidden="true">PDF</span><h3 id="d2">Financial Statements for 2024</h3></div>
+          <div class="doc-actions"><a href="documents/financial-statements-2024-en.pdf" target="_blank" rel="noopener" data-document-action="open" aria-label="Open PDF — 2024"><span data-copy="openDocument">Open PDF</span><span aria-hidden="true"> ↗</span></a><a href="documents/financial-statements-2024-en.pdf" download aria-label="Download — 2024" data-document-action="download"><span data-copy="downloadDocument">Download</span><span aria-hidden="true"> ↓</span></a></div>
+        </article>
+        <article class="doc-row">
+          <div class="name"><span class="icon" aria-hidden="true">PDF</span><h3 id="d3">Financial Statements for 2023</h3></div>
+          <div class="doc-actions"><a href="documents/financial-statements-2023-en.pdf" target="_blank" rel="noopener" data-document-action="open" aria-label="Open PDF — 2023"><span data-copy="openDocument">Open PDF</span><span aria-hidden="true"> ↗</span></a><a href="documents/financial-statements-2023-en.pdf" download aria-label="Download — 2023" data-document-action="download"><span data-copy="downloadDocument">Download</span><span aria-hidden="true"> ↓</span></a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="ir-contact" aria-labelledby="irContactH2" data-reveal>
+      <div class="ir-contact-layout">
+        <span class="ir-contact-sheen" aria-hidden="true"></span>
+        <div class="ir-contact-content">
+          <span class="ir-contact-kicker" data-copy="navInvestors">Investors</span>
+          <h2 id="irContactH2">Contact us about investing</h2>
+          <p id="irContactIntro">We are open to your questions.</p>
+          <div class="ir-contact-resources">
+            <a href="#investors/financials" data-copy="allFinancials">All financial indicators ↗</a>
+            <a href="documents/financial-statements-2025-en.pdf" target="_blank" rel="noopener" data-copy="report2025">Financial Statements 2025 · PDF ↗</a>
+          </div>
+        </div>
+        <div class="ir-contact-action">
+          <div class="ir-contact-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#i-mail"></use></svg><span>↗</span></div>
+          <div class="ir-contact-address">
+            <p id="irContactLabel">Corporate email for inquiries</p>
+            <a href="mailto:info@dengiclick.kz" class="ir-contact-email" data-contact-email>info@dengiclick.kz</a>
+          </div>
+          <span class="ir-contact-signature" translate="no">Dengi Market / Kazakhstan</span>
+        </div>
+      </div>
+    </section>
+
+
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="redesign-footer"><div class="wrap"><span id="footerBrand">DM Pawnshop</span><a href="#about" data-page="about" id="footerAbout">About Us</a><a href="articles/index.html" data-copy="articlesNavigation">Articles</a><a href="mailto:info@dengiclick.kz" data-contact-email>info@dengiclick.kz</a><a href="#investors/ir-contact" data-page="investors" data-anchor="ir-contact" id="footerContact">Contact us about investing</a></div></footer>
+
+</body></html>

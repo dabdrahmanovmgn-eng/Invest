@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="News and articles from Dengi Market.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>News — Dengi Market</title>
+  <link rel="stylesheet" href="../assets/editorial.css">
+  <script src="../assets/articles.js" defer></script>
+</head>
+<body class="editorial-page" data-editorial-page="list">
+  <a class="editorial-skip" href="#main" data-copy="skip">Skip to content</a>
+  <header class="editorial-header">
+    <div class="editorial-shell editorial-header-inner">
+      <a class="editorial-brand" href="../#home">Dengi <span>Market</span></a>
+      <nav class="editorial-nav" aria-label="Main navigation" data-copy-aria="navigation">
+        <a href="../#home" data-copy="home">Home</a>
+        <a href="index.html" aria-current="page" data-copy="news">News</a>
+      </nav>
+      <div class="editorial-locale" role="group" aria-label="Language" data-copy-aria="language">
+        <button type="button" data-language="en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" data-language="ru" aria-pressed="false" lang="ru">RU</button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="editorial-shell editorial-main" tabindex="-1">
+    <div class="news-heading">
+      <h1 data-copy="heading">News & articles</h1>
+      <p data-copy="intro">News and materials from Dengi Market.</p>
+    </div>
+    <div id="editorial-status" class="editorial-status" role="status" aria-live="polite">
+      <p id="status-message">Loading articles…</p>
+      <button id="retry" class="editorial-button" type="button" hidden data-copy="retry">Try again</button>
+    </div>
+    <div id="articles-grid" class="news-grid" aria-busy="true"></div>
+    <noscript><p class="editorial-status">Enable JavaScript to load articles. / Включите JavaScript для загрузки статей.</p></noscript>
+  </main>
+  <footer class="editorial-footer">
+    <div class="editorial-shell editorial-footer-inner">
+      <span>Dengi Market / Kazakhstan</span>
+      <a href="../#investors/ir-contact" data-copy="contact">Contact Investor Relations</a>
+    </div>
+  </footer>
+</body>
+</html>

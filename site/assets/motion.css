@@ -1,0 +1,151 @@
+/* Базовое состояние всегда читаемо; GSAP включается только после загрузки. */
+/* Запас под выносными элементами Manrope; компенсация сохраняет ритм заголовка. */
+.hero-word-mask { display: inline-block; overflow: clip; vertical-align: bottom; padding-bottom: .18em; margin-bottom: -.18em; }
+.hero-word-mask + .hero-word-mask { margin-left: .14em; }
+.hero-word-mask .hero-word { margin: 0; }
+.hero-word { position: relative; }
+/* Открытые линии остаются статичными без JS; маска неподвижна относительно текста. */
+.hero-lines { position: absolute; inset: -6% -8% -10% 0; z-index: 0; pointer-events: none; user-select: none; color: var(--green-deep); opacity: .15; }
+.hero-lines > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hero-line { fill: none; stroke: currentColor; stroke-width: 1.3; transform-box: fill-box; transform-origin: 55% 65%; }
+.hero-line path { vector-effect: non-scaling-stroke; }
+@supports (mask-image: linear-gradient(90deg, transparent, #000)) or (-webkit-mask-image: linear-gradient(90deg, transparent, #000)) {
+  .hero-lines { -webkit-mask-image: linear-gradient(90deg, transparent 30%, #0003 48%, #000 75%); mask-image: linear-gradient(90deg, transparent 30%, #0003 48%, #000 75%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Начальные фазы уже находятся в движущейся части цикла. */
+  .hero-background-active .hero-line { animation: hero-line-drift 16s ease-in-out -4s infinite paused; }
+  .hero-background-active .hero-line:nth-of-type(2) { animation-duration: 18s; animation-delay: -13s; }
+  .hero-background-active .hero-line:nth-of-type(3) { animation-duration: 17s; animation-delay: -5s; }
+  .hero-background-active .hero-line:nth-of-type(4) { animation-duration: 20s; animation-delay: -15s; }
+  .hero-background-active .hero-line:nth-of-type(5) { animation-duration: 19s; animation-delay: -6s; }
+  .hero-background-running .hero-line { animation-play-state: running; }
+}
+@keyframes hero-line-drift {
+  0%, 100% { transform: translate(-52px, 28px) rotate(-1.4deg); }
+  50% { transform: translate(64px, -38px) rotate(1.7deg); }
+}
+/* Две ограниченные световые маски движутся по форме букв; текст смещается обратно. */
+.hero-color-front {
+  position: absolute; left: 0; top: 0; height: calc(100% + .18em);
+  overflow: hidden; pointer-events: none; user-select: none; opacity: 0;
+  transform-origin: 0 0; will-change: transform;
+}
+.hero-light-tail, .hero-light-edge { position: absolute; inset: 0; }
+.hero-light-tail {
+  -webkit-mask-image: linear-gradient(105deg, transparent .03em, #0002 .12em, #000a .35em, #0005 .5em, transparent .63em);
+  mask-image: linear-gradient(105deg, transparent .03em, #0002 .12em, #000a .35em, #0005 .5em, transparent .63em);
+}
+.hero-light-edge {
+  -webkit-mask-image: linear-gradient(105deg, transparent .56em, #000c .585em, #000c .615em, transparent .64em);
+  mask-image: linear-gradient(105deg, transparent .56em, #000c .585em, #000c .615em, transparent .64em);
+}
+.hero-color-ink { display: block; color: #3f7a91; white-space: pre; transform-origin: 0 0; will-change: transform; }
+.hero-color-ink::before { content: attr(data-word); }
+.hero-word.accent .hero-color-ink { color: #70c995; }
+.hero-light-edge .hero-color-ink { color: #b1dfd1; }
+.hero-word.accent .hero-light-edge .hero-color-ink { color: #d8f3df; }
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+.hero-eyebrow .eyebrow { margin: 0; }
+.hero-intro-mark { flex: 0 0 32px; height: 2px; background: var(--green-deep); transform-origin: left center; }
+.metric-value-mask { display: block; overflow: clip; padding-bottom: .08em; margin-bottom: -.08em; }
+.metric-value-mask strong { display: block; }
+.metric-rule { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: #b7e7c9; pointer-events: none; }
+.gsap-motion [data-reveal] { transition: none; }
+.gsap-motion .hero-copy { transform: none; opacity: 1; }
+.gsap-motion .hero-word, .gsap-motion .hero-sub, .gsap-motion .hero-actions,
+.gsap-motion .hero-bottom, .gsap-motion .hero .eyebrow { animation: none; }
+.results-stage-frame { position: relative; transform-origin: center top; }
+
+/* Круглая кнопка связывает первый экран с показателями на стыке секций. */
+.hero-bridge { position: relative; height: 0; z-index: 3; }
+.scroll-cue-link {
+  position: absolute; top: -32px;
+  right: max(72px, calc((100% - 1200px) / 2 + 40px));
+  width: 64px; height: 64px;
+  display: block; color: var(--green-deep); cursor: pointer;
+  touch-action: manipulation; border-radius: 50%;
+  isolation: isolate;
+  -webkit-tap-highlight-color: #087b3920;
+}
+.scroll-cue-link:focus-visible { outline: 3px solid #007f91; outline-offset: 5px; }
+.bridge-contour { position: absolute; top: 0; left: -50%; width: 200%; height: 100%; z-index: 0; pointer-events: none; }
+.scroll-cue-link::before {
+  content: ''; position: absolute; inset: 1.5px; z-index: 1;
+  border-radius: inherit; pointer-events: none;
+  background: #e7f7eb; opacity: 0; transform: scale(.88);
+  transition: opacity .24s ease-out, transform .28s ease-out;
+}
+.bridge-feedback {
+  position: absolute; inset: 0; z-index: 2; transform-origin: 50% 50%;
+  pointer-events: none;
+  transition: transform .28s cubic-bezier(.2, .7, .3, 1);
+}
+.bridge-shape {
+  position: absolute; left: 50%; top: 50%; width: 28px; height: 28px; margin: -14px 0 0 -14px;
+}
+.bridge-shape > svg { display: block; width: 100%; height: 100%; }
+.scroll-cue-link:focus-visible::before { opacity: 1; transform: scale(1); }
+.scroll-cue-link:focus-visible .bridge-feedback { transform: scale(1.06); }
+@media (hover: hover) and (pointer: fine) {
+  .scroll-cue-link:hover::before { opacity: 1; transform: scale(1); }
+  .scroll-cue-link:hover .bridge-feedback { transform: scale(1.06); }
+}
+.scroll-cue-link:active::before { opacity: 1; transform: scale(.96); transition-duration: .12s; }
+.scroll-cue-link:active .bridge-feedback { transform: scale(.94); transition-duration: .12s; }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* Конечное число сохраняет ширину и доступно скринридеру весь период анимации. */
+.count-value, .stat .n.count-value { display: inline-grid; font-variant-numeric: tabular-nums; }
+.count-value > .count-final, .count-value > .count-display { grid-area: 1 / 1; font: inherit; letter-spacing: inherit; }
+.count-value > .count-final { opacity: 0; pointer-events: none; }
+.featured-metric strong > [data-count-value] { font-size: inherit; letter-spacing: inherit; margin: 0; }
+
+.results-stage, .ir-contact-card { position: relative; isolation: isolate; overflow: clip; }
+.scroll-ornament {
+  position: absolute; width: 290px; height: 540px; right: 0; top: 0;
+  opacity: .08; pointer-events: none; user-select: none; z-index: -1;
+  object-fit: contain; transform-origin: center;
+}
+.results-stage > .scroll-ornament, .ir-contact-card > .scroll-ornament {
+  top: 24px; height: calc(100% - 48px); width: 240px; right: 24px;
+}
+.ir-contact-card::after { display: none; }
+.advantage-card > summary > .scroll-ornament {
+  top: 18px; height: calc(100% - 36px); width: 140px; right: 12px;
+}
+
+@media (max-width: 600px) {
+  .hero-lines { inset: 0 -24% -4% 0; opacity: .13; }
+  .hero-line:nth-of-type(n+3) { display: none; }
+  .hero-eyebrow { gap: 10px; margin-bottom: 24px; }
+  .hero-intro-mark { flex-basis: 24px; }
+  .hero-word-mask { display: block; width: fit-content; max-width: 100%; }
+  .hero-word-mask + .hero-word-mask { margin-left: 0; }
+  .results-stage > .scroll-ornament, .ir-contact-card > .scroll-ornament { width: 160px; right: 12px; }
+  .scroll-cue-link { width: 56px; height: 56px; top: -28px; right: 56px; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .hero-line { animation: none !important; transform: none !important; }
+  .hero-color-front { display: none !important; }
+  .hero-intro-mark { transform: none !important; opacity: 1 !important; }
+  .hero-word-mask, .metric-value-mask { overflow: visible; }
+  .gsap-motion .hero-word, .gsap-motion .hero-copy,
+  .gsap-motion .hero-sub, .gsap-motion .hero-actions,
+  .gsap-motion .hero-report, .gsap-motion .hero-bottom, .gsap-motion .hero .eyebrow,
+  .gsap-motion .results-stage-frame, .gsap-motion .results-stage, .gsap-motion .stage-heading, .gsap-motion .featured-label,
+  .gsap-motion .featured-metric strong, .gsap-motion .metric-rule,
+  .gsap-motion .about-intro h2, .gsap-motion .hero-art, .gsap-motion .flow > *,
+  .gsap-motion .growth-bar, .gsap-motion .track-bar i, .gsap-motion .doc-list > *,
+  .gsap-motion .disclosure-content, .gsap-motion .metric-value-mask,
+  .gsap-motion .advantage-card > summary { transform: none !important; opacity: 1 !important; }
+  .scroll-ornament { transform: none !important; opacity: .08 !important; }
+  .bridge-shape { transform: none !important; }
+  .bridge-feedback, .scroll-cue-link::before { transform: none !important; transition: none; }
+  .count-value > .count-final { opacity: 1; }
+  .count-value > .count-display { display: none; }
+}
+@media print { .scroll-ornament, .hero-bridge, .hero-lines { display: none; } }

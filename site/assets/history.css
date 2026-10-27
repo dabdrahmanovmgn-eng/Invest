@@ -1,0 +1,330 @@
+/* Хронология компании: полные тексты, годы как навигационные ориентиры. */
+#overview-history .timeline-card {
+  padding: 26px 0 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#overview-history .timeline-head {
+  margin: 0;
+}
+
+/* Заголовок раскрытия уже называет раздел; ID остаётся именем региона. */
+#overview-history .timeline-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+#overview-history .timeline-nav {
+  display: none;
+}
+
+#overview-history .timeline-h {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: visible;
+  overscroll-behavior-inline: auto;
+}
+
+#overview-history .timeline-h:focus-visible {
+  outline: 2px solid var(--green-deep);
+  outline-offset: 8px;
+}
+
+#overview-history .th-item {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 24px;
+  align-content: start;
+  min-width: 0;
+  padding: 32px 0;
+  border-bottom: 1px solid #cfded5;
+}
+
+#overview-history .th-line,
+#overview-history .th-dot {
+  display: none;
+}
+
+#overview-history .th-year {
+  display: block;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: var(--green-deep);
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+#overview-history .th-facts {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  color: #46576b;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -.015em;
+  overflow-wrap: break-word;
+}
+
+#overview-history .th-facts li {
+  position: relative;
+  margin: 0;
+  padding-left: 16px;
+}
+
+#overview-history .th-facts li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: .7em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #64a17b;
+}
+
+#overview-history .th-item:first-child {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(150px, .65fr) minmax(0, 2fr);
+  align-items: center;
+  gap: 38px;
+  margin-bottom: 6px;
+  padding: 32px 36px;
+  background: #e5f2e9;
+  border: 1px solid #c2ddcb;
+  border-radius: 24px;
+}
+
+#overview-history .th-year-plan {
+  color: var(--ink);
+  font-size: clamp(48px, 6vw, 76px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.065em;
+}
+
+#overview-history .th-year-plan span {
+  display: block;
+  width: fit-content;
+  margin-top: 15px;
+  padding: 6px 10px;
+  border: 1px solid #9dbda9;
+  border-radius: 5px;
+  color: #365d45;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#overview-history .th-item:first-child .th-facts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0;
+  color: var(--green-deep);
+  font-size: clamp(21px, 2.1vw, 28px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.035em;
+}
+
+#overview-history .th-item:first-child .th-facts li {
+  padding: 4px 0 4px 24px;
+  border-left: 1px solid #b1ceba;
+}
+
+#overview-history .th-item:first-child .th-facts li::before {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  #overview-history .timeline-h {
+    column-gap: 30px;
+  }
+
+  #overview-history .th-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  #overview-history .th-facts {
+    font-size: 15px;
+  }
+
+  #overview-history .th-item:first-child {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 24px;
+    padding: 28px;
+  }
+
+  #overview-history .th-item:first-child .th-facts {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  #overview-history .timeline-h {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #overview-history .th-item {
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 22px;
+    padding-block: 26px;
+  }
+
+  #overview-history .th-year {
+    font-size: 34px;
+  }
+
+  #overview-history .th-facts {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  #overview-history .th-item:first-child {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding: 26px;
+  }
+
+  #overview-history .th-year-plan {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 60px;
+  }
+
+  #overview-history .th-year-plan span {
+    margin: 0;
+    letter-spacing: 0;
+  }
+
+  #overview-history .th-item:first-child .th-facts {
+    gap: 20px;
+    font-size: 23px;
+  }
+
+  #overview-history .th-item:first-child .th-facts li {
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 440px) {
+  #overview-history .timeline-card {
+    padding-top: 18px;
+  }
+
+  #overview-history .th-item {
+    grid-template-columns: 65px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  #overview-history .th-year {
+    font-size: 30px;
+  }
+
+  #overview-history .th-item:first-child {
+    padding: 24px 22px;
+  }
+
+  #overview-history .th-year-plan {
+    font-size: 56px;
+  }
+
+  #overview-history .th-item:first-child .th-facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    font-size: 24px;
+  }
+
+  #overview-history .th-facts {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #overview-history .th-year,
+  #overview-history .th-facts {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media print {
+  #overview-history .timeline-card {
+    break-inside: auto;
+  }
+
+  #overview-history .timeline-h {
+    display: block;
+  }
+
+  #overview-history .th-item,
+  #overview-history .th-item:first-child {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 24px;
+    margin: 0;
+    padding: 14px 0;
+    border: 0;
+    border-bottom: 1px solid #cfded5;
+    border-radius: 0;
+    background: transparent;
+    break-inside: avoid;
+  }
+
+  #overview-history .th-year,
+  #overview-history .th-year-plan {
+    display: block;
+    color: var(--ink);
+    font-size: 28px;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #overview-history .th-year-plan span {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+  #overview-history .th-facts,
+  #overview-history .th-item:first-child .th-facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+    color: var(--ink);
+    font-size: 12px;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #overview-history .th-item:first-child .th-facts li {
+    padding: 0;
+    border: 0;
+  }
+}

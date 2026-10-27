@@ -1,0 +1,165 @@
+/* UX-проход по Frontend Design и Web Design Guidelines, 21.10.2026. */
+@font-face {
+  font-family: Manrope;
+  src: url("fonts/manrope-variable.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root { font-family: Manrope, sans-serif; }
+body { font-size: 16px; }
+h1, h2, h3 { text-wrap: balance; }
+button, select { font: inherit; }
+button, a, summary, select { touch-action: manipulation; }
+a, summary, select { scroll-margin-block: calc(var(--header-height) + var(--subnav-height) + 24px) 24px; }
+a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #007f91;
+  outline-offset: 4px;
+}
+.results-stage a:focus-visible, .ir-contact-card a:focus-visible { outline-color: #fff; }
+.ir-header-inner { gap: 28px; }
+.brand { min-height: 44px; }
+.site-nav { gap: 24px; }
+.site-nav-link { min-height: 44px; display: flex; align-items: center; font-size: 14px; }
+.locale button { width: 44px; height: 44px; font-size: 12px; }
+.locale button:hover { background: var(--mint); }
+
+.hero { min-height: min(800px, calc(100svh - var(--header-height))); }
+.hero-inner { padding-block: 72px 144px; }
+.hero-title { font-weight: 750; letter-spacing: -.06em; line-height: 1.08; overflow: visible; }
+.hero-word + .hero-word { margin-left: .14em; }
+.hero-title .accent { color: var(--green-deep); }
+.hero-sub { max-width: 52ch; letter-spacing: -.02em; }
+.hero .eyebrow, .about-kicker, .teaser-label, .home-section-end,
+.report-kicker, .ir-contact-label, .page-nav-eyebrow, .reg-item .k,
+.track-head, .datatable th {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+}
+.hero .eyebrow { font-size: 14px; margin-bottom: 26px; }
+.action { font-size: 14px; background: #fff; }
+.funding-contact { margin-top: 8px; color: var(--green-deep); border-color: var(--green-deep); }
+.hero-report {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  max-width: 100%;
+  margin-top: 22px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.hero-report:hover [data-copy] { text-decoration: underline; text-underline-offset: 4px; }
+.hero-report-format { flex-shrink: 0; border: 1px solid #bfd7c7; border-radius: 6px; padding: 4px 7px; font-size: 11px; }
+.hero-location, .scroll-cue { font-size: 12px; letter-spacing: 0; }
+.scroll-cue { min-height: 44px; }
+.section-index { display: none; }
+.stage-heading h2 { max-width: 24ch; }
+.stage-period, .featured-label { font-size: 14px; }
+.stage-bottom a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; }
+.featured-metric strong, .stat .n, .fact-card .n, .datatable td,
+.track-row .amt, .track-row .yr { font-variant-numeric: tabular-nums; }
+
+/* У преимуществ нет последовательности: убираем декоративные номера. */
+.feature-disclosure > summary { grid-template-columns: minmax(0, 1fr) auto; }
+.feature-disclosure > summary::before { content: none; }
+.feature-disclosure > .disclosure-content { padding-left: 0; max-width: 72ch; }
+.disclosure-action { font-size: 13px; }
+.feature-disclosure[open], .section-disclosure[open] { border-top-color: #82b894; }
+.feature-disclosure > summary:hover, .section-disclosure > summary:hover { color: var(--green-deep); }
+.company-copy, .block-intro { max-width: 72ch; }
+.pl-note { font-size: 12px !important; }
+
+.ir-subnav-inner { gap: 8px; }
+.ir-subnav a {
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+.ir-subnav a.current { background: var(--mint); color: var(--green-deep); box-shadow: inset 0 -2px var(--green-deep); }
+.mobile-section-nav select { min-height: 44px; background: #fff; color: var(--green-deep); }
+.datatable th { font-size: 13px; }
+.datatable td { font-size: 14px; }
+.doc-row { transition: border-color .2s; }
+.doc-row:hover { transform: none; }
+.doc-row:focus-within { border-color: var(--green-deep); }
+.doc-row .name { min-width: 0; }
+.doc-actions { gap: 10px; }
+.doc-actions a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #bfd7c7;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.doc-actions a:first-child { background: var(--mint); border-color: var(--mint); }
+.doc-actions a:hover { border-color: var(--green-deep); text-decoration: none; }
+.ir-contact-email { overflow-wrap: anywhere; }
+.redesign-footer a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
+
+@media (max-width: 1000px) {
+  .ir-header-inner { gap: 18px; }
+  .site-nav { gap: 16px; }
+  .brand-name { font-size: 14px; }
+}
+@media (max-width: 850px) {
+  .ir-header-inner { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding-block: 10px 6px; }
+  .header-right { grid-column: 2; grid-row: 1; }
+  .site-nav { grid-column: 1 / -1; grid-row: 2; width: 100%; margin: 0; justify-content: space-between; gap: 12px; }
+  .site-nav-link { font-size: 13px; padding: 8px 0; }
+}
+@media (max-width: 600px) {
+  .hero { min-height: 0; }
+  .hero-inner { padding-top: 48px; padding-bottom: 110px; }
+  .hero-title { font-size: clamp(72px, 20vw, 120px); margin-bottom: 26px; }
+  .hero-word + .hero-word { margin-left: 0; }
+  .hero-sub { max-width: 30ch; font-size: 19px; line-height: 1.5; }
+  .hero .eyebrow { font-size: 13px; letter-spacing: 0; margin-bottom: 24px; }
+  .hero-actions { align-items: stretch; gap: 12px; }
+  .action { min-height: 48px; font-size: 13px; justify-content: center; }
+  .hero-report { font-size: 13px; gap: 9px; margin-top: 18px; }
+  .hero-bottom { bottom: 20px; }
+  .hero-location { font-size: 11px; max-width: 18ch; }
+  .scroll-cue { font-size: 12px; }
+  .stage-heading { gap: 16px; }
+  .stage-period { margin: 0; }
+  .stage-heading h2 { max-width: 18ch; }
+  .featured-label { font-size: 14px; }
+  .stage-bottom { gap: 4px; }
+  .stage-bottom a { font-size: 13px; }
+  .feature-disclosure > summary { grid-template-columns: minmax(0, 1fr) auto; gap: 16px; }
+  .feature-disclosure summary h3, .feature-disclosure .summary-title { font-size: 18px; }
+  .feature-disclosure > .disclosure-content { padding-left: 0; }
+  .disclosure-action { font-size: 12px; }
+  .section-disclosure > summary { gap: 14px; }
+  .mobile-section-nav label { font-size: 12px; text-transform: none; letter-spacing: 0; }
+  .mobile-section-nav select { font-size: 14px; }
+  .doc-actions a { flex: 1; }
+  .doc-row .name h3 { font-size: 22px; }
+  .ir-contact-label { font-size: 12px; }
+  .ir-header-inner { padding-top: max(10px, env(safe-area-inset-top)); }
+  .wrap, .ir-header-inner { padding-left: max(22px, env(safe-area-inset-left)); padding-right: max(22px, env(safe-area-inset-right)); }
+}
+@media (max-width: 360px) {
+  .site-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; row-gap: 0; }
+  .site-nav-link { font-size: 13px; justify-content: center; }
+  .hero-actions { flex-direction: column; }
+  .hero-report-format { font-size: 10px; padding-inline: 5px; }
+  .hero-report { gap: 7px; font-size: 12px; }
+}
+@media print {
+  .hero-report { display: none; }
+  .hero-inner { padding-block: 20px 40px; }
+  .doc-actions a { border: 0; padding: 0; }
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dengi Market — Article editor</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/editorial.css">
+  <link rel="stylesheet" href="../assets/admin.css?v=first-setup-1">
+  <script src="../assets/admin.js?v=first-setup-1" defer></script>
+</head>
+<body class="editorial-page admin-page">
+  <a class="admin-skip" href="#admin-main" data-i18n="skip">Skip to content</a>
+  <header class="admin-header">
+    <a class="admin-brand" href="../"><img src="../assets/favicon.svg" width="34" height="34" alt=""><span>Dengi Market</span></a>
+    <div class="admin-header-actions">
+      <a class="admin-site-link" href="../articles/" data-i18n="viewArticles">Articles on the website</a>
+      <div class="admin-locale" role="group" aria-label="Language" data-i18n-label="uiLanguage"><button type="button" data-ui-language="en" aria-pressed="true">EN</button><button type="button" data-ui-language="ru" aria-pressed="false">RU</button></div>
+      <button type="button" id="logout" class="admin-button admin-button-quiet" hidden data-i18n="logout">Sign out</button>
+    </div>
+  </header>
+
+  <main id="admin-main" class="admin-main">
+    <div class="admin-page-head"><div><p class="admin-kicker" data-i18n="editorKicker">Dengi Market publications</p><h1 data-i18n="pageTitle">Article editor</h1></div><p class="admin-session" id="session-label"></p></div>
+    <p id="connection-status" class="admin-notice" role="status" data-i18n="connecting">Connecting to the editor…</p>
+    <noscript><p class="admin-notice">Для работы редактора включите JavaScript. Enable JavaScript to use the editor.</p></noscript>
+
+    <section id="setup-panel" class="admin-login" aria-labelledby="setup-title" hidden>
+      <div class="admin-login-intro">
+        <h2 id="setup-title" data-i18n="setupTitle">Your first sign-in</h2>
+        <p data-i18n="setupIntro">Create your editor account to start publishing articles and photographs.</p>
+        <p class="admin-setup-note" data-i18n="setupOnce">Keep your username and password for future sign-ins. This setup is only needed once.</p>
+      </div>
+      <div class="admin-login-card">
+        <h3 data-i18n="setupHeading">Create an account</h3>
+        <form id="setup-form" novalidate>
+          <label class="admin-field"><span data-i18n="username">Username</span><input id="setup-username" name="username" value="admin" autocomplete="username" autocapitalize="none" spellcheck="false" required minlength="3" maxlength="64" aria-describedby="setup-username-hint"><small id="setup-username-hint" data-i18n="setupUsernameHint">At least 3 characters: Latin letters, numbers, dot, underscore, @ or hyphen.</small></label>
+          <label class="admin-field"><span data-i18n="password">Password</span><input id="setup-password" name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="1024" aria-describedby="setup-password-hint"><small id="setup-password-hint" data-i18n="setupPasswordHint">Choose a password with at least 12 characters.</small></label>
+          <label class="admin-field"><span data-i18n="confirmPassword">Repeat password</span><input id="setup-confirm" name="password-confirmation" type="password" autocomplete="new-password" required minlength="12" maxlength="1024"></label>
+          <p id="setup-error" class="admin-error" role="alert" tabindex="-1" hidden></p>
+          <button type="submit" class="admin-button admin-button-primary" id="setup-submit" data-i18n="createAccount">Create account & sign in</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="login-panel" class="admin-login" aria-labelledby="login-title" hidden>
+      <div class="admin-login-intro"><h2 id="login-title" data-i18n="loginTitle">Your publishing workspace</h2><p data-i18n="loginIntro">Write articles, add photographs and publish updates on the website.</p><a href="../articles/" data-i18n="viewArticles">Articles on the website</a></div>
+      <div class="admin-login-card">
+        <h3 data-i18n="signIn">Sign in</h3>
+        <form id="login-form">
+          <label class="admin-field"><span data-i18n="username">Username</span><input id="username" name="username" autocomplete="username" spellcheck="false" required maxlength="64"></label>
+          <label class="admin-field"><span data-i18n="password">Password</span><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="1024"></label>
+          <p id="login-error" class="admin-error" role="alert" tabindex="-1" hidden></p>
+          <button type="submit" class="admin-button admin-button-primary" id="login-submit" data-i18n="signIn">Sign in</button>
+        </form>
+        <details id="setup-help" class="admin-help"><summary data-i18n="firstLogin">First sign-in</summary><p data-i18n="setupHelp">Create an administrator account in the project terminal. The command asks for a password.</p><code>python scripts/serve_cms.py set-admin --username admin</code></details>
+      </div>
+    </section>
+
+    <section id="workspace" class="admin-workspace" aria-label="Articles workspace" data-i18n-label="workspace" hidden>
+      <aside class="admin-library" aria-labelledby="library-title">
+        <div class="admin-library-head"><h2 id="library-title" data-i18n="yourArticles">Articles</h2><button type="button" id="new-article" class="admin-button admin-button-primary" data-i18n="newArticle">New article</button></div>
+        <label class="admin-field admin-search"><span data-i18n="findArticle">Find an article</span><input id="article-search" name="article-search" type="search" autocomplete="off"></label>
+        <label class="admin-field admin-filter"><span data-i18n="filterStatus">Status</span><select id="article-filter" name="article-filter"><option value="all" data-i18n="allStatuses">All statuses</option><option value="draft" data-i18n="draft">Draft</option><option value="published" data-i18n="published">Published</option><option value="archived" data-i18n="archived">Archived</option></select></label>
+        <p id="library-status" class="admin-muted" role="status"></p>
+        <ul id="article-list" class="admin-article-list"></ul>
+        <button type="button" id="reload-list" class="admin-button admin-button-quiet" hidden data-i18n="retry">Try again</button>
+      </aside>
+
+      <div class="admin-editor">
+        <div class="admin-editor-head"><div><h2 id="editor-title" data-i18n="newArticle">New article</h2><span class="admin-status admin-status-draft" id="article-status" data-i18n="draft">Draft</span></div><a id="article-public-link" class="admin-public-link" href="../articles/" target="_blank" rel="noopener" hidden data-i18n="openPublished">View publication</a></div>
+        <form id="editor-form" novalidate autocomplete="off">
+          <fieldset id="editor-fields">
+            <legend class="admin-sr-only" data-i18n="articleFields">Article details</legend>
+            <label class="admin-field admin-title-field"><span data-i18n="titleLabel">Title</span><input id="article-title" name="title" maxlength="180" required></label>
+            <div class="admin-form-row">
+              <label class="admin-field"><span data-i18n="articleLanguage">Article language</span><select id="article-language" name="language"><option value="en">English</option><option value="ru">Русский</option></select></label>
+              <label class="admin-field admin-slug-field"><span data-i18n="slugLabel">Page address</span><input id="article-slug" name="slug" maxlength="120" pattern="[a-z0-9]+(-[a-z0-9]+)*" autocomplete="off" spellcheck="false" aria-describedby="slug-hint"><small id="slug-hint" data-i18n="slugHint">Leave blank to create an address automatically. Use lowercase Latin letters, numbers and hyphens.</small></label>
+            </div>
+            <label class="admin-field"><span data-i18n="excerptLabel">Short introduction</span><textarea id="article-excerpt" name="excerpt" rows="3" maxlength="600" aria-describedby="excerpt-hint"></textarea><small id="excerpt-hint" data-i18n="excerptHint">Shown in the list of articles. Up to 600 characters.</small></label>
+            <label class="admin-field"><span data-i18n="bodyLabel">Article text</span><textarea id="article-body" name="body" rows="14" maxlength="100000" aria-describedby="body-hint"></textarea><small id="body-hint" data-i18n="bodyHint">Write in plain text. Separate paragraphs with an empty line.</small></label>
+
+            <section class="admin-media-section" aria-labelledby="cover-heading"><div class="admin-media-head"><div><h3 id="cover-heading" data-i18n="coverTitle">Cover image</h3><p data-i18n="coverHint">The main image for the article and its card.</p></div><label class="admin-upload"><span data-i18n="chooseCover">Upload cover</span><input type="file" id="cover-file" accept="image/png,image/jpeg,image/webp"></label></div><div id="cover-preview" class="admin-cover-preview"></div></section>
+            <section class="admin-media-section" aria-labelledby="images-heading"><div class="admin-media-head"><div><h3 id="images-heading" data-i18n="imagesTitle">Photographs</h3><p data-i18n="imagesHint">Up to 12 images, shown after the article text.</p></div><label class="admin-upload"><span data-i18n="chooseImages">Add images</span><input type="file" id="images-file" accept="image/png,image/jpeg,image/webp" multiple></label></div><p class="admin-file-note" data-i18n="fileHint">PNG, JPEG or WebP. Up to 8 MB per image.</p><div id="images-preview" class="admin-images-preview"></div></section>
+          </fieldset>
+          <div class="admin-save-panel"><p id="editor-error" class="admin-error" role="alert" tabindex="-1" hidden></p><p id="editor-message" class="admin-save-message" role="status" aria-live="polite"></p><div class="admin-save-actions"><button type="button" id="archive-article" class="admin-button admin-button-quiet" disabled data-i18n="archiveAction">Archive</button><button type="submit" id="save-draft" class="admin-button" data-status="draft" data-i18n="saveDraft">Save draft</button><button type="submit" id="publish-article" class="admin-button admin-button-primary" data-status="published" data-i18n="publishAction">Publish</button></div></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="discard-dialog" class="admin-dialog" aria-labelledby="discard-title" aria-describedby="discard-copy"><form method="dialog"><h2 id="discard-title" data-i18n="discardTitle">Save your changes?</h2><p id="discard-copy" data-i18n="discardCopy">This article has unsaved changes. You can continue editing or leave without saving.</p><div class="admin-dialog-actions"><button class="admin-button admin-button-primary" value="cancel" autofocus data-i18n="continueEditing">Continue editing</button><button class="admin-button" value="discard" data-i18n="discardAction">Leave without saving</button></div></form></dialog>
+</body>
+</html>

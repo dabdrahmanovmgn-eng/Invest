@@ -1,0 +1,147 @@
+/* Контакт IR: цельный фирменный блок и заметное действие для обращения. */
+#ir-contact { padding-block: 68px 24px; }
+.ir-contact-layout {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  min-width: 0;
+  border: 1px solid #08773b;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #087c3d;
+  color: #fff;
+}
+/* Однократным проходом света управляет GSAP; без JS слой невидим. */
+.ir-contact-sheen {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 28%, rgba(255,255,255,0) 35%, rgba(255,255,255,.45) 50%, rgba(255,255,255,0) 65%, transparent 72%);
+}
+#ir-contact .ir-contact-content { position: relative; z-index: 1; min-width: 0; padding: 52px; }
+.ir-contact-kicker { display: flex; align-items: center; gap: 12px; color: #d5f0df; font-size: 14px; line-height: 1.5; }
+.ir-contact-kicker::before { content: ''; width: 28px; height: 1px; background: currentColor; }
+#ir-contact h2 {
+  max-width: 14ch;
+  margin: 32px 0 24px;
+  color: #fff;
+  font-size: clamp(42px, 4.5vw, 64px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+#irContactIntro { max-width: 30ch; margin: 0; color: #e1f1e6; font-size: 20px; line-height: 1.6; }
+.ir-contact-resources { display: grid; gap: 0; margin-top: 36px; }
+.ir-contact-resources a {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding-block: 12px;
+  color: #e1f1e6;
+  font-size: 14px;
+  line-height: 1.6;
+  text-decoration: underline;
+  text-decoration-color: #8cbfa0;
+  text-underline-offset: 5px;
+  overflow-wrap: anywhere;
+}
+.ir-contact-resources a:hover { color: #fff; text-decoration-color: #fff; }
+.ir-contact-action {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 44px;
+  border-left: 1px solid #ffffff2e;
+  background: #004e2529;
+  color: #fff;
+}
+.ir-contact-symbol { display: flex; align-items: center; min-height: 52px; }
+.ir-contact-symbol svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.25; }
+.ir-contact-symbol > span { display: none; }
+.ir-contact-address { min-width: 0; margin-block: 48px; }
+#irContactLabel { max-width: 28ch; margin: 0 0 20px; color: #e1f1e6; font-size: 15px; line-height: 1.6; }
+#ir-contact .ir-contact-email {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 86px;
+  margin: 0;
+  padding: 24px 62px 24px 24px;
+  border: 0;
+  border-radius: 16px;
+  background: #fff url('ir-contact-arrow.svg') right 24px center / 22px 22px no-repeat;
+  box-shadow: 0 12px 30px #003c1e24;
+  color: #086c35;
+  font-size: clamp(24px, 2.55vw, 35px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.045em;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color .2s ease-out, color .2s ease-out;
+}
+#ir-contact .ir-contact-email:hover { color: #064d27; background-color: #e9f6ed; }
+.ir-contact-signature { color: #d2eadb; font-size: 12px; line-height: 1.6; }
+#ir-contact a:focus-visible { outline: 3px solid #fff; outline-offset: 5px; border-radius: 3px; }
+#ir-contact .ir-contact-email:focus-visible { border-radius: 16px; }
+@media(max-width: 1100px) {
+  #ir-contact .ir-contact-content, .ir-contact-action { padding: 36px; }
+  #ir-contact h2 { font-size: 48px; }
+  #ir-contact .ir-contact-email { padding: 22px 50px 22px 20px; font-size: 27px; background-position: right 18px center; }
+}
+@media(max-width: 900px) {
+  .ir-contact-layout { grid-template-columns: minmax(0, 1fr); }
+  #ir-contact .ir-contact-content { padding-bottom: 30px; }
+  .ir-contact-action { border-left: 0; border-top: 1px solid #ffffff2e; padding-top: 28px; }
+  #ir-contact h2 { max-width: 19ch; }
+  #irContactIntro { max-width: none; }
+  .ir-contact-address { margin-block: 28px 34px; }
+  #irContactLabel { max-width: none; }
+  #ir-contact .ir-contact-email { width: fit-content; max-width: 100%; min-width: min(100%, 360px); }
+}
+@media(max-width: 600px) {
+  #ir-contact { padding-top: 36px; }
+  .ir-contact-layout { border-radius: 22px; }
+  #ir-contact .ir-contact-content, .ir-contact-action { padding-inline: 24px; }
+  #ir-contact .ir-contact-content { padding-top: 30px; padding-bottom: 24px; }
+  #ir-contact h2 { margin: 24px 0 20px; font-size: clamp(32px, 8.3vw, 44px); line-height: 1.1; }
+  #irContactIntro { font-size: 18px; }
+  .ir-contact-resources { margin-top: 24px; }
+  .ir-contact-action { padding-top: 24px; padding-bottom: 28px; }
+  .ir-contact-symbol { min-height: 34px; }
+  .ir-contact-symbol svg { width: 30px; height: 30px; }
+  .ir-contact-address { margin-block: 24px 30px; }
+  #irContactLabel { margin-bottom: 16px; font-size: 14px; }
+  #ir-contact .ir-contact-email { min-height: 72px; padding: 21px 48px 21px 18px; font-size: clamp(20px, 5.7vw, 28px); }
+}
+@media(max-width: 420px) {
+  #ir-contact .ir-contact-email { padding: 21px 12px; background-image: none; font-size: clamp(18px, 5.8vw, 24px); }
+}
+@media(prefers-reduced-motion: reduce), print {
+  #ir-contact .ir-contact-content,
+  #ir-contact .ir-contact-action,
+  #ir-contact .ir-contact-address,
+  #ir-contact .ir-contact-symbol,
+  #ir-contact .ir-contact-resources,
+  #ir-contact .ir-contact-signature,
+  #ir-contact .ir-contact-kicker,
+  #irContactH2, #irContactIntro, #irContactLabel,
+  #ir-contact .ir-contact-email { opacity: 1 !important; transform: none !important; }
+  .ir-contact-sheen { display: none !important; }
+}
+@media print {
+  .ir-contact-layout { display: block; border-color: #bcd4c4; background: #fff; color: var(--ink); break-inside: avoid; }
+  #ir-contact .ir-contact-content, .ir-contact-action { padding: 24px; }
+  #ir-contact h2 { max-width: none; color: var(--ink); font-size: 34px; }
+  #irContactIntro, .ir-contact-kicker, #irContactLabel, .ir-contact-signature { color: var(--ink); }
+  .ir-contact-resources a { color: #086c35; }
+  .ir-contact-action { border-top: 1px solid #bcd4c4; background: none; }
+  #ir-contact .ir-contact-email { width: fit-content; min-width: 0; min-height: 0; padding: 16px; border: 1px solid #bcd4c4; color: var(--ink); background: none; box-shadow: none; font-size: 24px; }
+}

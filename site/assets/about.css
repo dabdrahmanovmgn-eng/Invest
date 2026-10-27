@@ -1,0 +1,162 @@
+/* О компании: крупный заголовок, иллюстрация слева, связный текст справа. */
+.about-intro {
+  --about-body-size: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
+  grid-template-areas: "heading heading" "visual copy" "visual context";
+  align-items: start;
+  gap: 28px 72px;
+  margin-bottom: 72px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.advantages-section > h2,
+.about-intro h2 {
+  font-size: clamp(34px, 3.8vw, 52px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -.045em;
+}
+.about-intro .about-heading { grid-area: heading; min-width: 0; margin-bottom: 12px; }
+.about-intro .about-kicker {
+  gap: 10px;
+  margin: 0 0 18px;
+  color: #087b39;
+  font-size: 12px;
+  font-weight: 600;
+}
+.about-intro .about-kicker::before { width: 24px; height: 3px; border-radius: 2px; }
+.about-intro h2 {
+  max-width: none;
+  margin: 0;
+  text-wrap: balance;
+}
+.about-intro .about-copy-panel { grid-area: copy; min-width: 0; padding: 8px 0 0; }
+.about-intro .company-copy { max-width: none; }
+.about-intro .company-copy p,
+.about-intro .about-context p,
+.about-intro .about-visual-caption > span {
+  font-size: var(--about-body-size);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: normal;
+}
+.about-intro .company-copy p {
+  margin: 0;
+  color: #091e42;
+}
+.about-intro .about-visual {
+  grid-area: visual;
+  align-self: center;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  background: none;
+}
+.about-intro .about-composite {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 1241 / 912;
+  padding: 0;
+  overflow: visible;
+  border-radius: 0;
+  background: none;
+}
+.about-intro .about-composite::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 11% 7% -3% 3%;
+  border-radius: 150px 28px 100px 28px;
+  background: #e7f4eb;
+}
+.about-intro .about-composite img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  mix-blend-mode: normal;
+}
+.about-intro .about-visual-caption {
+  display: block;
+  max-width: none;
+  margin-top: 40px;
+  padding: 0 24px;
+  border: 0;
+  color: #526171;
+}
+.about-intro .about-visual-caption b {
+  margin: 0 0 10px;
+  color: #087b39;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.04em;
+}
+.about-intro .about-visual-caption > span { max-width: none; }
+.about-intro .about-context {
+  grid-area: context;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: #526171;
+}
+.about-intro .about-context p { min-width: 0; max-width: none; margin: 0; }
+.about-intro .about-context p:first-child { padding-top: 24px; border-top: 1px solid #dce5df; }
+.about-intro .about-context p:last-child {
+  padding: 26px 30px;
+  border-radius: 4px 24px 24px 24px;
+  background: #087b39;
+  color: #fff;
+}
+@media (max-width: 1100px) {
+  .about-intro { column-gap: 40px; }
+  .about-intro .about-context { gap: 24px; }
+  .about-intro .about-context p:last-child { padding: 24px; }
+}
+@media (max-width: 900px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "heading" "copy" "visual" "context";
+    gap: 32px;
+  }
+  .about-intro .about-heading { margin-bottom: 0; }
+  .about-intro .about-copy-panel { padding: 0; }
+  .about-intro .company-copy { max-width: 68ch; }
+  .about-intro .about-visual { width: 100%; max-width: 620px; margin-inline: auto; }
+  .about-intro .about-composite::before { border-top-left-radius: 140px; }
+  .about-intro .about-context { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .about-intro .about-context p:first-child { padding-top: 22px; }
+}
+@media (max-width: 600px) {
+  .about-intro { --about-body-size: 16px; gap: 28px; margin-bottom: 48px; }
+  .about-intro .about-kicker { margin-bottom: 16px; }
+  .about-intro .about-composite::before { inset: 10% 5% -3% 2%; border-radius: 88px 20px 64px 20px; }
+  .about-intro .about-visual-caption { margin-top: 30px; padding-inline: 12px; }
+  .about-intro .about-context { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .about-intro .about-context p:last-child { padding: 22px; }
+}
+@media print {
+  .about-intro { display: block; margin-bottom: 24px; }
+  .about-intro .about-heading { margin-bottom: 24px; }
+  .about-intro .about-composite { display: none; }
+  .about-intro .about-visual-caption { max-width: none; margin-block: 20px; padding: 0; }
+  .about-intro .about-context { display: block; }
+  .about-intro .about-context p:first-child { padding: 0; border: 0; }
+  .about-intro .about-context p:last-child { margin-top: 16px; padding: 0; border-radius: 0; background: none; color: #091e42; }
+}
