@@ -8,7 +8,7 @@
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../assets/editorial.css">
   <link rel="stylesheet" href="../assets/admin.css?v=first-setup-1">
-  <script src="../assets/admin.js?v=first-setup-1" defer></script>
+  <script src="../assets/admin.js?v=demo-recovery-1" defer></script>
 </head>
 <body class="editorial-page admin-page">
   <a class="admin-skip" href="#admin-main" data-i18n="skip">Skip to content</a>
@@ -48,13 +48,14 @@
       <div class="admin-login-intro"><h2 id="login-title" data-i18n="loginTitle">Your publishing workspace</h2><p data-i18n="loginIntro">Write articles, add photographs and publish updates on the website.</p><a href="../articles/" data-i18n="viewArticles">Articles on the website</a></div>
       <div class="admin-login-card">
         <h3 data-i18n="signIn">Sign in</h3>
+        <p id="demo-login-note" class="admin-muted" data-i18n="demoAccountNote" hidden></p>
         <form id="login-form">
           <label class="admin-field"><span data-i18n="username">Username</span><input id="username" name="username" autocomplete="username" spellcheck="false" required maxlength="64"></label>
           <label class="admin-field"><span data-i18n="password">Password</span><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="1024"></label>
           <p id="login-error" class="admin-error" role="alert" tabindex="-1" hidden></p>
           <button type="submit" class="admin-button admin-button-primary" id="login-submit" data-i18n="signIn">Sign in</button>
         </form>
-        <details id="setup-help" class="admin-help"><summary data-i18n="firstLogin">First sign-in</summary><p data-i18n="setupHelp">Create an administrator account in the project terminal. The command asks for a password.</p><code>python scripts/serve_cms.py set-admin --username admin</code></details>
+        <details id="setup-help" class="admin-help"><summary data-i18n="firstLogin">Help with sign-in</summary><p id="login-recovery-copy" data-i18n="setupHelp">To restore access, the owner of the computer running the editor can set a new password in the project terminal. Existing articles are kept.</p><code id="login-recovery-command">python scripts/serve_cms.py set-admin --username admin</code></details>
       </div>
     </section>
 

@@ -15,8 +15,10 @@
       skip: 'Skip to content', uiLanguage: 'Interface language', viewArticles: 'Articles on the website', logout: 'Sign out',
       editorKicker: 'Dengi Market publications', pageTitle: 'Article editor', connecting: 'Connecting to the editor…',
       loginTitle: 'Your publishing workspace', loginIntro: 'Write articles, add photographs and publish updates on the website.',
-      signIn: 'Sign in', signingIn: 'Signing in…', username: 'Username', password: 'Password', firstLogin: 'First sign-in',
-      setupHelp: 'Create an administrator account in the project terminal. The command asks for a password.',
+      signIn: 'Sign in', signingIn: 'Signing in…', username: 'Username', password: 'Password', firstLogin: 'Help with sign-in',
+      setupHelp: 'To restore access, the owner of the computer running the editor can set a new password in the project terminal. Existing articles are kept.',
+      demoAccountNote: 'This demo uses its own account. Sign in with the username and password created for the demo; your previous local account may be different.',
+      demoLoginHelp: 'On the computer running the demo, open RESET-DEMO-PASSWORD.cmd in the project folder. Enter your demo username and set a password. Existing articles are kept.',
       workspace: 'Articles workspace', yourArticles: 'Articles', newArticle: 'New article', editArticle: 'Edit article',
       findArticle: 'Find an article', filterStatus: 'Status', allStatuses: 'All statuses', draft: 'Draft', published: 'Published', archived: 'Archived', retry: 'Try again',
       articleFields: 'Article details', openPublished: 'View publication', titleLabel: 'Title', articleLanguage: 'Article language',
@@ -55,8 +57,10 @@
       skip: 'К содержимому', uiLanguage: 'Язык интерфейса', viewArticles: 'Статьи на сайте', logout: 'Выйти',
       editorKicker: 'Публикации Dengi Market', pageTitle: 'Редактор статей', connecting: 'Подключаемся к редактору…',
       loginTitle: 'Всё для ваших публикаций', loginIntro: 'Пишите статьи, добавляйте фотографии и публикуйте новости на сайте.',
-      signIn: 'Войти', signingIn: 'Входим…', username: 'Логин', password: 'Пароль', firstLogin: 'Первый вход',
-      setupHelp: 'Создайте учётную запись администратора в терминале проекта. Команда отдельно запросит пароль.',
+      signIn: 'Войти', signingIn: 'Входим…', username: 'Логин', password: 'Пароль', firstLogin: 'Помощь со входом',
+      setupHelp: 'Чтобы восстановить доступ, владелец компьютера с редактором может задать новый пароль через терминал проекта. Статьи сохранятся.',
+      demoAccountNote: 'У демоверсии отдельный аккаунт. Используйте логин и пароль, созданные для демонстрации: прежний локальный аккаунт может отличаться.',
+      demoLoginHelp: 'На компьютере с демонстрацией откройте RESET-DEMO-PASSWORD.cmd в папке проекта. Введите логин демоаккаунта и задайте пароль. Статьи сохранятся.',
       workspace: 'Рабочая область статей', yourArticles: 'Статьи', newArticle: 'Новая статья', editArticle: 'Редактирование статьи',
       findArticle: 'Найти статью', filterStatus: 'Статус', allStatuses: 'Все статусы', draft: 'Черновик', published: 'Опубликовано', archived: 'В архиве', retry: 'Повторить',
       articleFields: 'Содержание статьи', openPublished: 'Открыть на сайте', titleLabel: 'Заголовок', articleLanguage: 'Язык статьи',
@@ -199,6 +203,13 @@
     document.querySelectorAll('[data-i18n]').forEach(node => { node.textContent = t(node.dataset.i18n); });
     document.querySelectorAll('[data-i18n-label]').forEach(node => { node.setAttribute('aria-label', t(node.dataset.i18nLabel)); });
     document.querySelectorAll('[data-ui-language]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.uiLanguage === language)));
+    const demo = location.hostname.endsWith('.trycloudflare.com') || location.port === '8346';
+    const demoNote = $('demo-login-note');
+    if (demoNote) demoNote.hidden = !demo;
+    if (demo && $('login-recovery-copy') && $('login-recovery-command')) {
+      $('login-recovery-copy').textContent = t('demoLoginHelp');
+      $('login-recovery-command').textContent = 'RESET-DEMO-PASSWORD.cmd';
+    }
     updateActions();
     renderArticles();
     renderMedia();
