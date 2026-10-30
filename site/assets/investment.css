@@ -1,6 +1,6 @@
 /* Открытые инвестиционные тезисы: сначала аргумент, затем его обоснование. */
 #highlights .block-head {
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 #highlights .block-head h2 {
   max-width: 880px;
@@ -19,7 +19,7 @@
 }
 #highlights .investment-factor {
   min-width: 0;
-  padding: 28px 0 32px;
+  padding: 20px 0 24px;
   border-top: 1px solid #c9ddcf;
   scroll-margin-top: calc(var(--header-height, 88px) + var(--subnav-height, 0px) + 24px);
 }
@@ -98,7 +98,7 @@
 @media (max-width: 760px) {
   #highlights .block-head { margin-bottom: 28px; }
   #highlights .investment-factors { grid-template-columns: minmax(0, 1fr); }
-  #highlights .investment-factor { padding-block: 24px 28px; }
+  #highlights .investment-factor { padding-block: 20px 24px; }
   #highlights .investment-factor h3 { max-width: none; margin-bottom: 12px; }
 }
 @media (max-width: 600px) {

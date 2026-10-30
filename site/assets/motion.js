@@ -11,6 +11,13 @@
   const scenes = new Map();
   const counted = new WeakSet();
   const counters = new Map();
+  // GSAP 3.15.0 оставляет слушатели MediaQueryList после matchMedia().revert().
+  // Храним три запроса на весь срок страницы; меняем только контекст анимаций.
+  const queries = {
+    wide: window.matchMedia('(min-width: 960px)'),
+    reduced: window.matchMedia('(prefers-reduced-motion: reduce)'),
+    print: window.matchMedia('print')
+  };
   let media;
   let refreshTimer;
   let disclose;
@@ -41,7 +48,8 @@
   function refresh() {
     clearTimeout(refreshTimer);
     refreshTimer = setTimeout(() => {
-      if (media) ScrollTrigger.refresh();
+      // Safe refresh ждёт конца прокрутки и не обрывает переход по ссылке.
+      if (media) ScrollTrigger.refresh(true);
     }, 100);
   }
 
@@ -85,7 +93,15 @@
 
   function destroy() {
     clearTimeout(refreshTimer);
-    media?.revert();
+    if (media) {
+      media.revert();
+      // Повторный fromTo может вернуть startAt (opacity: 0) при revert.
+      // Эти inline-свойства принадлежат только анимации раскрытия.
+      document.querySelectorAll('details > .disclosure-content').forEach(body => {
+        body.style.removeProperty('opacity');
+        body.style.removeProperty('transform');
+      });
+    }
     restoreCounters();
     media = null;
     scenes.clear();
@@ -93,81 +109,15 @@
     root.classList.remove('gsap-motion');
   }
 
-  function titleLight(timeline, title) {
-    const mask = 'linear-gradient(90deg, transparent, #000)';
-    if (!window.CSS?.supports('mask-image', mask) && !window.CSS?.supports('-webkit-mask-image', mask)) return;
-    const words = [...title.querySelectorAll('.hero-word')];
-    if (words.length !== 2) return;
-    // Размеры читаются до создания слоёв и до начала подъёма слов.
-    const boxes = words.map(word => word.getBoundingClientRect());
-    const widths = words.map(word => word.offsetWidth);
-    const band = parseFloat(getComputedStyle(title).fontSize) * 0.75;
-    const inline = Math.abs(boxes[0].top - boxes[1].top) < 2;
-    const total = inline ? boxes[1].right - boxes[0].left + band * 1.5 : boxes.reduce((sum, box) => sum + box.width + band * 1.5, 0);
-    const speed = total / (inline ? 1.25 : 1.28);
-    const overlays = [];
-    const events = new AbortController();
-    let disposed = false;
-    let next = 0.4;
-    let end = 0;
-    const clear = () => {
-      if (disposed) return;
-      disposed = true;
-      events.abort();
-      overlays.forEach(layer => layer.remove());
-    };
-    words.forEach((word, index) => {
-      const front = document.createElement('span');
-      front.className = 'hero-color-front';
-      front.setAttribute('aria-hidden', 'true');
-      front.style.width = `${boxes[index].width + band * 1.5}px`;
-      front.style.setProperty('--light-band', `${band}px`);
-      const ink = document.createElement('span');
-      ink.className = 'hero-color-ink';
-      // Псевдоэлемент сохраняет единственную текстовую копию в DOM и скринридере.
-      ink.dataset.word = word.textContent;
-      const tail = document.createElement('span');
-      tail.className = 'hero-light-tail';
-      tail.append(ink);
-      const edge = document.createElement('span');
-      edge.className = 'hero-light-edge';
-      const edgeInk = ink.cloneNode();
-      edge.append(edgeInk);
-      front.append(tail, edge);
-      word.append(front);
-      overlays.push(front);
-      const start = inline ? 0.4 + (boxes[index].left - boxes[0].left) / speed : next;
-      const finish = boxes[index].width + band * 0.5;
-      const duration = (finish + band) / speed;
-      timeline.fromTo(front, { x: -band }, { x: finish, duration, ease: 'none' }, start);
-      timeline.fromTo([ink, edgeInk], { x: band }, { x: -finish, duration, ease: 'none' }, start);
-      timeline.to(front, { opacity: 1, duration: 0.08, ease: 'power1.out' }, start);
-      timeline.to(front, { opacity: 0, duration: 0.12, ease: 'power1.in' }, start + duration - 0.12);
-      next = start + duration + 0.05;
-      end = Math.max(end, start + duration);
-    });
-    timeline.call(clear, [], end + 0.03);
-    const finish = () => { if (!disposed) timeline.progress(1).pause(); };
-    window.addEventListener('resize', finish, { passive: true, signal: events.signal });
-    document.fonts?.ready.then(() => {
-      if (!disposed && words.some((word, index) => Math.abs(word.offsetWidth - widths[index]) > 1)) finish();
-    });
-    return clear;
-  }
-
   function init({ intro = false } = {}) {
     destroy();
     introPending = intro;
     root.classList.remove('motion-ready');
     root.classList.add('gsap-motion');
-    media = gsap.matchMedia();
-    media.add({
-      wide: '(min-width: 960px)',
-      compact: '(max-width: 959px)',
-      reduced: '(prefers-reduced-motion: reduce)',
-      print: 'print'
-    }, context => {
-      const { wide, reduced, print } = context.conditions;
+    media = gsap.context(context => {
+      const wide = queries.wide.matches;
+      const reduced = queries.reduced.matches;
+      const print = queries.print.matches;
       if (reduced || print) {
         introPending = false;
         return;
@@ -175,7 +125,7 @@
       const distance = wide ? 28 : 12;
       const defaults = { duration: wide ? 0.75 : 0.5, ease: 'power3.out' };
       const interactionEvents = new AbortController();
-      let clearTitleLight;
+      const disclosureAnimations = new Map();
 
       context.add('counters', scope => {
         scope.querySelectorAll('[data-count-value]').forEach(element => {
@@ -248,17 +198,11 @@
         const introTimeline = gsap.timeline({ id: 'hero-intro', defaults, onStart: () => seen.add(hero), onComplete: () => background.start() });
         scenes.set(hero, introTimeline);
         const title = hero.querySelector('.hero-title');
-        const heroWords = title.querySelectorAll('.hero-word');
-        clearTitleLight = titleLight(introTimeline, title);
-        // Постоянная перспектива до конца подъёма; затем возвращаем обычный текст.
-        gsap.set(heroWords, { transformPerspective: 900, transformOrigin: '50% 100%' });
+        // Слово появляется целиком: без поворотов, масок и зависимости от ширины шрифта.
         introTimeline.addLabel('brand', 0)
-          .from('.hero-intro-mark', { scaleX: 0, duration: 0.5, ease: 'power2.out' }, 'brand+=0.04')
-          .from('.hero .eyebrow', { opacity: 0, y: 6, duration: 0.45 }, 'brand+=0.08')
-          .from(heroWords, { yPercent: 108, rotationX: wide ? 12 : 8, rotation: wide ? 0.6 : 0, scale: wide ? 0.965 : 0.975, duration: wide ? 0.95 : 0.82, stagger: 0.12, ease: 'power3.out', clearProps: 'transform,transformOrigin' }, 'brand+=0.08')
-          .from('.hero-sub', { opacity: 0, y: wide ? 18 : 10, duration: 0.55, ease: 'power2.out' }, 'brand+=0.6')
-          .from('.hero-actions', { opacity: 0, y: 12, duration: 0.55, ease: 'power2.out' }, 'brand+=1.02')
-          .from('.hero-bottom', { opacity: 0, y: 8, duration: 0.45 }, 'brand+=0.68');
+          .from(title, { opacity: 0, y: wide ? 20 : 12, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity' }, 'brand')
+          .from('.hero-sub', { opacity: 0, y: 10, duration: 0.55, clearProps: 'transform,opacity' }, 'brand+=0.25')
+          .from('.hero-actions', { opacity: 0, y: 8, duration: 0.5, clearProps: 'transform,opacity' }, 'brand+=0.45');
         // Ссылки остаются доступны во время вступления; фокус завершает сцену.
         hero.addEventListener('focusin', () => introTimeline.progress(1).pause(), { signal: interactionEvents.signal });
         window.addEventListener('scroll', () => {
@@ -367,6 +311,9 @@
           if (!overview.contains(element)) return;
           record.animation.kill();
           record.trigger?.kill();
+          // При закрытии до появления тоже завершаем число: повторное открытие
+          // не должно создавать новые обёртки и удерживать старые в context.
+          counted.add(element);
           element.textContent = record.finalText;
           element.classList.remove('count-value');
           counters.delete(element);
@@ -456,7 +403,7 @@
         }
       });
 
-      // Регистрируем поздние анимации внутри context, чтобы matchMedia их тоже отменял.
+      // Поздние анимации принадлежат context и отменяются при смене режима.
       context.add('disclosure', details => {
         const body = details.querySelector(':scope > .disclosure-content');
         if (!body) return;
@@ -465,19 +412,26 @@
           else finishOverview();
           return;
         }
-        gsap.killTweensOf(body);
-        gsap.set(body, { clearProps: 'opacity,transform' });
         if (details.open) {
-          gsap.from(body, { opacity: 0, y: 6, duration: 0.24, ease: 'power2.out', clearProps: 'opacity,transform' });
+          let animation = disclosureAnimations.get(body);
+          if (!animation) {
+            animation = gsap.fromTo(body, { opacity: 0, y: 6 }, {
+              opacity: 1, y: 0, duration: 0.24, ease: 'power2.out',
+              clearProps: 'opacity,transform', paused: true, immediateRender: false
+            });
+            disclosureAnimations.set(body, animation);
+          }
+          animation.restart();
           context.counters(body);
         } else {
+          disclosureAnimations.get(body)?.progress(1).pause();
           counters.forEach((record, element) => {
             if (body.contains(element)) record.animation.progress(1).pause();
           });
         }
       });
       disclose = context.disclosure;
-      return () => { interactionEvents.abort(); background.clear(); clearTitleLight?.(); overviewScenes.clear(); restoreCounters(); scenes.clear(); disclose = null; };
+      return () => { interactionEvents.abort(); background.clear(); overviewScenes.clear(); disclosureAnimations.clear(); restoreCounters(); scenes.clear(); disclose = null; };
     }, document.body);
     refresh();
     return true;
@@ -490,6 +444,9 @@
     disclosure(details) { disclose?.(details); refresh(); }
   };
   document.fonts?.ready.then(refresh);
+  Object.values(queries).forEach(query => query.addEventListener('change', () => {
+    if (media) init();
+  }));
   window.addEventListener('load', refresh);
   window.addEventListener('beforeprint', () => {
     scenes.forEach(animation => animation.progress(1).pause());

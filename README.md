@@ -4,6 +4,20 @@
 
 В `site/` находится текущий лендинг EN/RU: разделы, анимации, фотографии команды и финансовые PDF.
 
+Версия от 30.10.2026 содержит обновлённый дизайн, исправления мобильной сетки и анимаций, контакт IR и согласованные изменения контента: Internal Rating, рост портфеля 106%, ТОП-4, удаление отдельной таблицы ковенантов и строки Total repaid to date. Проверены EN/RU на ширинах 320–3840 px, прямые ссылки и режим без JavaScript.
+
+## Сборка языковой версии и SEO
+
+Главная EN — `site/index.html`, RU — автоматически собранный `site/index.ru.html`. Словарь — `site/assets/content.js`, контакты команды — `site/assets/config.js`. После изменения разметки или словаря выполните:
+
+```sh
+python -m pip install -r scripts/requirements-build.txt
+python scripts/build_locales.py
+python scripts/verify_seo.py
+```
+
+Краткий отчёт: `docs/SEO-REPORT-20261029.md`. Сайт использует текущий адрес GitHub Pages в canonical и sitemap; при переезде их нужно обновить. Новый контакт IR — `investors@dengimarket-ir.com`.
+
 ## GitHub Pages
 
 В настройках репозитория **Settings → Pages → Source** выберите **GitHub Actions**. Workflow `.github/workflows/pages.yml` публикует только папку `site/` при изменении ветки `main` или ручном запуске. После успешного размещения адрес страницы: https://dabdrahmanovmgn-eng.github.io/Invest/.

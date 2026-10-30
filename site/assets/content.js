@@ -433,8 +433,8 @@ window.IR_COPY = {
     "en": "<h3>Established track record</h3><p><strong class=\"investment-key\">Over 10 years</strong> of successful operating history in consumer lending. On the Kazakhstan market <strong class=\"investment-key\">since 2015</strong>.</p>"
   },
   "hl2": {
-    "ru": "<h3>Национальный масштаб</h3><p><strong class=\"investment-key\">Свыше 300 отделений</strong> во всех регионах страны - крупнейшая ломбардная сеть, входящая в <strong class=\"investment-key\">ТОП-5</strong>.</p>",
-    "en": "<h3>National scale</h3><p><strong class=\"investment-key\">Over 300 branches</strong> across every region of the country - the largest pawnshop network, ranked in the <strong class=\"investment-key\">TOP-5</strong>.</p>"
+    "ru": "<h3>Национальный масштаб</h3><p><strong class=\"investment-key\">Свыше 300 отделений</strong> во всех регионах страны - крупнейшая ломбардная сеть, входящая в <strong class=\"investment-key\">ТОП-4</strong>.</p>",
+    "en": "<h3>National scale</h3><p><strong class=\"investment-key\">Over 300 branches</strong> across every region of the country - the largest pawnshop network, ranked in the <strong class=\"investment-key\">TOP-4</strong>.</p>"
   },
   "hl3": {
     "ru": "<h3>Кредитование под залог</h3><p><strong class=\"investment-key\">100% займов обеспечено залогом</strong> - ювелирными изделиями (золото) и техникой. Заложенное имущество остается на хранении в ломбарде до полного погашения займа.</p>",
@@ -473,20 +473,20 @@ window.IR_COPY = {
     "en": "<b>How the business works:</b> a client pledges jewellery (gold) or electronics (smartphones, laptops, gadgets) as collateral for a short-term secured loan. The loan is sized against an appraised collateral value, repaid with interest, and the collateral is released on repayment."
   },
   "fs1": {
-    "ru": "<b>1. Оценка</b>Собственные весы, тест золота на пробность и уникальная для рынка онлайн-оценка - выдача в среднем занимает 15 минут.",
-    "en": "<b>1. Appraisal</b>In-house scales, a gold purity test and online appraisal - unique on the market - disbursement averages 15 minutes."
+    "ru": "<span class=\"flow-number\">1</span><b>Оценка</b>Собственные весы, тест золота на пробность и уникальная для рынка онлайн-оценка - выдача в среднем занимает 15 минут.",
+    "en": "<span class=\"flow-number\">1</span><b>Appraisal</b>In-house scales, a gold purity test and online appraisal - unique on the market - disbursement averages 15 minutes."
   },
   "fs2": {
-    "ru": "<b class=\"ink\">2. Выдача</b>Заем выдается в день обращения при LTV до 80% для ювелирных изделий и до 60% для техники.",
-    "en": "<b class=\"ink\">2. Disbursement</b>Loan issued same-day at an LTV of up to 80% for jewellery and up to 60% for electronics."
+    "ru": "<span class=\"flow-number\">2</span><b class=\"ink\">Выдача</b>Заем выдается в день обращения при LTV до 80% для ювелирных изделий и до 60% для техники.",
+    "en": "<span class=\"flow-number\">2</span><b class=\"ink\">Disbursement</b>Loan issued same-day at an LTV of up to 80% for jewellery and up to 60% for electronics."
   },
   "fs3": {
-    "ru": "<b>3. Обслуживание</b>Средний срок - до 45 дней по золоту и до 25 дней по технике, средний чек - $440 и $180 соответственно.",
-    "en": "<b>3. Servicing</b>Average term - up to 45 days for gold and up to 25 days for electronics, with an average ticket of $440 and $180 respectively."
+    "ru": "<span class=\"flow-number\">3</span><b>Обслуживание</b>Средний срок - до 45 дней по золоту и до 25 дней по технике, средний чек - $440 и $180 соответственно.",
+    "en": "<span class=\"flow-number\">3</span><b>Servicing</b>Average term - up to 45 days for gold and up to 25 days for electronics, with an average ticket of $440 and $180 respectively."
   },
   "fs4": {
-    "ru": "<b class=\"ink\">4. Завершение</b>Погашение с возвратом залога клиенту, либо реализация невостребованного золота на аукционе или сбыт на аффинажный завод.",
-    "en": "<b class=\"ink\">4. Resolution</b>Repayment with the collateral returned to the client, or disposal of unclaimed gold via auction sale or sale to a refinery."
+    "ru": "<span class=\"flow-number\">4</span><b class=\"ink\">Завершение</b>Погашение с возвратом залога клиенту, либо реализация невостребованного золота на аукционе или сбыт на аффинажный завод.",
+    "en": "<span class=\"flow-number\">4</span><b class=\"ink\">Resolution</b>Repayment with the collateral returned to the client, or disposal of unclaimed gold via auction sale or sale to a refinery."
   },
   "t3h1": {
     "ru": "Портфель по типу залога",
@@ -608,10 +608,6 @@ window.IR_COPY = {
     "ru": "Всего привлечено на сегодня",
     "en": "Total raised to date"
   },
-  "t5r3": {
-    "ru": "Всего погашено на сегодня",
-    "en": "Total repaid to date"
-  },
   "t5r4": {
     "ru": "Просрочка платежа",
     "en": "Late payments"
@@ -623,54 +619,6 @@ window.IR_COPY = {
   "repaySchedTitle": {
     "ru": "График погашения основного долга",
     "en": "Principal repayment schedule"
-  },
-  "covTitle": {
-    "ru": "Ковенанты",
-    "en": "Covenants"
-  },
-  "covH1": {
-    "ru": "Показатель",
-    "en": "Metric"
-  },
-  "covH2": {
-    "ru": "Ковенант",
-    "en": "Covenant"
-  },
-  "covH3": {
-    "ru": "Факт",
-    "en": "Actual"
-  },
-  "covH4": {
-    "ru": "Статус",
-    "en": "Status"
-  },
-  "cov1": {
-    "ru": "Equity-to-Asset ratio",
-    "en": "Equity-to-Asset ratio"
-  },
-  "cov2": {
-    "ru": "Net Debt-to-Equity ratio",
-    "en": "Net Debt-to-Equity ratio"
-  },
-  "cov3": {
-    "ru": "Interest Coverage Ratio",
-    "en": "Interest Coverage Ratio"
-  },
-  "covOk1": {
-    "ru": "Соответствует",
-    "en": "Compliant"
-  },
-  "covOk2": {
-    "ru": "Соответствует",
-    "en": "Compliant"
-  },
-  "covOk3": {
-    "ru": "Соответствует",
-    "en": "Compliant"
-  },
-  "covFoot": {
-    "ru": "Показатели по состоянию на 1 июля 2026 года, рассчитаны согласно кредитных условий с Kilde.",
-    "en": "Metrics as of 1 July 2026, calculated per the terms of the Kilde loan agreements."
   },
   "rsH1": {
     "ru": "Срок погашения",
@@ -869,12 +817,12 @@ window.IR_COPY = {
     "ru": "Инвесторам / Dengi Market"
   },
   "designContact": {
-    "en": "Contact IR →",
-    "ru": "Связаться с IR →"
+    "en": "Contact IR",
+    "ru": "Связаться с IR"
   },
   "designFinancials": {
-    "en": "Financial results ↗",
-    "ru": "Финансовые результаты ↗"
+    "en": "Financial results",
+    "ru": "Финансовые результаты"
   },
   "skipContent": {
     "en": "Skip to content",
@@ -921,12 +869,12 @@ window.IR_COPY = {
     "ru": "Листайте вниз"
   },
   "allFinancials": {
-    "en": "All financial indicators ↗",
-    "ru": "Все финансовые показатели ↗"
+    "en": "All financial indicators",
+    "ru": "Все финансовые показатели"
   },
   "report2025": {
-    "en": "Financial Statements 2025 · PDF ↗",
-    "ru": "Отчётность за 2025 год · PDF ↗"
+    "en": "Financial Statements 2025 · PDF",
+    "ru": "Отчётность за 2025 год · PDF"
   },
   "companyFigures": {
     "en": "Company at a glance",
@@ -993,7 +941,15 @@ window.IR_COPY = {
     "en": "On the international capital market since 2023."
   },
   "why8Rating": {
-    "ru": "Рейтинг Kilde",
-    "en": "Kilde rating"
+    "ru": "Внутренний рейтинг",
+    "en": "Internal Rating"
+  },
+  "seoTitle": {
+    "en": "Dengi Market — Investor Relations in Kazakhstan",
+    "ru": "Dengi Market — Информация для инвесторов в Казахстане"
+  },
+  "seoDescription": {
+    "en": "Dengi Market, Kazakhstan’s nationwide pawnshop network. Financial results, funding track record, risk management, reports and investor contacts.",
+    "ru": "Dengi Market — республиканская сеть ломбардов Казахстана. Финансовые показатели, история финансирования, управление рисками, отчётность и контакты для инвесторов."
   }
 };

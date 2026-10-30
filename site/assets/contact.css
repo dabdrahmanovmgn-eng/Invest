@@ -1,5 +1,5 @@
 /* Контакт IR: цельный фирменный блок и заметное действие для обращения. */
-#ir-contact { padding-block: 68px 24px; }
+#ir-contact { padding-block: 24px 16px; }
 .ir-contact-layout {
   position: relative;
   isolation: isolate;
@@ -21,12 +21,12 @@
   pointer-events: none;
   background: linear-gradient(105deg, transparent 28%, rgba(255,255,255,0) 35%, rgba(255,255,255,.45) 50%, rgba(255,255,255,0) 65%, transparent 72%);
 }
-#ir-contact .ir-contact-content { position: relative; z-index: 1; min-width: 0; padding: 52px; }
+#ir-contact .ir-contact-content { position: relative; z-index: 1; min-width: 0; padding: 36px; }
 .ir-contact-kicker { display: flex; align-items: center; gap: 12px; color: #d5f0df; font-size: 14px; line-height: 1.5; }
 .ir-contact-kicker::before { content: ''; width: 28px; height: 1px; background: currentColor; }
 #ir-contact h2 {
   max-width: 14ch;
-  margin: 32px 0 24px;
+  margin: 24px 0 20px;
   color: #fff;
   font-size: clamp(42px, 4.5vw, 64px);
   font-weight: 500;
@@ -35,7 +35,7 @@
   text-wrap: balance;
 }
 #irContactIntro { max-width: 30ch; margin: 0; color: #e1f1e6; font-size: 20px; line-height: 1.6; }
-.ir-contact-resources { display: grid; gap: 0; margin-top: 36px; }
+.ir-contact-resources { display: grid; gap: 0; margin-top: 24px; }
 .ir-contact-resources a {
   display: block;
   width: fit-content;
@@ -57,7 +57,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-width: 0;
-  padding: 44px;
+  padding: 32px;
   border-left: 1px solid #ffffff2e;
   background: #004e2529;
   color: #fff;
@@ -76,7 +76,7 @@
   padding: 24px 62px 24px 24px;
   border: 0;
   border-radius: 16px;
-  background: #fff url('ir-contact-arrow.svg') right 24px center / 22px 22px no-repeat;
+  background: #fff;
   box-shadow: 0 12px 30px #003c1e24;
   color: #086c35;
   font-size: clamp(24px, 2.55vw, 35px);
@@ -107,7 +107,7 @@
   #ir-contact .ir-contact-email { width: fit-content; max-width: 100%; min-width: min(100%, 360px); }
 }
 @media(max-width: 600px) {
-  #ir-contact { padding-top: 36px; }
+  #ir-contact { padding-top: 16px; }
   .ir-contact-layout { border-radius: 22px; }
   #ir-contact .ir-contact-content, .ir-contact-action { padding-inline: 24px; }
   #ir-contact .ir-contact-content { padding-top: 30px; padding-bottom: 24px; }
@@ -123,6 +123,10 @@
 }
 @media(max-width: 420px) {
   #ir-contact .ir-contact-email { padding: 21px 12px; background-image: none; font-size: clamp(18px, 5.8vw, 24px); }
+}
+@media(max-width: 360px) {
+  #ir-contact .ir-contact-content { padding-inline: 20px; }
+  #ir-contact h2 { font-size: 28px; }
 }
 @media(prefers-reduced-motion: reduce), print {
   #ir-contact .ir-contact-content,

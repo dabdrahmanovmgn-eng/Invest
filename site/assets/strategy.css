@@ -1,7 +1,7 @@
 /* Стратегия — открытые приоритеты бизнеса, на отдельном фирменном фоне. */
 #strategy {
-  margin-top: 80px;
-  padding: 48px;
+  margin-top: 40px;
+  padding: 36px;
   border-radius: 28px;
   background: var(--mint);
   color: var(--ink);
@@ -19,7 +19,7 @@
 }
 #strategy > .block-intro {
   max-width: 58ch;
-  margin: 0 0 38px;
+  margin: 0 0 24px;
   color: var(--ink-soft);
   font-size: 18px;
   line-height: 1.7;
@@ -31,7 +31,7 @@
 }
 #strategy .strategy-priority {
   min-width: 0;
-  padding: 28px 0 32px;
+  padding: 20px 0 24px;
   border-top: 1px solid #c5dccd;
   scroll-margin-top: calc(var(--header-height, 88px) + var(--subnav-height, 0px) + 24px);
 }
@@ -123,10 +123,10 @@
   #strategy #pl9, #strategy #pl0 { padding: 24px; }
 }
 @media (max-width: 760px) {
-  #strategy { margin-top: 56px; padding: 28px; border-radius: 24px; }
+  #strategy { margin-top: 32px; padding: 28px; border-radius: 24px; }
   #strategy .strategy-priorities { grid-template-columns: minmax(0, 1fr); }
   #strategy > .block-intro { margin-bottom: 30px; }
-  #strategy .strategy-priority { padding-block: 24px 28px; }
+  #strategy .strategy-priority { padding-block: 20px 24px; }
   #strategy #pl9, #strategy #pl0 { margin-top: 14px; }
 }
 @media (max-width: 600px) {

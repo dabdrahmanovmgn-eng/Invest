@@ -5,8 +5,8 @@
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 1fr);
   grid-template-areas: "heading heading" "visual copy" "visual context";
   align-items: start;
-  gap: 28px 72px;
-  margin-bottom: 72px;
+  gap: 24px 48px;
+  margin-bottom: 40px;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -92,7 +92,7 @@
 .about-intro .about-visual-caption {
   display: block;
   max-width: none;
-  margin-top: 40px;
+  margin-top: 24px;
   padding: 0 24px;
   border: 0;
   color: #526171;
@@ -144,10 +144,10 @@
   .about-intro .about-context p:first-child { padding-top: 22px; }
 }
 @media (max-width: 600px) {
-  .about-intro { --about-body-size: 16px; gap: 28px; margin-bottom: 48px; }
+  .about-intro { --about-body-size: 16px; gap: 24px; margin-bottom: 32px; }
   .about-intro .about-kicker { margin-bottom: 16px; }
   .about-intro .about-composite::before { inset: 10% 5% -3% 2%; border-radius: 88px 20px 64px 20px; }
-  .about-intro .about-visual-caption { margin-top: 30px; padding-inline: 12px; }
+  .about-intro .about-visual-caption { margin-top: 22px; padding-inline: 12px; }
   .about-intro .about-context { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .about-intro .about-context p:last-child { padding: 22px; }
 }

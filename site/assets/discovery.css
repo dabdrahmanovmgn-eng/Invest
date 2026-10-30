@@ -1,7 +1,7 @@
 /* Общая витрина: основные факты в summary, объяснения в раскрытиях. */
 .advantages-section {
   display: block;
-  padding-block: 64px 56px;
+  padding-block: 40px;
 }
 .advantages-section > h2 {
   position: static;
@@ -39,7 +39,7 @@
   flex-direction: column;
   align-items: stretch;
   gap: 0;
-  min-height: 316px;
+  min-height: 280px;
   padding: 20px;
   border-radius: inherit;
   overflow: clip;
@@ -50,7 +50,7 @@
 .advantages-section .advantage-card > summary::-webkit-details-marker { display: none; }
 .advantages-section .advantage-card > summary::before { display: none; }
 .advantages-section .advantage-card--history > summary,
-.advantages-section .advantage-card--network > summary { min-height: 316px; }
+.advantages-section .advantage-card--network > summary { min-height: 280px; }
 .advantages-section .advantage-card > summary:hover { color: inherit; }
 .advantages-section .advantage-card:hover,
 .advantages-section .advantage-card[open] { border-color: #6eac84; background-color: #eff8f2; }
@@ -176,7 +176,7 @@
   .advantages-section .advantage-card--trust { grid-column: span 6; }
   .advantages-section .advantage-card > summary,
   .advantages-section .advantage-card--history > summary,
-  .advantages-section .advantage-card--network > summary { min-height: 324px; padding: 18px; }
+  .advantages-section .advantage-card--network > summary { min-height: 280px; padding: 18px; }
   .advantages-section .advantage-card > .disclosure-content { margin-inline: 18px; }
   .advantages-section .advantage-number { font-size: 68px; }
   .advantages-section .advantage-card--growth .advantage-number { font-size: 64px; }
@@ -185,7 +185,7 @@
   .advantages-section .advantage-card--collateral .advantage-number { font-size: 60px; }
 }
 @media (max-width: 820px) {
-  .advantages-section { padding-block: 48px; }
+  .advantages-section { padding-block: 32px; }
   .advantages-section > h2 { margin-bottom: 24px; }
   .advantages-section .advantage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .advantages-section .advantage-card,
@@ -193,9 +193,9 @@
   .advantages-section .advantage-card--network,
   .advantages-section .advantage-card--growth,
   .advantages-section .advantage-card--trust { grid-column: span 1; }
-  .advantages-section .advantage-card > summary { min-height: 324px; padding: 20px; }
+  .advantages-section .advantage-card > summary { min-height: 280px; padding: 20px; }
   .advantages-section .advantage-card--history > summary,
-  .advantages-section .advantage-card--network > summary { min-height: 324px; }
+  .advantages-section .advantage-card--network > summary { min-height: 280px; }
   .advantages-section .advantage-visual { min-height: 94px; margin-bottom: 12px; }
   .advantages-section .advantage-visual svg { height: 84px; }
   .advantages-section .advantage-number { font-size: 68px; }
@@ -204,12 +204,12 @@
   .advantages-section .advantage-card > .disclosure-content { font-size: 14px; }
 }
 @media (max-width: 600px) {
-  .advantages-section { padding-block: 48px; }
+  .advantages-section { padding-block: 32px; }
   .advantages-section .advantage-grid { gap: 12px; }
   .advantages-section .advantage-card { grid-column: 1 / -1; border-radius: 18px; }
   .advantages-section .advantage-card > summary,
   .advantages-section .advantage-card--history > summary,
-  .advantages-section .advantage-card--network > summary { min-height: 310px; padding: 20px; }
+  .advantages-section .advantage-card--network > summary { min-height: 260px; padding: 20px; }
   .advantages-section .advantage-visual { min-height: 90px; margin-bottom: 10px; }
   .advantages-section .advantage-visual svg { height: 80px; max-width: 170px; }
   .advantages-section .advantage-card--collateral .advantage-visual svg { display: block; }

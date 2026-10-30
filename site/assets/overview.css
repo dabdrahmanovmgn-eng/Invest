@@ -1,7 +1,7 @@
 /* Раскрытые сведения о компании: акцент на миссии, затем принципы, цели и факты. */
 #overview > .section-disclosure > summary { min-height: 96px; gap: 24px; font-size: 22px; line-height: 1.35; font-weight: 500; }
 #overview > .section-disclosure > summary > [data-copy] { max-width: none; }
-#overview > .section-disclosure > .disclosure-content { padding: 8px 0 40px; }
+#overview > .section-disclosure > .disclosure-content { padding: 8px 0 24px; }
 #overview .mvv-card { margin: 0; padding: 0; }
 #overview .mvv-grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px 24px; }
 #overview .mvv-col { min-width: 0; padding: 40px; border: 0; border-radius: 24px; }
@@ -30,7 +30,7 @@
 #overview .mini-value { min-width: 0; margin: 0; padding: 0 0 0 24px; border: 0; border-left: 2px solid #b8d7c2; }
 #overview .mini-value h4 { margin: 0 0 10px; color: var(--ink); font-size: 19px; font-weight: 600; line-height: 1.3; letter-spacing: -.02em; }
 #overview .mini-value span { display: block; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
-#overview .goals-card { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 2fr); gap: 48px; margin: 56px 0; padding: 40px 0 0; border-top: 1px solid var(--line); }
+#overview .goals-card { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 2fr); gap: 32px; margin: 32px 0; padding: 28px 0 0; border-top: 1px solid var(--line); }
 #overview .goals-heading, #overview .company-facts > h3 { margin: 0; color: var(--ink); font-size: 32px; line-height: 1.18; font-weight: 500; letter-spacing: -.04em; text-wrap: balance; }
 #overview .goals-heading .accent { color: inherit; }
 #overview .goals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
@@ -54,7 +54,7 @@
   #overview .mvv-grid { grid-template-columns: 1fr; gap: 18px; }
   #overview .mvv-col--values { padding-top: 16px; }
   #overview .values-grid { grid-template-columns: 1fr; gap: 24px; }
-  #overview .goals-card { margin: 40px 0; padding-top: 32px; }
+  #overview .goals-card { margin: 28px 0; padding-top: 24px; }
   #overview .goals-grid { grid-template-columns: 1fr; gap: 28px; }
 }
 @media (max-width: 600px) {

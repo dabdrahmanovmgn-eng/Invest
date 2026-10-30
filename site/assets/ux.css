@@ -1,7 +1,7 @@
 /* UX-проход по Frontend Design и Web Design Guidelines, 21.10.2026. */
 @font-face {
   font-family: Manrope;
-  src: url("fonts/manrope-variable.ttf") format("truetype");
+  src: url("fonts/manrope-variable.woff2") format("woff2");
   font-weight: 200 800;
   font-style: normal;
   font-display: swap;
@@ -23,11 +23,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visib
 .brand { min-height: 44px; }
 .site-nav { gap: 24px; }
 .site-nav-link { min-height: 44px; display: flex; align-items: center; font-size: 14px; }
-.locale button { width: 44px; height: 44px; font-size: 12px; }
-.locale button:hover { background: var(--mint); }
+.locale :is(button, a) { width: 44px; height: 44px; font-size: 12px; }
+.locale :is(button, a):hover { background: var(--mint); }
 
-.hero { min-height: min(800px, calc(100svh - var(--header-height))); }
-.hero-inner { padding-block: 72px 144px; }
+.hero { min-height: min(640px, calc(100svh - var(--header-height))); }
+.hero-inner { padding-block: 48px 104px; }
 .hero-title { font-weight: 750; letter-spacing: -.06em; line-height: 1.08; overflow: visible; }
 .hero-word + .hero-word { margin-left: .14em; }
 .hero-title .accent { color: var(--green-deep); }
@@ -121,7 +121,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visib
 }
 @media (max-width: 600px) {
   .hero { min-height: 0; }
-  .hero-inner { padding-top: 48px; padding-bottom: 110px; }
+  .hero-inner { padding-top: 32px; padding-bottom: 88px; }
   .hero-title { font-size: clamp(72px, 20vw, 120px); margin-bottom: 26px; }
   .hero-word + .hero-word { margin-left: 0; }
   .hero-sub { max-width: 30ch; font-size: 19px; line-height: 1.5; }

@@ -10,7 +10,8 @@
   const timeline = document.getElementById('timelineTrack');
   const previous = document.getElementById('tlPrev');
   const next = document.getElementById('tlNext');
-  const sectionSelect = document.getElementById('investor-section');
+  const sectionPicker = document.getElementById('investor-menu');
+  const sectionCurrent = document.getElementById('investor-current');
   const sections = ['highlights', 'financials', 'funding', 'risk', 'strategy', 'documents', 'ir-contact'];
   const pages = [...document.querySelectorAll('[data-page-section]')];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -92,7 +93,6 @@
     for (const id of sections) {
       if (document.getElementById(id).getBoundingClientRect().top <= sectionOffset) currentSection = id;
     }
-    if (currentSection === 'ir-contact') currentSection = 'documents';
     if (activePage !== currentPage) {
       activePage = currentPage;
       updateTitle();
@@ -105,13 +105,13 @@
       if (selected) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-    document.querySelectorAll('.ir-subnav-inner a').forEach(link => {
+    document.querySelectorAll('.ir-subnav a').forEach(link => {
       const selected = link.hash === `#investors/${currentSection}`;
       link.classList.toggle('current', selected);
       if (selected) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
-    if (document.activeElement !== sectionSelect) sectionSelect.value = `#investors/${currentSection}`;
+    sectionCurrent.textContent = sectionPicker.querySelector(`a[href="#investors/${currentSection}"]`).textContent;
     updateOffsets(headerHeight, subnavHeight);
   }
 
@@ -134,11 +134,28 @@
   }
 
   function updateTitle() {
-    const key = { home: 'navHome', about: 'navAboutPage', investors: 'navInvestors' }[activePage];
-    document.title = `Dengi Market — ${text(key)}`;
+    document.title = text('seoTitle');
+    document.querySelector('meta[name="description"]').content = text('seoDescription');
+    document.querySelector('meta[property="og:title"]').content = text('seoTitle');
+    document.querySelector('meta[property="og:description"]').content = text('seoDescription');
+    document.querySelector('meta[property="og:locale"]').content = language === 'ru' ? 'ru_RU' : 'en_GB';
+    const canonical = document.querySelector(`link[hreflang="${language}"]`).href;
+    document.querySelector('link[rel="canonical"]').href = canonical;
+    document.querySelector('meta[property="og:url"]').content = canonical;
+  }
+
+  function captureReadingPosition() {
+    if (window.scrollY < 40) return null;
+    const inset = header.offsetHeight + (activePage === 'investors' ? subnav.offsetHeight : 0);
+    let anchor;
+    for (const section of document.querySelectorAll('.hero, #featured-results, .advantages-section, section.block, #team-section, #ir-contact')) {
+      if (section.getClientRects().length && section.getBoundingClientRect().top <= inset + 24) anchor = section;
+    }
+    return anchor ? { element: anchor, offset: documentTop(anchor) - window.scrollY - inset } : null;
   }
 
   function setLanguage(value, persist = true) {
+    const readingPosition = persist ? captureReadingPosition() : null;
     const restartMotion = window.IR_MOTION?.active;
     if (restartMotion) window.IR_MOTION.destroy();
     language = value === 'ru' ? 'ru' : 'en';
@@ -148,14 +165,27 @@
       if (element) element.innerHTML = translations[language];
     }
     document.querySelectorAll('[data-copy]').forEach(element => element.innerHTML = text(element.dataset.copy));
-    document.getElementById('h1').innerHTML = '<span class="hero-word-mask"><span class="hero-word">Dengi</span></span> <span class="hero-word-mask"><span class="hero-word accent">Market</span></span>';
+    document.getElementById('h1').innerHTML = '<span class="hero-word-mask"><span class="hero-word">DENGI</span></span><span class="hero-word-mask"><span class="hero-word accent">MARKET</span></span>';
     const paragraphs = [...document.querySelectorAll('#heroSub p')];
     if (paragraphs[0]) {
       const value = paragraphs[0].textContent.replace(/^Dengi Market\s*(?:-\s*|is\s+)/, '').trim();
-      paragraphs[0].textContent = value.charAt(0).toLocaleUpperCase(language) + value.slice(1);
+      const lead = value.charAt(0).toLocaleUpperCase(language) + value.slice(1);
+      // Only split existing approved copy; do not rewrite or translate it.
+      const splitAt = language === 'ru' ? lead.indexOf('. ') + 1 : lead.indexOf(', ') + 1;
+      paragraphs[0].replaceChildren();
+      if (splitAt > 0) {
+        const line = document.createElement('span');
+        line.className = 'hero-sub-line';
+        line.textContent = lead.slice(0, splitAt);
+        paragraphs[0].append(line, document.createTextNode(' ' + lead.slice(splitAt).trim()));
+      } else paragraphs[0].textContent = lead;
     }
     document.getElementById('companyCopy').replaceChildren(...paragraphs.slice(1, 2));
     document.getElementById('companyContext').replaceChildren(...paragraphs.slice(2));
+    document.querySelectorAll('#companyContext p').forEach((paragraph, index) => {
+      const symbol = index === 0 ? 'i-wallet' : 'i-target';
+      paragraph.insertAdjacentHTML('afterbegin', `<svg class="context-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#${symbol}"></use></svg>`);
+    });
     document.querySelectorAll('[data-content-key]').forEach(details => {
       const heading = document.getElementById(details.dataset.contentKey).querySelector('h3');
       if (heading) details.querySelector('.summary-title').innerHTML = heading.innerHTML;
@@ -163,11 +193,11 @@
     document.querySelectorAll('[data-language]').forEach(button => {
       const selected = button.dataset.language === language;
       button.classList.toggle('active', selected);
-      button.setAttribute('aria-pressed', String(selected));
+      if (selected) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
     });
     document.querySelector('.site-nav').setAttribute('aria-label', text('primaryNavigation'));
     subnav.setAttribute('aria-label', text('investorNavigation'));
-    sectionSelect.setAttribute('aria-label', text('investorNavigation'));
     document.querySelector('.locale').setAttribute('aria-label', text('languageSelection'));
     previous.setAttribute('aria-label', text('previousEvent'));
     next.setAttribute('aria-label', text('nextEvent'));
@@ -185,11 +215,22 @@
     });
     renderTeam();
     updateTitle();
+    const selectedSection = sectionPicker.querySelector('a.current');
+    if (selectedSection) sectionCurrent.textContent = selectedSection.textContent;
     updateOffsets();
     updateTimeline();
     if (restartMotion) window.IR_MOTION.init();
+    if (readingPosition) {
+      // При смене языка длина предыдущих блоков меняется; сохраняем место чтения.
+      revealAncestors(readingPosition.element);
+      const inset = header.offsetHeight + (activePage === 'investors' ? subnav.offsetHeight : 0);
+      window.scrollTo({ top: Math.max(0, documentTop(readingPosition.element) - inset - readingPosition.offset), behavior: 'instant' });
+    }
     scheduleScrollScene();
     if (persist) {
+      const target = new URL(language === 'ru' ? 'index.ru.html' : './', location.href);
+      target.hash = location.hash;
+      if (target.href !== location.href) history.pushState(null, '', target);
       try { localStorage.setItem(languageKey, language); } catch { /* EN/RU also works without storage. */ }
     }
   }
@@ -210,12 +251,15 @@
 
   function navigate({ initial = false, moveFocus = true } = {}) {
     const hash = location.hash.slice(1);
-    const [route, anchor] = hash.split('/');
+    const [requestedRoute, requestedAnchor] = hash.split('/');
+    // Прежняя ссылка удалённой таблицы ведёт в сохранившийся раздел финансирования.
+    const route = requestedRoute === 'covTitle' ? 'funding' : requestedRoute;
+    const anchor = requestedAnchor === 'covTitle' ? 'funding' : requestedAnchor;
     const page = document.getElementById(`page-${route}`);
     const target = (page && anchor && page.contains(document.getElementById(anchor)) ? document.getElementById(anchor) : page)
       || document.getElementById(route) || document.getElementById('page-home');
     // Заголовок таблицы находится в summary; прежние прямые ссылки открывают её целиком.
-    if (target.id === 'covTitle' || target.id === 'repaySchedTitle') target.closest('details').open = true;
+    if (target.id === 'repaySchedTitle') target.closest('details').open = true;
     revealAncestors(target);
     // A financial-results link should expose the indicators, not just the chart.
     if (target.id === 'financials') target.querySelector('.financial-table-details').open = true;
@@ -228,7 +272,10 @@
         focusTarget.setAttribute('tabindex', '-1');
         focusTarget.focus({ preventScroll: true });
       }
+      // При прямом входе ScrollTrigger не должен вернуть сохранённую до перехода позицию.
+      if (initial) window.ScrollTrigger?.clearScrollMemory('manual');
       window.scrollTo({ top: Math.max(0, top), behavior: initial ? 'instant' : motion() });
+      if (initial) window.ScrollTrigger?.update();
       updateScrollScene();
       updateTimeline();
     });
@@ -254,8 +301,11 @@
     targets.forEach(target => revealObserver.observe(target));
   }
 
-  document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.language)));
-  document.querySelectorAll('details').forEach(details => {
+  document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', event => {
+    event.preventDefault();
+    if (button.dataset.language !== language) setLanguage(button.dataset.language);
+  }));
+  document.querySelectorAll('details:not(.section-picker)').forEach(details => {
     details.addEventListener('toggle', () => {
       const body = details.querySelector(':scope > .disclosure-content');
       if (window.IR_MOTION?.active) {
@@ -280,9 +330,20 @@
   document.querySelectorAll('a[href^="#"]:not(#skipContent)').forEach(link => link.addEventListener('click', () => {
     if (link.hash === location.hash) navigate();
   }));
-  sectionSelect.addEventListener('change', () => {
-    if (location.hash === sectionSelect.value) navigate();
-    else location.hash = sectionSelect.value;
+  sectionPicker.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    sectionPicker.open = false;
+  }));
+  document.addEventListener('pointerdown', event => {
+    if (!sectionPicker.contains(event.target)) sectionPicker.open = false;
+  });
+  document.addEventListener('focusin', event => {
+    if (!sectionPicker.contains(event.target)) sectionPicker.open = false;
+  });
+  sectionPicker.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      sectionPicker.open = false;
+      sectionPicker.querySelector('summary').focus();
+    }
   });
   window.addEventListener('hashchange', () => navigate());
   window.addEventListener('scroll', scheduleScrollScene, { passive: true });
@@ -303,7 +364,7 @@
     scheduleScrollScene();
   });
   window.addEventListener('beforeprint', () => {
-    document.querySelectorAll('details').forEach(details => {
+    document.querySelectorAll('details:not(.section-picker)').forEach(details => {
       details.dataset.printOpen = String(details.open);
       details.open = true;
     });
@@ -315,7 +376,16 @@
     });
   });
 
-  try { language = localStorage.getItem(languageKey) || 'en'; } catch { /* Default EN. */ }
+  // Язык задаётся адресом; сохранённое предпочтение не переопределяет индексируемую страницу.
+  language = location.pathname.endsWith('/index.ru.html') ? 'ru' : 'en';
+  window.addEventListener('popstate', () => {
+    const nextLanguage = location.pathname.endsWith('/index.ru.html') ? 'ru' : 'en';
+    // Переходы между разделами уже обрабатываются hashchange.
+    // Не пересоздаём DOM и анимации, если язык не изменился.
+    if (nextLanguage === language) return;
+    setLanguage(nextLanguage, false);
+    navigate({ initial: true, moveFocus: false });
+  });
   setLanguage(language, false);
   initializeReveals();
   navigate({ initial: true, moveFocus: false });

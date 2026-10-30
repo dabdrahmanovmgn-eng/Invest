@@ -11,7 +11,7 @@
   const copy = {
     en: {
       skip: 'Skip to content', navigation: 'Main navigation', language: 'Language',
-      home: 'Home', news: 'News', heading: 'News & articles', intro: 'News and materials from Dengi Market.',
+      home: 'Home', news: 'Articles', heading: 'Articles', intro: 'News and materials from Dengi Market.',
       retry: 'Try again', back: 'All articles', contact: 'Contact Investor Relations', read: 'Read article',
       loadingList: 'Loading articles…', loadingArticle: 'Loading article…',
       empty: 'There are no articles in English yet.',
@@ -21,7 +21,7 @@
     },
     ru: {
       skip: 'Перейти к содержимому', navigation: 'Основная навигация', language: 'Язык',
-      home: 'Главная', news: 'Новости', heading: 'Новости и статьи', intro: 'Новости и материалы Dengi Market.',
+      home: 'Главная', news: 'Статьи', heading: 'Статьи', intro: 'Новости и материалы Dengi Market.',
       retry: 'Повторить', back: 'Все статьи', contact: 'Связаться с IR', read: 'Читать статью',
       loadingList: 'Загружаем статьи…', loadingArticle: 'Загружаем статью…',
       empty: 'Статей на русском языке пока нет.',
@@ -209,8 +209,9 @@
       } else renderArticle(result.article);
     } catch (error) {
       if (current !== sequence || error.name === 'AbortError') return;
-      const missing = page === 'article' && error.message === 'missing';
-      showStatus(missing ? 'missing' : 'error', !missing, !missing);
+      const unavailable = error.message === 'missing';
+      // На статическом хостинге нет API: показываем пустой список без бесконечных повторов.
+      showStatus(unavailable ? (page === 'article' ? 'missing' : 'empty') : 'error', !unavailable, !unavailable);
     } finally {
       if (current === sequence) busy.setAttribute('aria-busy', 'false');
     }

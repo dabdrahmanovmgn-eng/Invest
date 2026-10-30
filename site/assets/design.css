@@ -1,0 +1,342 @@
+/* Общая система по варианту «Стало» в Figma, 29.10.2026.
+   Финансовые, инвестиционные и редакционные разделы продолжают эту систему. */
+:root {
+  --green-deep: #087b39;
+  --ink: #091e42;
+  --ink-soft: #526171;
+  --ground: #f6f8fa;
+  --mint: #e7f7eb;
+  --line: #dce5df;
+  --design-radius: 16px;
+  --design-gap: 20px;
+  --design-section: 72px;
+  --design-heading: clamp(30px, 3.5vw, 44px);
+}
+.wrap, .ir-header-inner, .ir-subnav-inner, .editorial-shell {
+  width: 100%; max-width: 1400px; margin-inline: auto; padding-inline: 40px;
+}
+.hero { min-height: 580px; justify-content: center; background: linear-gradient(140deg, #fff 56%, #f3faf6); }
+.hero-inner { padding-block: 96px 112px; }
+.hero-copy { width: 100%; text-align: center; }
+.hero .hero-title {
+  display: flex; justify-content: center; gap: 0; margin: 0 0 30px;
+  font-size: clamp(40px, calc((100vw - 96px) / 6.5), 200px); font-weight: 800; line-height: 1.08;
+  letter-spacing: -.06em; white-space: nowrap;
+}
+.hero .hero-word-mask + .hero-word-mask { margin-left: 0; }
+.hero .hero-word { display: inline-block; }
+.hero-sub { max-width: 720px; margin-inline: auto; font-size: 19px; line-height: 1.6; letter-spacing: -.015em; }
+.hero-sub-line { display: block; }
+.hero-actions { justify-content: center; gap: 14px; margin-top: 36px; }
+.hero-actions .action { width: 240px; min-height: 56px; padding: 16px 22px; justify-content: center; font-size: 15px; }
+.hero-eyebrow, .hero-bottom, .hero-bridge, .section-index, .about-kicker { display: none; }
+.hero-lines { opacity: .11; }
+.action { font-size: 14px; line-height: 1.4; }
+.action:hover { transform: none; }
+.results-stage { padding-block: 54px 32px; border-radius: 20px; }
+.stage-heading { align-items: start; gap: 24px; margin-bottom: 36px; }
+.stage-heading h2 { max-width: 17ch; font-size: 34px; line-height: 1.15; }
+.stage-period { padding-top: 7px; }
+.featured-metrics { gap: 32px; }
+.featured-label { margin-bottom: 18px; }
+.featured-metric strong { font-size: clamp(56px, 6.6vw, 94px); letter-spacing: -.055em; }
+.stage-bottom { margin-top: 22px; }
+.stage-bottom a { display: inline-flex; align-items: center; min-height: 44px; }
+.advantages-section { padding-block: 60px; }
+.advantages-section > h2 { max-width: none; margin-bottom: 36px; font-size: var(--design-heading); }
+.advantages-section .advantage-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--design-gap); align-items: start; }
+.advantages-section .advantage-card { grid-column: auto; border-radius: var(--design-radius); background: #fff; }
+.advantages-section .advantage-card--network, .advantages-section .advantage-card--growth { background: var(--mint); border-color: var(--mint); }
+.advantages-section .advantage-card--collateral { background: var(--green-deep); border-color: var(--green-deep); }
+.advantages-section .advantage-card > summary { min-height: 286px; padding: 22px; }
+.advantages-section .advantage-card--history > summary, .advantages-section .advantage-card--network > summary { min-height: 286px; }
+.advantages-section .advantage-visual { min-height: 66px; height: 66px; margin-bottom: 14px; justify-content: start; }
+.advantages-section .advantage-number,
+.advantages-section .advantage-card--growth .advantage-number,
+.advantages-section .advantage-card--trust .advantage-number { font-size: 62px; font-weight: 500; letter-spacing: -.055em; }
+.advantages-section .advantage-caption { display: none; }
+.advantages-section .advantage-visual svg { width: 86px; max-width: 86px; height: 64px; stroke-width: 1; }
+.advantages-section .advantage-card summary h3 { font-size: 18px; font-weight: 600; line-height: 1.3; margin-bottom: 10px; }
+.advantages-section .advantage-preview { font-size: 13px; line-height: 1.55; }
+.advantages-section .advantage-card .disclosure-action { min-height: 28px; font-size: 12px; }
+.advantages-section .advantage-card .disclosure-action i,
+.advantages-section .advantage-card .scroll-ornament { display: none; }
+.advantages-section .advantage-card > .disclosure-content { margin-inline: 22px; }
+.advantage-detail-title { display: block; margin-bottom: 8px; color: var(--ink); font-weight: 600; }
+.body-grid { padding-top: 60px; padding-bottom: 24px; }
+.about-intro {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "heading copy" "visual copy";
+  gap: 24px; align-items: start; margin-bottom: 28px;
+}
+.about-intro .about-heading { margin: 0; }
+.about-intro h2 { font-size: var(--design-heading); }
+.about-intro .about-copy-panel { padding: 0; }
+.about-intro .about-visual { align-self: end; padding-right: 24px; }
+.about-intro .about-composite { max-width: 530px; margin-inline: auto; }
+.about-intro .about-visual-caption { margin: 0 0 20px; padding: 0; color: var(--ink); }
+.about-intro .about-visual-caption b { display: inline; font-size: 17px; line-height: 1.45; letter-spacing: 0; }
+.about-intro .about-visual-caption > span { display: inline; font-size: 17px; line-height: 1.45; font-weight: 600; color: var(--ink); }
+.about-intro .company-copy p { font-size: 15px; line-height: 1.6; }
+.about-intro .about-context { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; }
+.about-intro .about-context p { margin: 0; padding: 22px; border-radius: 12px; font-size: 13px; line-height: 1.6; background: var(--mint); color: var(--ink); }
+.about-intro .about-context p + p { margin: 0; background: var(--green-deep); color: #fff; }
+.about-intro .about-context p:first-child, .about-intro .about-context p:last-child { padding: 22px; border: 0; border-radius: 12px; }
+.context-icon { display: block; width: 28px; height: 28px; margin-bottom: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.about-context p { border: 1px solid transparent; }
+.section-disclosure { margin-bottom: 12px; padding-inline: 24px; border: 1px solid #e4eae6; border-radius: var(--design-radius); background: #fff; }
+.section-disclosure > summary, #overview > .section-disclosure > summary { padding-block: 18px; min-height: 72px; gap: 24px; font-size: 17px; font-weight: 500; }
+.section-disclosure > summary > [data-copy] { max-width: none; }
+.section-disclosure > summary .disclosure-more, .section-disclosure > summary .disclosure-less { display: none; }
+.section-disclosure[open] > summary .disclosure-less { display: none; }
+.section-disclosure > .disclosure-content, #overview > .section-disclosure > .disclosure-content { padding: 8px 0 24px; }
+#overview, #overview-history { margin: 0; padding: 0; }
+#overview-history { margin-bottom: 60px; }
+section.block { margin-bottom: var(--design-section); padding-top: 0; }
+.block-head h2, #highlights .block-head h2, #strategy .block-head h2 { font-size: var(--design-heading); line-height: 1.18; font-weight: 600; letter-spacing: -.04em; }
+.block-head { margin-bottom: 32px; }
+.block-head h2 { margin: 0; max-width: 24ch; }
+.split-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px var(--design-gap); }
+.split-section > .block-head { margin: 0; }
+.split-section > .block-intro { align-self: start; margin: 0; font-size: 15px; line-height: 1.65; }
+.split-section > :not(.block-head):not(.block-intro) { grid-column: 1 / -1; }
+#model .flow { gap: var(--design-gap); }
+#model .flow-step { padding: 24px; border: 1px solid #e5ebe7; border-radius: var(--design-radius); background: #fff; font-size: 14px; line-height: 1.6; }
+#model .flow-step b { display: block; margin: 0 0 10px; font-size: 18px; font-weight: 600; color: var(--ink); }
+.flow-number { display: block; margin-bottom: 14px; color: var(--green-deep); font-size: 62px; font-weight: 500; line-height: 1; letter-spacing: -.055em; }
+#model .table-card { padding: 22px; border: 1px solid #e5ebe7; border-radius: var(--design-radius); background: #fff; }
+.datatable { font-variant-numeric: tabular-nums; }
+.datatable th { background: var(--ground); font-weight: 500; }
+.datatable td, .datatable th { padding: 18px 20px; }
+.team-section { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px var(--design-gap); margin: 0 0 40px; padding-top: 0; border: 0; }
+.team-section .team-title { font-size: var(--design-heading); }
+.team-section .team-caption { align-self: start; max-width: 48ch; font-size: 15px; line-height: 1.65; }
+.team-section .team-grid { gap: 8px var(--design-gap); align-items: stretch; }
+.team-grid .team-card { display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; }
+@supports (grid-template-rows: subgrid) {
+  .team-grid .team-card { grid-row: span 4; grid-template-rows: subgrid; }
+}
+.team-grid .team-portrait, .team-grid .team-card img { border-radius: 12px; }
+.team-grid .team-card h3 { margin: 8px 0 0; font-size: 18px; }
+.team-grid .team-role { margin: 0; font-size: 14px; min-height: 0; line-height: 1.5; }
+.team-grid .team-email { margin: 0; padding-bottom: 16px; font-size: 13px; min-height: 44px; line-height: 1.5; }
+#overview .mvv-col { border-radius: var(--design-radius); padding: 28px; }
+#overview .mvv-grid { gap: var(--design-gap); }
+#overview .mvv-col--mission > p { font-size: 24px; }
+#overview .mvv-col--vision > p { font-size: 18px; }
+#overview .mvv-col--values { padding-inline: 0; }
+#overview .fact-grid { border: 0; border-radius: 0; gap: var(--design-gap); background: transparent; }
+#overview .fact-card { border: 1px solid var(--line) !important; border-radius: 12px; padding: 22px; }
+#overview .fact-card .n { font-size: 34px; }
+#overview .fact-card .n.small { font-size: 21px; }
+#overview .goals-card { gap: 28px; }
+#overview-history .timeline-h { gap: 16px var(--design-gap); }
+#overview-history .th-item { border: 1px solid var(--line); border-radius: 12px; padding: 22px; gap: 16px; }
+.investors-title { margin: 0 0 48px; font-size: 56px; font-weight: 700; }
+.ir-subnav-inner { gap: 8px; }
+.ir-subnav a { font-size: 12px; }
+#highlights .block-head { margin-bottom: 32px; }
+#highlights .investment-factors { gap: var(--design-gap); }
+#highlights .investment-factor { padding: 28px; border: 1px solid var(--line); border-radius: var(--design-radius); background: #fff; }
+#highlights .investment-factor:nth-child(4n + 2), #highlights .investment-factor:nth-child(4n + 3) { background: var(--mint); border-color: var(--mint); }
+#highlights .investment-factor h3 { font-size: 21px; font-weight: 600; }
+#highlights .investment-factor p { font-size: 15px; line-height: 1.7; }
+#highlights .investment-key { font-size: inherit; font-weight: 650; }
+#highlights .investment-links { border: 0; padding-top: 24px; }
+.fin-split { grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: var(--design-gap); }
+.fin-split > .table-card { padding: 28px; border: 1px solid var(--line); border-radius: var(--design-radius); background: #fff; }
+.financial-report { padding: 28px; border-radius: var(--design-radius); }
+.financial-report > strong { font-size: 76px; }
+.table-mini-title { margin: 0 0 24px; font-size: 23px; font-weight: 600; }
+.growth-legend { font-size: 12px; }
+#funding > .table-card { padding: 28px; border: 1px solid var(--line); border-radius: var(--design-radius); background: var(--ground); }
+.track-row { padding-block: 22px; }
+.track-row .amt { font-size: 28px; }
+.track-bar { height: 10px; background: #dfebe3; }
+.funding-contact { justify-self: start; }
+.risk-card { padding: 24px; border-radius: var(--design-radius); background: var(--mint); }
+.reg-grid { gap: var(--design-gap); }
+.reg-item { padding: 24px; border: 0; border-radius: 12px; background: #fff; }
+.reg-item + .reg-item, .reg-more-grid .reg-item { border: 0; }
+.reg-item .k { margin-bottom: 12px; color: var(--green-deep); font-size: 14px; font-weight: 600; }
+.reg-item .v { font-size: 15px; line-height: 1.65; }
+.risk-card .section-disclosure { margin-top: 20px; border: 0; }
+.risk-card .section-disclosure > summary { font-size: 17px; }
+.risk-card .reg-more-grid .reg-item { padding: 18px 0; border-top: 1px solid var(--line); border-radius: 0; }
+#strategy { margin-top: 0; padding: 36px; border-radius: 20px; background: var(--mint); }
+#strategy > .block-intro { margin: 0; font-size: 15px; }
+#strategy .strategy-priorities { gap: var(--design-gap); }
+#strategy .strategy-priority, #strategy #pl9, #strategy #pl0 { margin: 0; padding: 26px; border: 0; border-radius: var(--design-radius); background: #fff; }
+#strategy .strategy-priority .pl-head { gap: 14px; margin-bottom: 16px; }
+#strategy .strategy-priority .pl-icon { border: 0; background: var(--mint); }
+#strategy .strategy-priority h3 { font-size: 20px; font-weight: 600; }
+#strategy .strategy-priority p { font-size: 15px; line-height: 1.7; }
+.doc-list { gap: var(--design-gap); }
+.doc-row { padding: 28px; border-radius: var(--design-radius); background: var(--ground); }
+.doc-row:hover { transform: none; background: var(--mint); }
+.doc-row .name h3 { font-size: 23px; }
+.doc-actions a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
+#ir-contact { margin-top: 0; padding: 0; }
+.ir-contact-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 44px; gap: 24px var(--design-gap); border-radius: 20px; }
+#ir-contact .ir-contact-content, .ir-contact-action { padding: 0; background: none; border: 0; }
+.ir-contact-action { align-self: center; }
+.ir-contact-kicker, .ir-contact-symbol, .ir-contact-signature { display: none; }
+#ir-contact h2 { max-width: 16ch; margin: 0 0 18px; font-size: 44px; line-height: 1.15; font-weight: 500; }
+#irContactIntro { font-size: 17px; }
+.ir-contact-address { margin: 0; }
+#irContactLabel { font-size: 13px; margin-bottom: 16px; }
+#ir-contact .ir-contact-email { min-height: 76px; padding: 22px 24px; border-radius: 12px; font-size: clamp(17px, 2vw, 27px); letter-spacing: -.025em; box-shadow: none; }
+.ir-contact-resources { grid-column: 1 / -1; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin: 0; padding-top: 18px; border-top: 1px solid #ffffff35; }
+.ir-contact-resources a { font-size: 12px; text-decoration: none; }
+.ir-contact-resources a:hover { text-decoration: underline; }
+.redesign-footer { padding-block: 32px; background: var(--ground); }
+.redesign-footer .wrap { gap: 24px; }
+.redesign-footer a { min-height: 44px; display: inline-flex; align-items: center; }
+/* Статьи используют тот же контейнер, карточки и ритм. */
+.editorial-page { background: var(--ground); }
+.editorial-header { background: #fff; }
+.editorial-main { padding-block: 64px; }
+.news-heading { align-items: start; border: 0; margin-bottom: 12px; }
+.news-heading h1 { font-size: var(--design-heading); }
+.news-grid { gap: var(--design-gap); }
+.news-card, .news-card.has-cover { padding: 24px; border: 1px solid var(--line); border-radius: var(--design-radius); background: #fff; }
+.news-card-media { border-radius: 10px; }
+.news-card h2 { font-size: 23px; }
+.editorial-status { border-radius: var(--design-radius); background: #fff; }
+.article-cover { border-radius: var(--design-radius); }
+.article-heading h1 { font-size: clamp(32px, 4vw, 52px); }
+.article-body { max-width: 760px; }
+@media (max-width: 1000px) {
+  .hero { min-height: 490px; }
+  .hero-inner { padding-block: 80px 96px; }
+  .hero-sub { font-size: 18px; max-width: 620px; }
+  .advantages-section .advantage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .advantages-section .advantage-card > summary { min-height: 258px; }
+  .about-intro { grid-template-areas: "heading heading" "visual copy"; }
+  .about-intro .about-context { grid-template-columns: 1fr; }
+  .about-intro .about-context p { font-size: 14px; }
+  .about-intro .about-visual { align-self: center; padding: 0; }
+  .fin-split { grid-template-columns: 1fr; }
+  .financial-report { min-height: 220px; }
+  .team-section .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .team-grid .team-role { min-height: 0; }
+  .ir-contact-layout { padding: 32px; }
+  #ir-contact h2 { font-size: 36px; }
+  #ir-contact .ir-contact-email { padding: 22px; background-image: none; font-size: 24px; }
+}
+@media (max-width: 700px) {
+  :root { --design-gap: 16px; --design-section: 52px; }
+  .wrap, .ir-header-inner, .ir-subnav-inner, .editorial-shell { padding-inline: 22px; }
+  .hero { min-height: 460px; }
+  .hero-inner { padding-block: 72px 80px; }
+  .hero .hero-title { font-size: calc((100vw - 60px) / 6.5); margin-bottom: 26px; }
+  .hero-sub { max-width: 40ch; font-size: 16px; }
+  .hero-actions { margin-top: 28px; gap: 12px; flex-direction: row; align-items: stretch; }
+  .hero-actions .action { width: auto; flex: 1 1 0; min-width: 0; padding-inline: 12px; font-size: 13px; }
+  .results-stage { padding-block: 36px 24px; border-radius: 16px; }
+  .stage-heading { margin-bottom: 28px; }
+  .stage-heading h2 { font-size: 29px; }
+  .stage-period { margin: 0; padding: 0; width: auto; font-size: 11px; }
+  .featured-metrics { grid-template-columns: 1fr; gap: 24px; }
+  .featured-metric { padding-bottom: 18px; }
+  .featured-metric strong { font-size: 68px; }
+  .stage-bottom { flex-direction: column; gap: 0; margin-top: 16px; }
+  .advantages-section, .body-grid { padding-top: 44px; }
+  .advantages-section { padding-bottom: 44px; }
+  .advantages-section > h2 { margin-bottom: 28px; }
+  .advantages-section .advantage-card > summary,
+  .advantages-section .advantage-card--history > summary,
+  .advantages-section .advantage-card--network > summary { min-height: 288px; padding: 18px; }
+  .advantages-section .advantage-number,
+  .advantages-section .advantage-card--growth .advantage-number,
+  .advantages-section .advantage-card--trust .advantage-number { font-size: 52px; }
+  .advantages-section .advantage-card summary h3 { font-size: 17px; }
+  .about-intro { grid-template-columns: 1fr; grid-template-areas: "heading" "visual" "copy"; gap: 24px; }
+  .about-intro .about-composite { max-width: 420px; }
+  .about-intro .about-context { grid-template-columns: 1fr; }
+  .about-intro .about-context p { padding: 24px; font-size: 15px; }
+  .section-disclosure { padding-inline: 18px; }
+  .section-disclosure > summary, #overview > .section-disclosure > summary { font-size: 16px; gap: 16px; }
+  #overview-history { margin-bottom: 44px; }
+  .split-section { grid-template-columns: 1fr; gap: 24px; }
+  #model .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #model .flow-step { padding: 20px; }
+  #model .table-card { padding: 14px; }
+  .datatable th, .datatable td { padding: 14px; }
+  .team-section { grid-template-columns: 1fr; gap: 24px; margin-bottom: 20px; }
+  .team-grid .team-card h3 { font-size: 16px; }
+  .team-grid .team-role { font-size: 12px; }
+  .team-grid .team-email { overflow-wrap: anywhere; }
+  #overview .mvv-grid { grid-template-columns: 1fr; }
+  #overview .mvv-col { padding: 22px; }
+  #overview .mvv-col--mission > p { font-size: 22px; }
+  #overview .fact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #overview-history .timeline-h { grid-template-columns: 1fr; }
+  #overview-history .th-item { grid-template-columns: 64px minmax(0, 1fr); padding: 20px; }
+  .investors-title { font-size: 42px; margin-bottom: 32px; }
+  #highlights .investment-factors { grid-template-columns: 1fr; }
+  #highlights .investment-factor { padding: 24px; }
+  .fin-split > .table-card, #funding > .table-card { padding: 22px; }
+  .risk-card { padding: 16px; }
+  .reg-grid { grid-template-columns: 1fr; }
+  .reg-item { padding: 22px; }
+  #strategy { padding: 24px 18px; border-radius: var(--design-radius); }
+  #strategy .strategy-priorities { grid-template-columns: 1fr; }
+  #strategy .strategy-priority, #strategy #pl9, #strategy #pl0 { padding: 22px; }
+  .doc-row { padding: 24px; }
+  .ir-contact-layout { grid-template-columns: 1fr; padding: 28px 24px; gap: 28px; }
+  #ir-contact h2 { font-size: 34px; max-width: 18ch; }
+  #ir-contact .ir-contact-email { min-width: 0; width: 100%; min-height: 64px; padding: 20px; font-size: clamp(19px, 5.5vw, 28px); }
+  .ir-contact-resources { flex-direction: column; gap: 0; padding-top: 16px; }
+  .editorial-main { padding-block: 40px; }
+}
+@media (max-width: 380px) {
+  .advantages-section .advantage-grid, #model .flow, .team-section .team-grid, #overview .fact-grid { grid-template-columns: 1fr; }
+  .advantages-section .advantage-card > summary,
+  .advantages-section .advantage-card--history > summary,
+  .advantages-section .advantage-card--network > summary { min-height: 250px; padding: 24px; }
+  .hero { min-height: 430px; }
+  .hero-sub { font-size: 15px; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .action { width: 100%; min-height: 48px; }
+  .stage-heading { flex-direction: column; gap: 12px; }
+  #ir-contact h2 { font-size: 30px; }
+}
+@media print {
+  .hero { min-height: 0; }
+  .hero-inner { padding-block: 24px; }
+  .hero .hero-title { font-size: 64px; }
+  .results-stage, #strategy, .ir-contact-layout { background: #fff; color: var(--ink); }
+  .advantages-section .advantage-card--collateral { background: #fff; color: var(--ink); border-color: var(--line); }
+  .advantages-section .advantage-card--collateral .advantage-visual,
+  .advantages-section .advantage-card--collateral .advantage-preview { color: var(--ink); }
+  .split-section { display: block; }
+  .split-section > .block-intro { margin-bottom: 24px; }
+  .about-intro .about-context p, .about-intro .about-context p + p { color: var(--ink); background: #fff; border-color: var(--line); }
+  .ir-contact-layout { display: block; padding: 24px; }
+  #ir-contact h2, #irContactIntro, #irContactLabel, #ir-contact .ir-contact-email { color: var(--ink); }
+  .ir-contact-resources { display: none; }
+  .editorial-page { background: #fff; }
+}
+
+/* Один нативно доступный disclosure для меню, оформленный в системе сайта. */
+.section-picker-label { display: block; margin-bottom: 6px; font-size: 12px; color: var(--ink-soft); }
+.section-picker { position: relative; margin: 0; border: 0; background: #fff; }
+.section-picker > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 52px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; color: var(--green-deep); font-size: 14px; line-height: 1.4; list-style: none; cursor: pointer; }
+.section-picker > summary::-webkit-details-marker { display: none; }
+.section-picker > summary::after { display: none; }
+.section-picker > summary:focus-visible { outline: 2px solid var(--green-deep); outline-offset: 3px; }
+.picker-chevron { flex: 0 0 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -4px; }
+.section-picker[open] .picker-chevron { transform: rotate(225deg); margin-top: 4px; }
+.section-picker-links { position: absolute; inset: calc(100% + 8px) 0 auto; z-index: 5; padding: 6px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 12px 32px #091e4218; max-height: min(420px, 55vh); overflow-y: auto; overscroll-behavior: contain; }
+.ir-subnav .section-picker-links a { display: block; width: 100%; max-width: none; min-height: 44px; padding: 10px 12px; border-radius: 8px; font-size: 14px; line-height: 1.45; white-space: normal; box-shadow: none; }
+.ir-subnav .section-picker-links a:hover, .ir-subnav .section-picker-links a:focus-visible { background: var(--mint); }
+.ir-subnav .section-picker-links a.current { background: var(--mint); font-weight: 600; }
+@media (max-width: 1100px) {
+  .ir-subnav-inner { display: none; }
+  .mobile-section-nav { display: block; padding-block: 12px; }
+}
+@media print { .mobile-section-nav { display: none; } }
+
+.locale a { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.timeline-nav .tl-arrow { width: auto; min-height: 44px; padding: 10px 14px; font-size: 12px; line-height: 1.4; }

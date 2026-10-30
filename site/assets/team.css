@@ -3,9 +3,9 @@
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
   column-gap: 56px;
-  row-gap: 42px;
-  margin: 72px 0 16px;
-  padding-top: 52px;
+  row-gap: 28px;
+  margin: 40px 0 16px;
+  padding-top: 32px;
   border-top: 1px solid var(--line);
 }
 .team-section[hidden] { display: none; }
@@ -125,7 +125,7 @@
   .team-section .team-grid { margin-top: 8px; }
 }
 @media (max-width: 600px) {
-  .team-section { margin-top: 48px; padding-top: 32px; }
+  .team-section { margin-top: 28px; padding-top: 24px; }
   .team-section .team-caption { font-size: 16px; }
   .team-section .team-grid { gap: 36px 18px; }
   .team-grid .team-card h3 { margin-top: 18px; }
