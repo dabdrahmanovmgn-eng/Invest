@@ -11,6 +11,7 @@
   const scenes = new Map();
   const counted = new WeakSet();
   const counters = new Map();
+  const emailStates = new WeakMap();
   // GSAP 3.15.0 оставляет слушатели MediaQueryList после matchMedia().revert().
   // Храним три запроса на весь срок страницы; меняем только контекст анимаций.
   const queries = {
@@ -22,6 +23,69 @@
   let refreshTimer;
   let disclose;
   let introPending = false;
+  function emailState(link) {
+    const value = link.textContent.trim();
+    let state = emailStates.get(link);
+    if (!state || state.value !== value) {
+      state = { value, count: 0, started: false, complete: false };
+      emailStates.set(link, state);
+    }
+    return state;
+  }
+
+  function typeEmail(link) {
+    if (!link) return () => {};
+    const state = emailState(link);
+    const final = document.createElement('span');
+    final.className = 'email-final';
+    final.textContent = state.value;
+    const visual = document.createElement('span');
+    visual.className = 'email-typed';
+    visual.setAttribute('aria-hidden', 'true');
+    const letters = document.createElement('span');
+    letters.className = 'email-letters';
+    letters.textContent = state.value.slice(0, state.count);
+    const caret = document.createElement('span');
+    caret.className = 'email-caret';
+    visual.append(letters, caret);
+    link.replaceChildren(final, visual);
+    link.classList.add('email-typewriter');
+    link.dataset.emailPhase = state.complete ? 'complete' : state.started ? 'typing' : 'waiting';
+    let trigger;
+    if (!state.complete) {
+      const progress = { count: state.count };
+      const animation = gsap.to(progress, {
+        id: 'contact-email-typing', paused: true,
+        count: state.value.length, duration: (state.value.length - state.count) * .065,
+        delay: state.started ? 0 : .35, ease: 'none', snap: { count: 1 },
+        onStart: () => { state.started = true; link.dataset.emailPhase = 'typing'; },
+        onUpdate: () => {
+          // Счётчик сохраняется между сменами языка и перестройками контекста.
+          const count = Math.max(state.count, Math.round(progress.count));
+          if (count === state.count) return;
+          state.count = count;
+          letters.textContent = state.value.slice(0, count);
+        },
+        onComplete: () => {
+          state.count = state.value.length;
+          state.complete = true;
+          letters.textContent = state.value;
+          link.dataset.emailPhase = 'complete';
+          trigger?.kill();
+        }
+      });
+      trigger = ScrollTrigger.create({
+        id: 'contact-email-enter', trigger: link, start: 'top 90%', once: true,
+        onEnter: () => animation.play(), onEnterBack: () => animation.play()
+      });
+    }
+    return () => {
+      link.textContent = state.value;
+      link.classList.remove('email-typewriter');
+      delete link.dataset.emailPhase;
+    };
+  }
+
   function heroBackground(hero) {
     if (!hero.querySelector('.hero-lines') || !window.IntersectionObserver) return { start() {}, clear() {} };
     const events = new AbortController();
@@ -119,6 +183,12 @@
       const reduced = queries.reduced.matches;
       const print = queries.print.matches;
       if (reduced || print) {
+        const email = document.querySelector('#ir-contact .ir-contact-email');
+        if (email) {
+          const state = emailState(email);
+          state.count = state.value.length;
+          state.complete = true;
+        }
         introPending = false;
         return;
       }
@@ -384,6 +454,7 @@
       scene(documents, tl => tl.from(documents.children, { y: distance, opacity: 0, stagger: 0.09 }));
 
       const contact = document.getElementById('ir-contact');
+      const clearEmail = typeEmail(contact.querySelector('.ir-contact-email'));
       scene(contact, tl => {
         tl.from(contact.querySelectorAll('.ir-contact-kicker, h2, #irContactIntro, .ir-contact-resources'), {
           y: wide ? 20 : 12, opacity: 0, duration: 0.65, stagger: 0.08,
@@ -393,7 +464,7 @@
       const address = contact.querySelector('.ir-contact-address');
       scene(address, tl => {
         tl.from(contact.querySelector('.ir-contact-symbol'), { y: 10, opacity: 0, duration: 0.45, clearProps: 'opacity,transform' }, 0)
-          .from(address.children, { y: wide ? 16 : 10, opacity: 0, duration: 0.65, stagger: 0.08, clearProps: 'opacity,transform' }, 0.05)
+          .from(address.querySelector('#irContactLabel'), { y: wide ? 16 : 10, opacity: 0, duration: 0.65, clearProps: 'opacity,transform' }, 0.05)
           .from(contact.querySelector('.ir-contact-signature'), { opacity: 0, duration: 0.45, clearProps: 'opacity' }, 0.25);
         const sheen = contact.querySelector('.ir-contact-sheen');
         if (sheen) {
@@ -431,7 +502,7 @@
         }
       });
       disclose = context.disclosure;
-      return () => { interactionEvents.abort(); background.clear(); overviewScenes.clear(); disclosureAnimations.clear(); restoreCounters(); scenes.clear(); disclose = null; };
+      return () => { clearEmail(); interactionEvents.abort(); background.clear(); overviewScenes.clear(); disclosureAnimations.clear(); restoreCounters(); scenes.clear(); disclose = null; };
     }, document.body);
     refresh();
     return true;

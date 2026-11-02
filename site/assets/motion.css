@@ -1,4 +1,19 @@
 /* Базовое состояние всегда читаемо; GSAP включается только после загрузки. */
+/* Полный адрес задаёт размер поля и доступное имя ссылки, печать — только визуальный слой. */
+#ir-contact .ir-contact-email.email-typewriter { display: grid; }
+.email-typewriter > .email-final, .email-typewriter > .email-typed { grid-area: 1 / 1; min-width: 0; }
+.email-typewriter > .email-final { opacity: 0; pointer-events: none; }
+.email-typewriter > .email-typed { user-select: none; }
+.email-final::after, .email-caret { content: ''; display: inline-block; width: 0; height: 1em; margin-inline-start: 3px; border-inline-start: 2px solid currentColor; vertical-align: -.1em; }
+.email-typewriter[data-email-phase='waiting'] .email-caret { visibility: hidden; }
+@keyframes email-caret-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .email-typewriter[data-email-phase='complete'] .email-caret { animation: email-caret-blink 1.1s step-end infinite; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  .email-typewriter > .email-final { opacity: 1; }
+  .email-typewriter > .email-typed { display: none; }
+}
 /* Запас под выносными элементами Manrope; компенсация сохраняет ритм заголовка. */
 .hero-word-mask { display: inline-block; overflow: clip; vertical-align: bottom; padding-bottom: .18em; margin-bottom: -.18em; }
 .hero-word-mask + .hero-word-mask { margin-left: .14em; }
