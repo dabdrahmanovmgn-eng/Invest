@@ -149,6 +149,8 @@ section.block { margin-bottom: var(--design-section); padding-top: 0; }
 .financial-report > strong { font-size: 76px; }
 .table-mini-title { margin: 0 0 24px; font-size: 23px; font-weight: 600; }
 .growth-legend { font-size: 12px; }
+#funding { row-gap: 12px; }
+#funding > .section-disclosure { margin: 0; }
 #funding > .table-card { padding: 28px; border: 1px solid var(--line); border-radius: var(--design-radius); background: var(--ground); }
 .track-row { padding-block: 22px; }
 .track-row .amt { font-size: 28px; }
@@ -178,6 +180,7 @@ section.block { margin-bottom: var(--design-section); padding-top: 0; }
 .doc-actions a { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
 #ir-contact { margin-top: 0; padding: 0; }
 .ir-contact-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 44px; gap: 24px var(--design-gap); border-radius: 20px; }
+.ir-contact-layout::before { content: ''; position: absolute; z-index: 0; inset-block: 18px; left: calc(50% - 140px); width: 140px; background: url('ornament-contact.svg') center / contain no-repeat; opacity: .22; pointer-events: none; }
 #ir-contact .ir-contact-content, .ir-contact-action { padding: 0; background: none; border: 0; }
 .ir-contact-action { align-self: center; }
 .ir-contact-kicker, .ir-contact-symbol, .ir-contact-signature { display: none; }
@@ -186,7 +189,7 @@ section.block { margin-bottom: var(--design-section); padding-top: 0; }
 .ir-contact-address { margin: 0; }
 #irContactLabel { font-size: 13px; margin-bottom: 16px; }
 #ir-contact .ir-contact-email { min-height: 76px; padding: 22px 24px; border-radius: 12px; font-size: clamp(17px, 2vw, 27px); letter-spacing: -.025em; box-shadow: none; }
-.ir-contact-resources { grid-column: 1 / -1; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin: 0; padding-top: 18px; border-top: 1px solid #ffffff35; }
+.ir-contact-resources { position: relative; z-index: 1; grid-column: 1 / -1; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin: 0; padding-top: 18px; border-top: 1px solid #ffffff35; }
 .ir-contact-resources a { font-size: 12px; text-decoration: none; }
 .ir-contact-resources a:hover { text-decoration: underline; }
 .redesign-footer { padding-block: 32px; background: var(--ground); }
@@ -288,6 +291,7 @@ section.block { margin-bottom: var(--design-section); padding-top: 0; }
   #strategy .strategy-priority, #strategy #pl9, #strategy #pl0 { padding: 22px; }
   .doc-row { padding: 24px; }
   .ir-contact-layout { grid-template-columns: 1fr; padding: 28px 24px; gap: 28px; }
+  .ir-contact-layout::before { inset-block: 12px auto; left: auto; right: 10px; width: 100px; height: 200px; opacity: .16; }
   #ir-contact h2 { font-size: 34px; max-width: 18ch; }
   #ir-contact .ir-contact-email { min-width: 0; width: 100%; min-height: 64px; padding: 20px; font-size: clamp(19px, 5.5vw, 28px); }
   .ir-contact-resources { flex-direction: column; gap: 0; padding-top: 16px; }
@@ -320,6 +324,7 @@ section.block { margin-bottom: var(--design-section); padding-top: 0; }
   .split-section > .block-intro { margin-bottom: 24px; }
   .about-intro .about-context p, .about-intro .about-context p + p { color: var(--ink); background: #fff; border-color: var(--line); }
   .ir-contact-layout { display: block; padding: 24px; }
+  .ir-contact-layout::before { display: none; }
   #ir-contact h2, #irContactIntro, #irContactLabel, #ir-contact .ir-contact-email { color: var(--ink); }
   .ir-contact-resources { display: none; }
   .editorial-page { background: #fff; }
