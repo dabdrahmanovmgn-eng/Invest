@@ -229,7 +229,7 @@ class CmsDemoTests(unittest.TestCase):
         url = image["url"]
         self.assertEqual(self.request("GET", url, auth=False)[0], 404)
         self.assertEqual(self.request("GET", url)[1], test_cms.png())
-        payload = {"title": "Демонстрация", "language": "ru", "body": "Статья с изображением", "cover": url, "images": [url], "status": "draft"}
+        payload = {"title": "Demo", "language": "en", "body": "Article with an image", "cover": url, "images": [url], "status": "draft"}
         status, result, _ = self.request("POST", "/api/admin/articles", payload)
         self.assertEqual(status, 201, result)
         article = result["article"]

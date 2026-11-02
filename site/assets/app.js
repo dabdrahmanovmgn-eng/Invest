@@ -2,7 +2,6 @@
   'use strict';
   const copy = window.IR_COPY;
   const config = window.IR_CONFIG;
-  const languageKey = 'dengi-ir-language';
   const root = document.documentElement;
   const header = document.querySelector('.ir-header');
   const subnav = document.querySelector('.ir-subnav');
@@ -15,18 +14,15 @@
   const sections = ['highlights', 'financials', 'funding', 'risk', 'strategy', 'documents', 'ir-contact'];
   const pages = [...document.querySelectorAll('[data-page-section]')];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let language = 'en';
   let activePage = 'home';
   let framePending = false;
   let revealObserver;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  const text = key => copy[key]?.[language] || '';
+  const text = key => copy[key] || '';
   const motion = () => reducedMotion.matches ? 'instant' : 'smooth';
   const clamp = value => Math.max(0, Math.min(1, value));
 
   function renderTeam() {
-    const caption = value => value?.[language] || value?.ru || value?.en || '';
-    const captionLanguage = value => value?.[language] ? language : value?.ru ? 'ru' : 'en';
     const members = config.team.filter(member => member.photo);
     const grid = document.getElementById('team-grid');
     grid.replaceChildren();
@@ -35,24 +31,24 @@
       const card = document.createElement('article');
       card.className = 'team-card card';
       const photo = document.createElement('img');
-      Object.assign(photo, { src: member.photo, alt: caption(member.photoAlt) || caption(member.name) || 'Dengi Market', loading: 'lazy', decoding: 'async', width: 320, height: 400 });
+      Object.assign(photo, { src: member.photo, alt: member.photoAlt || member.name || 'Dengi Market', loading: 'lazy', decoding: 'async', width: 320, height: 400 });
       photo.className = 'team-photo';
-      photo.lang = captionLanguage(member.name);
+      photo.lang = 'en';
       const portrait = document.createElement('div');
       portrait.className = 'team-portrait';
       portrait.append(photo);
       card.append(portrait);
-      if (caption(member.name)) {
+      if (member.name) {
         const name = document.createElement('h3');
-        name.textContent = caption(member.name);
-        name.lang = captionLanguage(member.name);
+        name.textContent = member.name;
+        name.lang = 'en';
         card.append(name);
       }
-      if (caption(member.role)) {
+      if (member.role) {
         const role = document.createElement('p');
         role.className = 'team-role';
-        role.textContent = caption(member.role);
-        role.lang = captionLanguage(member.role);
+        role.textContent = member.role;
+        role.lang = 'en';
         card.append(role);
       }
       if (member.email) {
@@ -93,10 +89,7 @@
     for (const id of sections) {
       if (document.getElementById(id).getBoundingClientRect().top <= sectionOffset) currentSection = id;
     }
-    if (activePage !== currentPage) {
-      activePage = currentPage;
-      updateTitle();
-    }
+    activePage = currentPage;
     document.querySelectorAll('.site-nav-link').forEach(link => {
       const selected = link.dataset.section
         ? activePage === 'investors' && currentSection === link.dataset.section
@@ -133,45 +126,19 @@
     }
   }
 
-  function updateTitle() {
-    document.title = text('seoTitle');
-    document.querySelector('meta[name="description"]').content = text('seoDescription');
-    document.querySelector('meta[property="og:title"]').content = text('seoTitle');
-    document.querySelector('meta[property="og:description"]').content = text('seoDescription');
-    document.querySelector('meta[property="og:locale"]').content = language === 'ru' ? 'ru_RU' : 'en_GB';
-    const canonical = document.querySelector(`link[hreflang="${language}"]`).href;
-    document.querySelector('link[rel="canonical"]').href = canonical;
-    document.querySelector('meta[property="og:url"]').content = canonical;
-  }
-
-  function captureReadingPosition() {
-    if (window.scrollY < 40) return null;
-    const inset = header.offsetHeight + (activePage === 'investors' ? subnav.offsetHeight : 0);
-    let anchor;
-    for (const section of document.querySelectorAll('.hero, #featured-results, .advantages-section, section.block, #team-section, #ir-contact')) {
-      if (section.getClientRects().length && section.getBoundingClientRect().top <= inset + 24) anchor = section;
-    }
-    return anchor ? { element: anchor, offset: documentTop(anchor) - window.scrollY - inset } : null;
-  }
-
-  function setLanguage(value, persist = true) {
-    const readingPosition = persist ? captureReadingPosition() : null;
-    const restartMotion = window.IR_MOTION?.active;
-    if (restartMotion) window.IR_MOTION.destroy();
-    language = value === 'ru' ? 'ru' : 'en';
-    root.lang = language;
-    for (const [key, translations] of Object.entries(copy)) {
+  function initializeContent() {
+    for (const [key, value] of Object.entries(copy)) {
       const element = document.getElementById(key);
-      if (element) element.innerHTML = translations[language];
+      if (element) element.innerHTML = value;
     }
     document.querySelectorAll('[data-copy]').forEach(element => element.innerHTML = text(element.dataset.copy));
     document.getElementById('h1').innerHTML = '<span class="hero-word-mask"><span class="hero-word">DENGI</span></span><span class="hero-word-mask"><span class="hero-word accent">MARKET</span></span>';
     const paragraphs = [...document.querySelectorAll('#heroSub p')];
     if (paragraphs[0]) {
       const value = paragraphs[0].textContent.replace(/^Dengi Market\s*(?:-\s*|is\s+)/, '').trim();
-      const lead = value.charAt(0).toLocaleUpperCase(language) + value.slice(1);
+      const lead = value.charAt(0).toLocaleUpperCase('en') + value.slice(1);
       // Only split existing approved copy; do not rewrite or translate it.
-      const splitAt = language === 'ru' ? lead.indexOf('. ') + 1 : lead.indexOf(', ') + 1;
+      const splitAt = lead.indexOf(', ') + 1;
       paragraphs[0].replaceChildren();
       if (splitAt > 0) {
         const line = document.createElement('span');
@@ -190,15 +157,8 @@
       const heading = document.getElementById(details.dataset.contentKey).querySelector('h3');
       if (heading) details.querySelector('.summary-title').innerHTML = heading.innerHTML;
     });
-    document.querySelectorAll('[data-language]').forEach(button => {
-      const selected = button.dataset.language === language;
-      button.classList.toggle('active', selected);
-      if (selected) button.setAttribute('aria-current', 'page');
-      else button.removeAttribute('aria-current');
-    });
     document.querySelector('.site-nav').setAttribute('aria-label', text('primaryNavigation'));
     subnav.setAttribute('aria-label', text('investorNavigation'));
-    document.querySelector('.locale').setAttribute('aria-label', text('languageSelection'));
     previous.setAttribute('aria-label', text('previousEvent'));
     next.setAttribute('aria-label', text('nextEvent'));
     document.querySelector('.hero-art img').alt = text('heroAlt');
@@ -206,33 +166,16 @@
       const year = link.getAttribute('href').match(/\d{4}/)[0];
       link.setAttribute('aria-label', `${text(link.dataset.documentAction === 'open' ? 'openDocument' : 'downloadDocument')} — ${year}`);
     });
-    document.querySelectorAll('[data-localized-value]').forEach(element => {
-      element.textContent = language === 'ru' ? element.dataset.ruValue : element.dataset.localizedValue;
-    });
     document.querySelectorAll('[data-contact-email]').forEach(link => {
       link.textContent = config.contactEmail;
       link.href = `mailto:${config.contactEmail}`;
     });
     renderTeam();
-    updateTitle();
     const selectedSection = sectionPicker.querySelector('a.current');
     if (selectedSection) sectionCurrent.textContent = selectedSection.textContent;
     updateOffsets();
     updateTimeline();
-    if (restartMotion) window.IR_MOTION.init();
-    if (readingPosition) {
-      // При смене языка длина предыдущих блоков меняется; сохраняем место чтения.
-      revealAncestors(readingPosition.element);
-      const inset = header.offsetHeight + (activePage === 'investors' ? subnav.offsetHeight : 0);
-      window.scrollTo({ top: Math.max(0, documentTop(readingPosition.element) - inset - readingPosition.offset), behavior: 'instant' });
-    }
     scheduleScrollScene();
-    if (persist) {
-      const target = new URL(language === 'ru' ? 'index.ru.html' : './', location.href);
-      target.hash = location.hash;
-      if (target.href !== location.href) history.pushState(null, '', target);
-      try { localStorage.setItem(languageKey, language); } catch { /* EN/RU also works without storage. */ }
-    }
   }
 
   function documentTop(element) {
@@ -301,10 +244,6 @@
     targets.forEach(target => revealObserver.observe(target));
   }
 
-  document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', event => {
-    event.preventDefault();
-    if (button.dataset.language !== language) setLanguage(button.dataset.language);
-  }));
   document.querySelectorAll('details:not(.section-picker)').forEach(details => {
     details.addEventListener('toggle', () => {
       const body = details.querySelector(':scope > .disclosure-content');
@@ -376,17 +315,7 @@
     });
   });
 
-  // Язык задаётся адресом; сохранённое предпочтение не переопределяет индексируемую страницу.
-  language = location.pathname.endsWith('/index.ru.html') ? 'ru' : 'en';
-  window.addEventListener('popstate', () => {
-    const nextLanguage = location.pathname.endsWith('/index.ru.html') ? 'ru' : 'en';
-    // Переходы между разделами уже обрабатываются hashchange.
-    // Не пересоздаём DOM и анимации, если язык не изменился.
-    if (nextLanguage === language) return;
-    setLanguage(nextLanguage, false);
-    navigate({ initial: true, moveFocus: false });
-  });
-  setLanguage(language, false);
+  initializeContent();
   initializeReveals();
   navigate({ initial: true, moveFocus: false });
 })();

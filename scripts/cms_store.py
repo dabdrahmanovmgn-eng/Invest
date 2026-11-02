@@ -22,6 +22,9 @@ MAX_IMAGE_BYTES = 8 * 1024 * 1024
 UPLOAD_RE = re.compile(r"/uploads/[0-9a-f]{32}\.(?:png|jpg|webp)\Z")
 
 
+PUBLIC_ARTICLE = "status='published' AND language='en'"
+
+
 class CmsError(Exception):
     def __init__(self, message, status=400, code="invalid_request"):
         super().__init__(message)
@@ -286,12 +289,15 @@ class Store:
         result["images"] = json.loads(result["images"])
         if public:
             result.pop("status", None)
+        elif result["language"] == "ru" and result["status"] == "published":
+            # Прежние RU-публикации доступны редактору как черновики.
+            result["status"] = "draft"
         return result
 
     def list_articles(self, language=None, public=False):
         query, arguments = "SELECT * FROM articles WHERE 1=1", []
         if public:
-            query += " AND status='published'"
+            query += f" AND {PUBLIC_ARTICLE}"
         if language:
             query += " AND language=?"
             arguments.append(language)
@@ -301,7 +307,7 @@ class Store:
 
     def get_article(self, value, public=False):
         field = "slug" if public else "id"
-        query = f"SELECT * FROM articles WHERE {field}=?" + (" AND status='published'" if public else "")
+        query = f"SELECT * FROM articles WHERE {field}=?" + (f" AND {PUBLIC_ARTICLE}" if public else "")
         with self.connect() as db:
             row = db.execute(query, (value,)).fetchone()
         if not row:
@@ -329,6 +335,8 @@ class Store:
         language, status = values.get("language", "en"), values.get("status", "draft")
         if language not in ("en", "ru") or status not in ("draft", "published", "archived"):
             raise CmsError("Недопустимый язык или статус.")
+        if status == "published" and language != "en":
+            raise CmsError("Для публикации подготовьте английскую версию статьи.", 400, "english_required")
         if status == "published" and not values["body"]:
             raise CmsError("Для публикации нужен текст статьи.")
         slug = values.get("slug", "")
@@ -397,7 +405,7 @@ class Store:
             row = db.execute("SELECT * FROM uploads WHERE url=?", (url,)).fetchone()
             visible = authenticated
             if row and not visible:
-                for article in db.execute("SELECT cover,images FROM articles WHERE status='published'"):
+                for article in db.execute(f"SELECT cover,images FROM articles WHERE {PUBLIC_ARTICLE}"):
                     if article["cover"] == url or url in json.loads(article["images"]):
                         visible = True
                         break

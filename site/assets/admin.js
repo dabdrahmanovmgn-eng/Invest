@@ -3,6 +3,7 @@
   const $ = id => document.getElementById(id);
   const copy = {
     en: {
+      english_required: 'You can save Russian articles as drafts. To publish, prepare the English text and select English.',
       setupTitle: 'Your first sign-in', setupIntro: 'Create your editor account to start publishing articles and photographs.',
       setupOnce: 'Keep your username and password for future sign-ins. This setup is only needed once.',
       setupHeading: 'Create an account', setupUsernameHint: 'At least 3 characters: Latin letters, numbers, dot, underscore, @ or hyphen.',
@@ -45,6 +46,7 @@
       loggedOut: 'You have signed out.', setupNeeded: 'An administrator account has not been created yet. Follow the first sign-in instructions below.'
     },
     ru: {
+      english_required: 'Русскую статью можно сохранить как черновик. Для публикации подготовьте английский текст и выберите English.',
       setupTitle: 'Первый вход в редактор', setupIntro: 'Создайте свой аккаунт, чтобы добавлять статьи и фотографии на сайт.',
       setupOnce: 'Сохраните логин и пароль для следующих входов. Эта настройка нужна только один раз.',
       setupHeading: 'Создать аккаунт', setupUsernameHint: 'От 3 символов: латинские буквы, цифры, точка, подчёркивание, @ или дефис.',
@@ -178,13 +180,17 @@
     $('editor-title').textContent = t(current ? 'editArticle' : 'newArticle');
     $('article-status').textContent = t(status);
     $('article-status').className = 'admin-status admin-status-' + status;
+    const english = $('article-language').value === 'en';
+    $('article-language-hint').hidden = english;
+    $('publish-article').hidden = !english;
+    $('publish-article').disabled = busy || !english;
     $('save-draft').hidden = false;
     $('save-draft').textContent = t(status === 'published' ? 'unpublishAction' : 'saveDraft');
     $('publish-article').textContent = t(status === 'published' ? 'updatePublication' : 'publishAction');
     $('archive-article').hidden = status === 'archived';
     $('archive-article').disabled = busy || !current;
-    $('article-public-link').hidden = status !== 'published';
-    if (status === 'published') $('article-public-link').href = '../article/?slug=' + encodeURIComponent(current.slug);
+    $('article-public-link').hidden = status !== 'published' || !english;
+    if (status === 'published' && english) $('article-public-link').href = '../article/?slug=' + encodeURIComponent(current.slug);
     $('session-label').textContent = session.authenticated ? `${t('signedInAs')}: ${session.username}` : '';
   }
 
@@ -530,6 +536,7 @@
   $('article-search').addEventListener('input', renderArticles);
   $('article-filter').addEventListener('change', renderArticles);
   $('editor-fields').addEventListener('input', event => { if (event.target.type !== 'file') markDirty(); });
+  $('article-language').addEventListener('change', updateActions);
   $('editor-fields').addEventListener('change', event => { if (event.target.tagName === 'SELECT') markDirty(); });
   $('editor-form').addEventListener('submit', event => { event.preventDefault(); saveArticle(event.submitter?.dataset.status || (current?.status === 'published' ? 'published' : 'draft')); });
   $('editor-form').addEventListener('keydown', event => { if (event.key === 'Enter' && event.target.tagName === 'INPUT') event.preventDefault(); });

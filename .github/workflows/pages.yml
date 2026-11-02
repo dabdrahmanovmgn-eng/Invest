@@ -22,11 +22,8 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Build and check language pages
-        run: |
-          python -m pip install -r scripts/requirements-build.txt
-          python scripts/build_locales.py
-          python scripts/verify_seo.py
+      - name: Check English public site
+        run: python scripts/verify_seo.py
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:

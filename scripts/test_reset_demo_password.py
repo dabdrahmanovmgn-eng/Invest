@@ -23,7 +23,7 @@ class ResetDemoPasswordTests(unittest.TestCase):
         self.old_password = secrets.token_urlsafe(24)
         self.new_password = secrets.token_urlsafe(24)
         self.store.set_admin(self.username, self.old_password)
-        self.article = self.store.save_article({"title": "Фиктивная статья", "body": "Тестовый материал", "language": "ru", "status": "published"})
+        self.article = self.store.save_article({"title": "Sample article", "body": "Sample text", "language": "en", "status": "published"})
         self.original_articles = self.store.list_articles()
         self.output = io.StringIO()
         self.config_patches = (

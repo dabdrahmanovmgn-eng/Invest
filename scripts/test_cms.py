@@ -121,9 +121,9 @@ class CmsIntegrationTests(unittest.TestCase):
 
     def test_draft_publish_edit_archive_and_restore(self):
         self.login()
-        article = self.create(title="Новости компании", language="ru")
+        article = self.create(title="Company news", language="en")
         slug, identifier = article["slug"], article["id"]
-        self.assertTrue(slug.startswith("post-"))
+        self.assertTrue(slug.startswith("company-news-"))
         self.assertEqual(self.request("GET", "/api/articles", auth=False)[1]["articles"], [])
         self.assertEqual(self.request("GET", "/api/articles/" + slug, auth=False)[0], 404)
         status, result, _ = self.request("PUT", "/api/admin/articles/" + identifier, {"status": "published"})
@@ -133,12 +133,31 @@ class CmsIntegrationTests(unittest.TestCase):
         self.assertEqual(published["body"], article["body"])
         self.assertIsNotNone(published["published_at"])
         self.assertNotIn("status", published)
-        self.assertEqual(len(self.request("GET", "/api/articles?language=ru", auth=False)[1]["articles"]), 1)
-        self.assertEqual(self.request("GET", "/api/articles?language=en", auth=False)[1]["articles"], [])
+        self.assertEqual(len(self.request("GET", "/api/articles?language=en", auth=False)[1]["articles"]), 1)
+        self.assertEqual(self.request("GET", "/api/articles?language=ru", auth=False)[1]["articles"], [])
         self.assertEqual(self.request("PUT", "/api/admin/articles/" + identifier, {"status": "archived"})[0], 200)
         self.assertEqual(self.request("GET", "/api/articles/" + slug, auth=False)[0], 404)
         self.assertEqual(self.request("PUT", "/api/admin/articles/" + identifier, {"status": "published"})[0], 200)
         self.assertEqual(Store(self.data).get_article(slug, True)["body"], article["body"])
+
+    def test_russian_drafts_and_legacy_publications_are_editor_only(self):
+        self.login()
+        _, image, _ = self.upload()
+        cover = image["url"]
+        article = self.create(title="Новости компании", language="ru", body="Текст статьи", cover=cover)
+        editor_url = "/api/admin/articles/" + article["id"]
+        self.assertEqual(self.request("PUT", editor_url, {"status": "published"})[1]["code"], "english_required")
+        # Имитируем данные, сохранённые до перехода публичного сайта на EN.
+        with self.server.store.connect() as db:
+            db.execute("UPDATE articles SET status='published' WHERE id=?", (article["id"],))
+        for query in ("", "?language=en", "?language=ru"):
+            self.assertEqual(self.request("GET", "/api/articles" + query, auth=False)[1]["articles"], [])
+        self.assertEqual(self.request("GET", "/api/articles/" + article["slug"], auth=False)[0], 404)
+        self.assertEqual(self.request("GET", cover, auth=False)[0], 404)
+        self.assertEqual(self.request("GET", cover)[0], 200)
+        self.assertEqual(self.request("GET", editor_url)[1]["article"]["body"], "Текст статьи")
+        self.assertEqual(self.request("GET", "/api/admin/articles")[1]["articles"][0]["status"], "draft")
+        self.assertEqual(self.request("PUT", editor_url, {"body": "Обновлённый текст"})[0], 200)
 
     def test_unique_slug_validation_and_plain_text(self):
         self.login()

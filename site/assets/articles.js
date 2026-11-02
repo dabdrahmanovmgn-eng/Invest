@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  const storageKey = 'dengi-ir-language';
   const page = document.body.dataset.editorialPage;
   const status = document.getElementById('editorial-status');
   const message = document.getElementById('status-message');
@@ -9,32 +8,18 @@
   const grid = document.getElementById('articles-grid');
   const content = document.getElementById('article-content');
   const copy = {
-    en: {
-      skip: 'Skip to content', navigation: 'Main navigation', language: 'Language',
-      home: 'Home', news: 'Articles', heading: 'Articles', intro: 'News and materials from Dengi Market.',
-      retry: 'Try again', back: 'All articles', contact: 'Contact Investor Relations', read: 'Read article',
-      loadingList: 'Loading articles…', loadingArticle: 'Loading article…',
-      empty: 'There are no articles in English yet.',
-      error: 'Articles could not be loaded. Please try again.',
-      missing: 'This article is unavailable. It may have been removed or the link may be incorrect.',
-      published: 'Published', image: 'Article image', english: 'English', russian: 'Russian', article: 'Article',
-    },
-    ru: {
-      skip: 'Перейти к содержимому', navigation: 'Основная навигация', language: 'Язык',
-      home: 'Главная', news: 'Статьи', heading: 'Статьи', intro: 'Новости и материалы Dengi Market.',
-      retry: 'Повторить', back: 'Все статьи', contact: 'Связаться с IR', read: 'Читать статью',
-      loadingList: 'Загружаем статьи…', loadingArticle: 'Загружаем статью…',
-      empty: 'Статей на русском языке пока нет.',
-      error: 'Не удалось загрузить статьи. Попробуйте ещё раз.',
-      missing: 'Статья недоступна. Возможно, она удалена или в ссылке есть ошибка.',
-      published: 'Опубликовано', image: 'Изображение к статье', english: 'Английский', russian: 'Русский', article: 'Статья',
-    },
+    skip: 'Skip to content', navigation: 'Main navigation',
+    home: 'Home', news: 'Articles', heading: 'Articles', intro: 'News and materials from Dengi Market.',
+    retry: 'Try again', back: 'All articles', contact: 'Contact Investor Relations', read: 'Read article',
+    loadingList: 'Loading articles…', loadingArticle: 'Loading article…',
+    empty: 'There are no articles in English yet.',
+    error: 'Articles could not be loaded. Please try again.',
+    missing: 'This article is unavailable. It may have been removed or the link may be incorrect.',
+    published: 'Published', image: 'Article image', article: 'Article',
   };
-  let language = 'en';
   let pending;
   let sequence = 0;
-  try { language = localStorage.getItem(storageKey) === 'ru' ? 'ru' : 'en'; } catch (_) { /* Storage is optional. */ }
-  const t = key => copy[language][key] || '';
+  const t = key => copy[key] || '';
   const node = (tag, className, text) => {
     const item = document.createElement(tag);
     if (className) item.className = className;
@@ -57,7 +42,7 @@
     if (!value) return null;
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return null;
-    const time = node('time', '', new Intl.DateTimeFormat(language === 'ru' ? 'ru-RU' : 'en-GB', {
+    const time = node('time', '', new Intl.DateTimeFormat('en-GB', {
       day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Almaty',
     }).format(date));
     time.dateTime = date.toISOString();
@@ -70,10 +55,8 @@
     retry.hidden = !canRetry;
   }
   function translate() {
-    document.documentElement.lang = language;
     for (const item of document.querySelectorAll('[data-copy]')) item.textContent = t(item.dataset.copy);
     for (const item of document.querySelectorAll('[data-copy-aria]')) item.setAttribute('aria-label', t(item.dataset.copyAria));
-    for (const button of document.querySelectorAll('[data-language]')) button.setAttribute('aria-pressed', String(button.dataset.language === language));
     document.title = `${page === 'list' ? t('news') : t('article')} — Dengi Market`;
     document.querySelector('meta[name="description"]').content = t('intro');
   }
@@ -91,7 +74,6 @@
     const title = plain(article.title);
     if (!slug || !title || (article.status && article.status !== 'published')) return null;
     const card = node('article', 'news-card');
-    if (article.language === 'en' || article.language === 'ru') card.lang = article.language;
     const cover = safeImage(article.cover);
     if (cover) {
       const media = node('a', 'news-card-media');
@@ -124,7 +106,7 @@
     let count = 0;
     for (const article of articles) {
       if (!article || typeof article !== 'object') continue;
-      if (article.language && article.language !== language) continue;
+      if (article.language !== 'en') continue;
       const card = makeCard(article);
       if (card) { fragment.append(card); count++; }
     }
@@ -134,8 +116,7 @@
   }
   function renderArticle(article) {
     const title = plain(article?.title);
-    if (!title || (article.status && article.status !== 'published')) throw new Error('missing');
-    content.lang = article.language === 'ru' ? 'ru' : 'en';
+    if (!title || article.language !== 'en' || (article.status && article.status !== 'published')) throw new Error('missing');
     document.getElementById('article-title').textContent = title;
     document.title = `${title} — Dengi Market`;
     const excerpt = plain(article.excerpt);
@@ -144,7 +125,6 @@
     excerptNode.hidden = !excerpt;
     document.querySelector('meta[name="description"]').content = excerpt || title;
     const meta = document.getElementById('article-meta');
-    meta.lang = language;
     meta.replaceChildren();
     const date = dateNode(article);
     if (date) {
@@ -152,7 +132,6 @@
       published.append(document.createTextNode(`${t('published')} `), date);
       meta.append(published);
     }
-    if (article.language === 'en' || article.language === 'ru') meta.append(node('span', '', t(article.language === 'ru' ? 'russian' : 'english')));
     const cover = document.getElementById('article-cover');
     cover.replaceChildren();
     const coverURL = safeImage(article.cover);
@@ -198,7 +177,7 @@
     try {
       const slug = page === 'article' ? safeSlug(new URLSearchParams(location.search).get('slug')) : '';
       if (page === 'article' && !slug) throw new Error('missing');
-      const url = page === 'list' ? `/api/articles?language=${language}` : `/api/articles/${encodeURIComponent(slug)}`;
+      const url = page === 'list' ? '/api/articles?language=en' : `/api/articles/${encodeURIComponent(slug)}`;
       const response = await fetch(url, { signal: pending.signal, headers: { Accept: 'application/json' }, credentials: 'same-origin', cache: 'no-store' });
       if (!response.ok) throw new Error(response.status === 404 ? 'missing' : 'request');
       const result = await response.json();
@@ -216,20 +195,6 @@
       if (current === sequence) busy.setAttribute('aria-busy', 'false');
     }
   }
-  for (const button of document.querySelectorAll('[data-language]')) {
-    button.addEventListener('click', () => {
-      const next = button.dataset.language;
-      if (next === language) return;
-      language = next === 'ru' ? 'ru' : 'en';
-      try { localStorage.setItem(storageKey, language); } catch (_) { /* Storage is optional. */ }
-      load();
-    });
-  }
   retry.addEventListener('click', load);
-  window.addEventListener('storage', event => {
-    if (event.key !== storageKey || !['en', 'ru'].includes(event.newValue) || event.newValue === language) return;
-    language = event.newValue;
-    load();
-  });
   load();
 })();
