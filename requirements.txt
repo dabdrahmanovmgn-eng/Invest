@@ -1,0 +1,8 @@
+Django==5.2.19
+Pillow==12.3.0
+django-axes==8.3.1
+django-concurrency==2.8.1
+waitress==3.0.2
+asgiref==3.13.0
+sqlparse==0.6.1
+tzdata==2026.6

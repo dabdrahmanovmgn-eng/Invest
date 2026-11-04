@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+{% block title %}Статья уже изменена{% endblock %}
+{% block content %}
+<h1>Статья уже изменена другим редактором</h1>
+<p role="alert">Ваши изменения не сохранились. Скопируйте текст ниже, откройте актуальную статью в новой вкладке и перенесите нужные правки. Выбранные файлы потребуется выбрать снова.</p>
+<p><a href="{{ request.path }}" target="_blank" rel="noopener">Открыть актуальную статью в новой вкладке</a></p>
+{% for field in values %}
+<p><label for="saved-{{ field.id }}">{{ field.label }}</label><br><textarea id="saved-{{ field.id }}" readonly rows="5" cols="60">{{ field.value }}</textarea></p>
+{% endfor %}
+{% endblock %}

@@ -2,6 +2,7 @@
 /work/
 /cache/
 /.cache/
+/.venv/
 __pycache__/
 *.py[cod]
 .env
